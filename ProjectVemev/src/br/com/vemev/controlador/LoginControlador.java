@@ -17,17 +17,20 @@ public class LoginControlador {
 				
 		//regras de negocio para login
 		String usuario = request.getParameter("usuario");
-		String senha = request.getParameter("password");
+		String senha = request.getParameter("senha");
 		
 		//valida usuario e senha padrao do sistema
 		if(usuario != null && senha != null){
 			if(usuario.equalsIgnoreCase(this.userDefault) && senha.equals(this.passwordDefault)){
-				return "redirect:/home";			//redireciona para action /home
+				System.out.println("Login ok - Usuario admin logado!");
+				return "redirect:/home.html";			//redireciona para action /home
 			}else{
-				return "/index.html?error=login";	//redireciona para tela login informando erro de login
+				System.out.println("Erro login - usuario ou senha invalidos!");
+				return "redirect:/index.html?error=login";	//redireciona para tela login informando erro de login
 			}
 		}else{
-			return "/index.html?error=login";		//redireciona para tela login informando erro de login
+			System.out.println("Erro login - usuario ou senha invalidos!");
+			return "redirect:/index.html?error=login";		//redireciona para tela login informando erro de login
 		}
 		
 	}
