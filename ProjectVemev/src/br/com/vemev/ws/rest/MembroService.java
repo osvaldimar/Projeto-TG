@@ -26,18 +26,28 @@ import br.com.vemev.modelo.Membro;
 @Produces(MediaType.APPLICATION_JSON+";charset=utf-8")
 @Consumes(MediaType.APPLICATION_JSON+";charset=utf-8")
 public class MembroService {
+	
 
 	@GET
 	@Path("/listaMembrosService")
 	public Response listaMembrosService(){
 
-		System.out.println("chamou servico restful - listaMembros()");
-		
+		System.out.println("Chamou servico RESTful - listaMembros()");		
 		MembroDAO dao = new MembroDAO();
 		ArrayList<Membro> listaMembros = dao.getLista();
 		
 		//classe AuxiliarService transforma qualquer objeto ou lista em formato json e retorna resposta http status 200
 		return AuxiliarService.responseOK_toJson(listaMembros);		
+	}
+	
+	@GET
+	@Path("/readMembroService/{id_membro}")
+	public Response readMembroService(@PathParam("id_membro") int id){
+
+		System.out.println("Chamou servico RESTful - readMembroService()");		
+		MembroDAO dao = new MembroDAO();
+		Membro membro = dao.read(id);
+		return AuxiliarService.responseOK_toJson(membro);
 		
 	}
 	
@@ -45,49 +55,13 @@ public class MembroService {
 	@Path("/createMembroService/{dados}")
 	public Response createMembroService(@PathParam("dados") String json){
 
-		System.out.println("chamou servico restful - createMembroService()");
-		
+		System.out.println("Chamou servico RESTful - createMembroService()");		
 		Membro membro = (Membro) AuxiliarService.converteJsonParaObjetoJava(json, Membro.class);
 		MembroDAO dao = new MembroDAO();
 		//dao.create(membro);
-		
-		//classe AuxiliarService transforma qualquer objeto ou lista em formato json e retorna resposta http status 200
 		return AuxiliarService.responseOK_toJson("Membro criado ok!");		
 		
 	}
 	
-	@GET
-	@Path("/testeService1")
-	@Produces("application/json")
-	public Response convertFtoC() throws JSONException {
-
-		System.out.println("chamou metodo restful");
-		JSONObject jsonObject = new JSONObject();
-		Double fahrenheit = 98.24;
-		Double celsius;
-		celsius = (fahrenheit - 32) * 5 / 9;
-		jsonObject.put("F Value", fahrenheit);
-		jsonObject.put("C Value", celsius);
-
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n"
-				+ jsonObject;
-		return Response.status(200).entity(result).build();
-	}
-
-	@GET
-	@Path("/testeService2")
-	@Produces("application/json")
-	public Response convertFtoCfromInput(@PathParam("f") float f)
-			throws JSONException {
-
-		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius = (f - 32) * 5 / 9;
-		jsonObject.put("F Value", f);
-		jsonObject.put("C Value", celsius);
-
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n"
-				+ jsonObject;
-		return Response.status(200).entity(result).build();
-	}
+	
 }

@@ -16,99 +16,99 @@ public class Visitante {
 	@TipoDado(tipo = "String")
 	private String nome;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "apelido")
 	@TipoDado(tipo = "String")
 	private String apelido;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "telefone")
 	@TipoDado(tipo = "String")
 	private String telefone;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "celular")
 	@TipoDado(tipo = "String")
 	private String celular;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "data_nascimento")
 	@TipoDado(tipo = "String")
 	private String data_nascimento;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "email")
 	@TipoDado(tipo = "String")
 	private String email;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "sexo")
 	@TipoDado(tipo = "String")
 	private String sexo;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "estado_civil")
 	@TipoDado(tipo = "String")
 	private String estado_civil;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "endereco")
 	@TipoDado(tipo = "String")
 	private String endereco;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "bairro")
 	@TipoDado(tipo = "String")
 	private String bairro;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "cep")
 	@TipoDado(tipo = "String")
 	private String cep;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "estado")
 	@TipoDado(tipo = "String")
 	private String estado;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "cidade")
 	@TipoDado(tipo = "String")
 	private String cidade;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "complemento")
 	@TipoDado(tipo = "String")
 	private String complemento;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "descricao_reuniao")
 	@TipoDado(tipo = "String")
 	private String descricao_reuniao;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "pertence_igreja")
 	@TipoDado(tipo = "String")
 	private String pertence_igreja;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "qual_igreja")
 	@TipoDado(tipo = "String")
 	private String qual_igreja;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "pertence_celula")
 	@TipoDado(tipo = "String")
 	private String pertence_celula;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "conhecer_celula")
 	@TipoDado(tipo = "String")
 	private String conhecer_celula;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "conhecer_jesus")
 	@TipoDado(tipo = "String")
 	private String conhecer_jesus;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "deseja_oracao")
 	@TipoDado(tipo = "String")
 	private String deseja_oracao;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "motivo_oracao")
 	@TipoDado(tipo = "String")
 	private String motivo_oracao;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "precisa_ajuda")
 	@TipoDado(tipo = "String")
 	private String precisa_ajuda;
     
-    @ColunaBD(nome = "nome")
+    @ColunaBD(nome = "data_reuniao")
 	@TipoDado(tipo = "String")
 	private String data_reuniao;
     
-    @ColunaBD(nome = "nomcelula_cultoe")
+    @ColunaBD(nome = "celula_culto")
 	@TipoDado(tipo = "String")
     private String celula_culto;
 	

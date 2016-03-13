@@ -5,6 +5,12 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
+/**
+ * Classe para auxiliar nas chamadas dos servicos de web services, converte java para json e vice-versa
+ * @author OSVALDIMAR
+ *
+ */
 public class AuxiliarService {
 
 	/**

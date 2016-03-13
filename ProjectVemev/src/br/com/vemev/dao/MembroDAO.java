@@ -16,37 +16,37 @@ public class MembroDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Busca membro pelo nome
-	 * @param nomeMembro
+	 * Busca membro pelo id
+	 * @param idMembro
 	 * @return
 	 */
 	public Membro read(int idMembro){
-		String clausulaWhere = "id_membro = " + idMembro;			//busca utilizando a clausula where, PK coluna nome_membro
+		String clausulaWhere = "id_membro = " + idMembro;			//busca utilizando a clausula where, PK coluna id_membro
 		Membro membro = (Membro) super.read(clausulaWhere, Membro.class);
 		return membro;
 	}
 	
 	/**
-	 * Atualiza uma membro pelo nome
+	 * Atualiza um membro pelo id
 	 * @param membro
 	 */
 	public void update(Membro membro){
-		String clausulaWhere = "id_membro = '" + membro.getId_membro() + "'";	//atualiza utilizando a clausula where, PK coluna nome_membro
+		String clausulaWhere = "id_membro = '" + membro.getId_membro() + "'";	//atualiza utilizando a clausula where, PK coluna id_membro
 		super.update(membro, clausulaWhere);
 	}
 	
 	/**
-	 * Deleta uma membro pelo nome
-	 * @param nomeMembro
+	 * Deleta um membro pelo id
+	 * @param idMembro
 	 * @return
 	 */
 	public boolean delete(int idMembro){
-		String clausulaWhere = "id_membro = " +idMembro;				//deleta utilizando a clausula where, PK coluna nome_membro	
+		String clausulaWhere = "id_membro = " +idMembro;				//deleta utilizando a clausula where, PK coluna id_membro	
 		return super.delete(clausulaWhere, Membro.class);
 	}
 	
 	/**
-	 * Pesquisa todas os membros
+	 * Pesquisa uma lista de membros pelo nome informado
 	 * @return
 	 */
 	public ArrayList<Membro> getListaPeloNome(String nome){
@@ -56,7 +56,7 @@ public class MembroDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Pesquisa todas os membros
+	 * Retorna uma lista de todos os membros
 	 * @return
 	 */
 	public ArrayList<Membro> getLista(){

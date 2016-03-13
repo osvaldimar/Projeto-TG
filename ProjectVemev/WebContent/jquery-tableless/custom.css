@@ -1,0 +1,50 @@
+#divTableless table{
+  width:100%;
+  border:1px solid #ccc;
+}
+#divTableless table thead th{
+  background-color:#ad2525;
+  padding:6px;
+  color:#fff;
+  text-align:left;
+  font-size:14px;
+}
+#divTableless table thead th.header{
+  cursor:pointer;
+}
+#divTableless table tbody td{
+  padding:6px;
+  text-align:left;
+  color:#333;
+}
+#divTableless table tbody tr.odd td{
+  background-color:#ffffcc;
+}
+#divTableless table tbody tr.hover td{
+  background-color:#a9d0f5;
+}
+#divTableless table tbody tr.selected td{
+  background-color:#a9f5a9!important;
+}
+.pagedisplay{
+	width:40px;
+	text-align:center;
+	border:none;
+	background-color:#f2f2f2;
+	font-weight:900;
+}
+
+.pager-tableless span{
+	font-weight:900;
+	display:inline-block;
+	margin:0 0 0 0px;
+	color:#666;
+	float:right;
+}
+
+.pager-tableless{
+	text-align:left;
+	padding-top: 1%;
+	width: 300px;
+	min-width: 250px;
+}

@@ -46,7 +46,17 @@ public class VisitanteDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Pesquisa todos os visitantes
+	 * Pesquisa uma lista de visitantes pelo nome informado
+	 * @return
+	 */
+	public ArrayList<Visitante> getListaPeloNome(String nome){
+		String clausulaWhere = "nome = '%" + nome + "%'";
+		ArrayList<Visitante> lista = super.getList(clausulaWhere, Visitante.class);
+		return lista;
+	}
+	
+	/**
+	 * Retorna uma lista de todos os visitantes
 	 * @return
 	 */
 	public ArrayList<Visitante> getLista(){
