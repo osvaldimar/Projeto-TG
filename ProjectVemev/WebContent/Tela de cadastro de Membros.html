@@ -13,57 +13,63 @@
       <!-- Fixed navbar -->
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#">Vem e Vê</a>
-                </div>
-      <div class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Home</a></li>       
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li class="dropdown-header">Admin das Células</li>
-                        <li><a href="#">Cadastro das Células</a></li>
-                        <li><a href="#">Consulta das Células</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Lider de celula</a></li>
-                        <li><a href="#">Lider de Setor</a></li>
-                      </ul>
-                    </li> 
-                    
-                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li class="dropdown-header">Admin & Dashboard</li>
-                        <li><a href="#">Admin 1</a></li>
-                        <li><a href="#">Admin 2</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Portfolio</li>
-                        <li><a href="#">Portfolio 1</a></li>
-                        <li><a href="#">Portfolio 2</a></li>
-                      </ul>
-                    </li>   
-                    
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Themes <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li class="dropdown-header">Admin & Dashboard</li>
-                        <li><a href="#">Admin 1</a></li>
-                        <li><a href="#">Admin 2</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Portfolio</li>
-                        <li><a href="#">Portfolio 1</a></li>
-                        <li><a href="#">Portfolio 2</a></li>
-                      </ul>
-                    </li> 
-                     <li><a href="#">Conheça a Visão MDA</a></li>
-                  </ul>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Vem e Vê</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="/home.html">Home</a></li>       
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+             	<li class="dropdown-header">Admin das Células</li>
+                 <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
+                <li><a href="/Tela de cadastro de Celula.html">Cadastro de Célula</a></li>
+                <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
+                 <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
+         
+               
+               
+                
+              </ul>
+            </li> 
+            
+             <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Líderes <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+             	<li class="dropdown-header">Admin Líderes</li>
+                <li><a href="/vemev/cadastro/liderCelula">Cadastro de Líder de Célula</a></li>
+                 <li><a href="/Tela de cadastro do Lider em Treinamento.html">Cadastro de Líder em Treinamento</a></li>
+                <li><a href="/ Tela de cadastro de Lider da Rede.html">Cadastro de Líder de Redes</a></li>
+                 <li><a href="/Tela de cadastro do Lider de Setor.html">Cadastro de Líder de Setor</a></li>
+                
+                
+              </ul>
+            </li>   
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+             	<li class="dropdown-header">Consultas</li>
+                 <li><a href="#">Consulta dos Membros</a></li>
+                  <li><a href="#">Consulta das Células</a></li>
+                <li><a href="#">Consulta dos  Setores</a></li>
+                 <li><a href="#">Consulta dos Visitantes</a></li>
+                      <li class="divider">teste teste</li>
+                <li><a href="#">Consulta dos  Líderes Célula</a></li>
+                 <li><a href="#">Consulta dos Líderes em Treinamentos</a></li>
+                <li><a href="#">Consulta dos Líderes de Redes</a></li>
+                 <li><a href="#">Consulta dos Líderes de Setor</a></li>
+              </ul>
+            </li> 
+             <li><a href="#">Conheça a Visão MDA</a></li>
+          </ul>
       </div><!--/.nav-collapse -->
                 <div id="main" class="container-fluid">
          <h3 class="page-header">Cadastro dos Membros</h3>
@@ -75,14 +81,12 @@
           <div class="row">
           <div class="col-md-12">
           
-             <div class="form-group col-md-6">
-               <label for="nome">Nome</label>
-               <input type="text" class="form-control" id="nome" name="nome">
-              </div>
               </div>
               </div>
         
              <div class="form-group col-md-4">
+                <label for="nome">Nome</label>
+               <input type="text" class="form-control" id="nome" name="nome">
                 <label for="telefone">Telefone</label>
                <input type="text" class="form-control" id="telefone" name="telefone">  
                  <label for="endereco">Endereço</label>
@@ -93,6 +97,8 @@
                <input type="text" class="form-control" id="cidade" name="cidade">
              </div>
               <div class="form-group col-md-4">
+                 <label for="nome">RG</label>
+               <input type="text" class="form-control" id="RG" name="RG">
                <label for="celular">Celular</label>
                <input type="text" class="form-control" id="celular" name="celular">
                 <label for="complemento">Complemento</label>
