@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Rede</title>
+	<title>Consulta dos Membros</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 </head>
 <body> 
  <!-- Fixed navbar -->
- <div class="navbar navbar-default " role="navigation">
+ <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -85,53 +85,54 @@
  
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres de Redes</h3>
- <form action="/vemev/lider/createLiderRede" method="post">
+ <h3 class="page-header">Consulta de todos os Membros</h3>
+ <form action="index.html">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-    <label for="campo1"> Cor da Rede</label> <br>
-    
-        	<input type ="radio" value = "azul" name = "cor_rede"> Azul <br> 
-            <input type ="radio" value = "amarelo" name = "cor_rede"> Amarelo <br>
-           <input type ="radio" value = "verde" name ="cor_rede"> Verde <br>
-           <input type ="radio" value = "vermelho" name = "cor_rede"> Vermelho <br><br>
-           
-       <label for="data">Data</label>
-       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px"> <br>
-
-<div style="text-align:left; float:center;">
-      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
-</div>
-
 <!-- Start tableless -->
-     <div id="divTableless">
+<div style="text-align:center; float:center;">
+<p style="padding:12px;">
+        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
+        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
+</p>
+</div>
+     <div id="divTableless" style="overflow-x: scroll; overflow-y: scroll; height: 350px; min-width: 500px; border:1px solid #ccc;">
 		<table id="myTable" cellspacing="0" width="100%">
 		<thead>
 	      	<tr>
-	      		<th width="5%"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
-	      		<th>Nome do membro</th>
-		    	<th>Telefone</th>  
-		    	<th>Endereço</th>
-		    	<th>Bairro</th>
+	      		<th width="3%"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
+	      		<th width="15%">Nome do membro</th>
+	      		<th width="10%">Celular</th>
+		    	<th width="10%">Telefone</th>  
+		    	<th width="15%">Endereço</th>
+		    	<th width="12%">Bairro</th>		    	
+		    	<th width="10%">Cep</th>
+		    	<th width="5%">Estado</th>
+		    	<th width="10%">Cidade</th>
+		    	<th width="10%">Complemento</th>
 	    	</tr>
 		</thead>
       <tbody>
       	<c:forEach var="lista" items="${listaMembros}">
 	    	<tr>
-	    		<td><input value="${lista.id_membro}" name="id_membro" type="checkbox"></td>
+	    		<td><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
 	    		<td>${lista.nome}</td>
+	    		<td>${lista.celular}</td>
 	    		<td>${lista.telefone}</td>
 	    		<td>${lista.endereco}</td>
-	    		<td>${lista.bairro}</td>
+	    		<td>${lista.bairro}</td>	    		
+	    		<td>${lista.cep}</td>
+	    		<td>${lista.estado}</td>
+	    		<td>${lista.cidade}</td>
+	    		<td>${lista.complemento}</td>	    		
 	    	</tr>
 	    </c:forEach>
       </tbody>
     </table>
     </div>
-    
+
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
@@ -203,13 +204,13 @@
       });
       
       $('#frm-filtro').submit(function(e){ e.preventDefault(); });
-          
+
       $('#pesquisar').keydown(function(e){
-      	if(e.keyCode==13){ 
-          	return false; //ignorar enter da caixa pesquisar
-        }
+        	if(e.keyCode==13){ 
+            	return false; //ignorar enter da caixa pesquisar
+          }
       });
-    
+      
       $('#pesquisar').keyup(function(e){
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
@@ -222,6 +223,19 @@
           encontrou = false;
         });
       });
+
+      if($('#pesquisar').val() != ""){
+          var encontrou = false;
+          var termo = $('#pesquisar').val().toLowerCase();
+          $('#divTableless table > tbody > tr').each(function(){
+            $(this).find('td').each(function(){
+              if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
+            });
+            if(!encontrou) $(this).closest('tr').hide();
+            else $(this).closest('tr').show();
+            encontrou = false;
+          });
+      }
       
       $("#divTableless table") 
         .tablesorter({

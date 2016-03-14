@@ -39,7 +39,7 @@ public class MembroControlador {
 		//regras de negocio - salva membro no banco		
 		dao.create(membro);
 		
-		return "redirect:/membro?id_membro=" + membro.getId_membro();	//redireciona pagina da membro cadastrada
+		return "redirect:/vemev/membros";		//redireciona pagina listar todos os membros
 	}
 	
 	@RequestMapping(value={"/membros"}, method=RequestMethod.GET)
@@ -49,7 +49,7 @@ public class MembroControlador {
 		ArrayList<Membro> listaMembros = dao.getLista();			//recupera todas as membros no banco		
 		model.addAttribute("listaMembros", listaMembros);			//seta lista na view para jsp			
 		
-		return new ModelAndView("membros.jsp"); 	//retorna pagina listar todas as membros
+		return new ModelAndView("Tela de consulta dos membros.jsp"); 	//retorna pagina listar todas as membros
 	}
 	
 	

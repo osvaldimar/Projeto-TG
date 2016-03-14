@@ -90,14 +90,14 @@
   <!-- area de campos do form -->
 
 <div class="container-fluid">
-   <form method="post" action="exemplo.html" id="frm-filtro" style="background-color:#f2f2f2; width:100%; margin:10px 0 10px 0;">  
+
 <div style="text-align:center; float:center;">
 <p style="padding:12px;">
         <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
         <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" name="pesquisar" size="30" type="text">
 </p>
 </div>
-    </form>	
+
 <!-- Start tableless -->
      <div id="divTableless">
 		<table id="myTable" cellspacing="0" width="100%">
@@ -197,8 +197,14 @@
       });
       
       $('#frm-filtro').submit(function(e){ e.preventDefault(); });
+
+      $('#pesquisar').keydown(function(e){
+        	if(e.keyCode==13){ 
+            	return false; //ignorar enter da caixa pesquisar
+          }
+      });
       
-      $('#pesquisar').keydown(function(){
+      $('#pesquisar').keyup(function(e){
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
         $('#divTableless table > tbody > tr').each(function(){
