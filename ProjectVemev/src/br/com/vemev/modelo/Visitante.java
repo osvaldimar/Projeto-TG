@@ -32,6 +32,10 @@ public class Visitante {
 	@TipoDado(tipo = "String")
 	private String data_nascimento;
     
+    @ColunaBD(nome = "RG")
+	@TipoDado(tipo = "String")
+	private String RG;
+    
     @ColunaBD(nome = "email")
 	@TipoDado(tipo = "String")
 	private String email;
@@ -162,6 +166,14 @@ public class Visitante {
 
 	public void setData_nascimento(String data_nascimento) {
 		this.data_nascimento = data_nascimento;
+	}
+	
+	public String getRG() {
+		return RG;
+	}
+
+	public void setRG(String RG) {
+		this.RG = RG;
 	}
 
 	public String getEmail() {

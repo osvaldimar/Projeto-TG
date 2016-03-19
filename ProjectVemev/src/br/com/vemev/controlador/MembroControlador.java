@@ -72,6 +72,17 @@ public class MembroControlador {
 	}
 	
 	
+	@RequestMapping(value={"/membro/consultaMembros"}, method=RequestMethod.GET)
+	public ModelAndView consultaMembros(Model model){
+				
+		//regras de negocio
+		MembroDAO dao = new MembroDAO();
+		ArrayList<Membro> listaMembros = dao.getLista();		//recupera todos membros no banco		
+		model.addAttribute("listaMembros", listaMembros);		//seta lista na view para jsp			
+		
+		return new ModelAndView("Tela de consulta dos membros.jsp"); 	//retorna pagina consulta dos membros
+	}
+	
 	//direcionar tela cadastro de lider
 	@RequestMapping(value={"/cadastro/liderCelula"}, method=RequestMethod.GET)
 	public ModelAndView liderCelula(Model model){
@@ -84,14 +95,14 @@ public class MembroControlador {
 	}
 	
 	//direcionar tela cadastro de lider
-		@RequestMapping(value={"/cadastro/liderRede"}, method=RequestMethod.GET)
-		public ModelAndView liderRede(Model model){
-					
-			//regras de negocio
-			ArrayList<Membro> listaMembros = dao.getLista();			//recupera todas as celulas no banco		
-			model.addAttribute("listaMembros", listaMembros);			//seta lista na view para jsp			
-			
-			return new ModelAndView("Tela de cadastro do Lider da rede.jsp"); 	//retorna pagina listar todas as celulas
-		}
+	@RequestMapping(value={"/cadastro/liderRede"}, method=RequestMethod.GET)
+	public ModelAndView liderRede(Model model){
+				
+		//regras de negocio
+		ArrayList<Membro> listaMembros = dao.getLista();			//recupera todas as celulas no banco		
+		model.addAttribute("listaMembros", listaMembros);			//seta lista na view para jsp			
+		
+		return new ModelAndView("Tela de cadastro do Lider da rede.jsp"); 	//retorna pagina listar todas as celulas
+	}
 	
 }

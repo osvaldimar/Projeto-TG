@@ -470,11 +470,91 @@ public abstract class GenericDAO {
 	
 	/**
 	 * Metodo retorna uma lista de objetos populados com os registros do banco de dados
-	 * @param clausulaWhere String - Exemplo parametro: "id = 123" ou "nome = 'teste'" ...
+	 * @param clausulaWhere String - Exemplo parametro: "id = 123" ou "nome = 'teste' and id=123 or ..."
 	 * @param clazz Class - Exemplo parametro: Celula.class ou Setor.class ...
 	 * @return
 	 */
 	protected ArrayList getList(String clausulaWhere, Class clazz){
+		return getList(clausulaWhere, clazz, false);
+	}
+	
+	/**
+	 * Metodo retorna uma lista de objetos populados com os registros do banco de dados
+	 * @param clausulaSqlJoin String - Exemplo parametro: "select * from tabela1 join tabela2 where ..."
+	 * @param clazz Class - Exemplo parametro: Celula.class ou Setor.class ...
+	 * @return
+	 */
+	protected ArrayList getListSqlJoin(String clausulaSqlJoin, Class clazz){
+		return getList(clausulaSqlJoin, clazz, true);
+	}	
+	
+	/**
+	 * Metodo retorna uma lista de registros do banco de dados conforme o sql avancado, necessario passar os alias para os campos e alias das tabelas
+	 * @param sql String - Exemplo parametro: select t1.id_membro as id, t1.nome as nome, t2.nome_celula as nome_celula from membro as t1 join celula as t2 ...
+	 * @return ArrayList<HashMap<String, String>> - Ex: lista.get(posicao).get(key) >> lista.get(0).get("nome") = retorna valor do nome do membro da posicao do registro 0...
+	 */
+	public ArrayList<HashMap<String, String>> getListSqlAvancado(String sql, int totalColunas){
+		
+		//SQL
+		System.out.println("PRINT SQL SELECT AVANCADO: " + sql);
+		ArrayList<HashMap<String, String>> lista = new ArrayList<HashMap<String, String>>();
+		
+		Connection conexao = null;
+		PreparedStatement stmt = null;
+		try {
+			//execute query select
+			conexao = this.getConnection();
+			stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				System.out.println("Dados list select:");
+	
+				Integer contadorColunas = 1;
+				HashMap<String, String> linhaRegistro = new HashMap<String, String>();
+				
+				while(contadorColunas <= totalColunas){
+					Object objeto = rs.getObject(contadorColunas);		//detalhe: tipo generico pode ser String, Integer, Long, Date, Time
+					String valor = objeto.toString();					//Qualquer tipo sera transformado em String
+					
+					//HashMap<"chave", valor> - (chave=nome da coluna) e (valor=valor do campo da coluna)
+					//rs.
+					
+					//contadorColunas++;
+				}
+				System.out.println();
+				
+				//add na lista o 
+				lista.add(linhaRegistro);
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try{
+				if(stmt != null){
+					stmt.close();
+				}
+				if(conexao != null){
+					conexao.close();
+				}
+			}catch (Exception e){
+				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				e.printStackTrace();
+			}
+		}
+		
+		return lista;
+	}
+
+	/**
+	 * Se selectJoin eh false - Metodo fornece um select simples em uma tabela(classe informada no parametro) com clausula where se necessario
+	 * Se selectJoin eh true - Metodo fornece um select complexo com joins e where, porem retorna dados para uma tabela(classe informada no parametro)
+	 */
+	private ArrayList getList(String clausulaWhere, Class clazz, boolean selectJoin){
 		
 		//tabela
 		String tabela = "";
@@ -498,10 +578,15 @@ public abstract class GenericDAO {
 		
 		//SQL
 		String sql = "";
-		if(clausulaWhere.equals("")){
-			sql = "select * from " + tabela;
+		if(selectJoin == true){
+			sql = clausulaWhere;		//select complexo com joins
 		}else{
-			sql = "select * from " + tabela + " where " + clausulaWhere;
+			//select simples em uma tabela
+			if(clausulaWhere.equals("")){
+				sql = "select * from " + tabela;
+			}else{
+				sql = "select * from " + tabela + " where " + clausulaWhere;
+			}
 		}
 		System.out.println("PRINT SQL LIST SELECT: " + sql);
 		ArrayList lista = new ArrayList<>();
@@ -573,5 +658,4 @@ public abstract class GenericDAO {
 		
 		return lista;
 	}
-
 }

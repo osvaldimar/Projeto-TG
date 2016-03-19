@@ -9,7 +9,7 @@ public class SetorDAO extends GenericDAO {
 
 	
 	/**
-	 * Cria uma setor no banco de dados
+	 * Cria uma Setor no banco de dados
 	 * @param setor
 	 */
 	public void create(Setor setor){
@@ -17,32 +17,32 @@ public class SetorDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Busca setor pelo nome
-	 * @param nomeSetor
+	 * Busca Setor pelo idSetor
+	 * @param idSetor
 	 * @return
 	 */
-	public Setor read(String nomeSetor){
-		String clausulaWhere = "nome_setor = '" + nomeSetor + "'";			//busca utilizando a clausula where, PK coluna nome_setor
+	public Setor read(String idSetor){
+		String clausulaWhere = "id_setor = " + idSetor;			//busca utilizando a clausula where, PK coluna id_setor
 		Setor setor = (Setor) super.read(clausulaWhere, Setor.class);
 		return setor;
 	}
 	
 	/**
-	 * Atualiza uma setor pelo nome
+	 * Metodo atualiza um Setor
 	 * @param setor
 	 */
-	public void update(Setor setor, String nome){
-		String clausulaWhere = "nome_setor = '" + nome + "'";			//atualiza utilizando a clausula where, PK coluna nome_setor
+	public void update(Setor setor){
+		String clausulaWhere = "id_setor = " + setor.getId_setor();			//atualiza utilizando a clausula where, PK coluna id_setor
 		super.update(setor, clausulaWhere);
 	}
 	
 	/**
-	 * Deleta uma setor pelo nome
-	 * @param nomeSetor
+	 * Metodo deleta um Setor pelo id do Setor
+	 * @param idSetor
 	 * @return
 	 */
-	public boolean delete(String nomeSetor){
-		String clausulaWhere = "nome_setor = '" +nomeSetor+ "'";				//deleta utilizando a clausula where, PK coluna nome_setor	
+	public boolean delete(String idSetor){
+		String clausulaWhere = "id_setor = " +idSetor;				//deleta utilizando a clausula where, PK coluna id_setor	
 		return super.delete(clausulaWhere, Setor.class);
 	}
 	
@@ -51,7 +51,7 @@ public class SetorDAO extends GenericDAO {
 	 * @return
 	 */
 	public ArrayList<Setor> getLista(){
-		String clausulaWhere = "";
+		String clausulaWhere = " nome_setor != '' order by cor_rede, nome_setor";
 		ArrayList<Setor> lista = super.getList(clausulaWhere, Setor.class);
 		return lista;
 	}

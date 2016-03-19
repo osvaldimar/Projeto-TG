@@ -4,20 +4,20 @@ import br.com.vemev.dao.annotation.ColunaBD;
 import br.com.vemev.dao.annotation.TabelaBD;
 import br.com.vemev.dao.annotation.TipoDado;
 
-@TabelaBD(nome = "lider_rede")
-public class LiderRede {
+@TabelaBD(nome = "participa_celula")
+public class ParticipaCelula {
 
-	@ColunaBD(nome = "id_lider")		//nome coluna no banco de dados
+	@ColunaBD(nome = "id_participa")	//nome coluna no banco de dados
 	@TipoDado(tipo = "Integer")			//Tipo de dados no banco			(String, Integer, Long)
-	private Integer id_lider;	
+	private Integer id_participa;
 	
 	@ColunaBD(nome = "id_membro")
 	@TipoDado(tipo = "Integer")
 	private Integer id_membro;	
 	
-	@ColunaBD(nome = "cor_rede")
+	@ColunaBD(nome = "nome_celula")
 	@TipoDado(tipo = "String")	
-	private String cor_rede;	
+	private String nome_celula;	
 	
 	@ColunaBD(nome = "data_ini")
 	@TipoDado(tipo = "String")	
@@ -27,16 +27,16 @@ public class LiderRede {
 	@TipoDado(tipo = "String")	
 	private String data_fim;
 
-	public LiderRede(){
+	public ParticipaCelula(){
 		
 	}
 	
-	public Integer getId_lider() {
-		return id_lider;
+	public Integer getId_participa() {
+		return id_participa;
 	}
 
-	public void setId_lider(Integer id_lider) {
-		this.id_lider = id_lider;
+	public void setId_participa(Integer id_participa) {
+		this.id_participa = id_participa;
 	}
 
 	public Integer getId_membro() {
@@ -47,12 +47,12 @@ public class LiderRede {
 		this.id_membro = id_membro;
 	}
 
-	public String getCor_rede() {
-		return cor_rede;
+	public String getNome_celula() {
+		return nome_celula;
 	}
 
-	public void setCor_rede(String cor_rede) {
-		this.cor_rede = cor_rede;
+	public void setNome_celula(String nome_celula) {
+		this.nome_celula = nome_celula;
 	}
 
 	public String getData_ini() {

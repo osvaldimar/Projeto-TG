@@ -8,17 +8,17 @@ import br.com.vemev.dao.annotation.TipoDado;
 @TabelaBD(nome = "setor")				//nome tabela no banco de dados
 public class Setor {
 	
-	@ColunaBD(nome = "id_setor")		//nome coluna no banco de dados
-	@TipoDado(tipo = "Integer")			//Tipo de dados no banco			(String, Integer, Long)
-	private Integer id_setor;			//nome atributo da classe 			(qualquer)
+	@ColunaBD(nome = "id_setor")
+	@TipoDado(tipo = "Integer")
+	private Integer id_setor;
 
-	@ColunaBD(nome = "nome_setor")		//nome coluna no banco de dados
-	@TipoDado(tipo = "String")			//Tipo de dados no banco			(String, Integer, Long)
-	private String nome_setor;			//nome atributo da classe 			(qualquer)
+	@ColunaBD(nome = "nome_setor")
+	@TipoDado(tipo = "String")
+	private String nome_setor;
 	
-	@ColunaBD(nome = "cor_rede")		//nome coluna no banco de dados
-	@TipoDado(tipo = "String")			//Tipo de dados no banco			(String, Integer, Long)
-	private String cor_rede;			//nome atributo da classe 			(qualquer)
+	@ColunaBD(nome = "cor_rede")
+	@TipoDado(tipo = "String")
+	private String cor_rede;
 
 	public Integer getId_setor() {
 		return id_setor;

@@ -8,7 +8,7 @@ public class LiderRedeDAO extends GenericDAO {
 
 	
 	/**
-	 * Cria uma lider no banco de dados
+	 * Cria uma lider de Rede no banco de dados
 	 * @param lider
 	 */
 	public void create(LiderRede lider){
@@ -16,12 +16,12 @@ public class LiderRedeDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Busca lider pelo id
-	 * @param idMembro
+	 * Busca um lider de Rede pelo id_lider
+	 * @param idLider
 	 * @return
 	 */
-	public LiderRede read(int idMembro){
-		String clausulaWhere = "id_lider = " + idMembro;			//busca utilizando a clausula where, PK coluna id_lider
+	public LiderRede read(int idLider){
+		String clausulaWhere = "id_lider = " + idLider;			//busca utilizando a clausula where, PK coluna id_lider
 		LiderRede lider = (LiderRede) super.read(clausulaWhere, LiderRede.class);
 		return lider;
 	}
@@ -31,23 +31,23 @@ public class LiderRedeDAO extends GenericDAO {
 	 * @param lider
 	 */
 	public void update(LiderRede lider){
-		String clausulaWhere = "id_lider = '" + lider.getId_membro() + "'";	//atualiza utilizando a clausula where, PK coluna id_lider
+		String clausulaWhere = "id_lider = " + lider.getId_lider();	//atualiza utilizando a clausula where, PK coluna id_lider
 		super.update(lider, clausulaWhere);
 	}
 	
 	/**
-	 * Deleta um lider pelo id
-	 * @param idMembro
+	 * Deleta um lider de Rede
+	 * @param idLider
 	 * @return
 	 */
-	public boolean delete(int idMembro){
-		String clausulaWhere = "id_lider = " +idMembro;				//deleta utilizando a clausula where, PK coluna id_lider	
+	public boolean delete(int idLider){
+		String clausulaWhere = "id_lider = " +idLider;				//deleta utilizando a clausula where, PK coluna id_lider	
 		return super.delete(clausulaWhere, LiderRede.class);
 	}
 	
 	
 	/**
-	 * Retorna uma lista de todos os liders
+	 * Retorna uma lista de todos os liders das Redes
 	 * @return
 	 */
 	public ArrayList<LiderRede> getLista(){

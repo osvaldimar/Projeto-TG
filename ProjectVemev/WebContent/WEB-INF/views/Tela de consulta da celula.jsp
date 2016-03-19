@@ -16,10 +16,16 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<!-- Magnific Popup core JS CSS file -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
+	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
+	
+	<!-- Tableless JS CSS file -->
 	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
+
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -45,10 +51,6 @@
                 <li><a href="/Tela de cadastro de Celula.html">Cadastro de Célula</a></li>
                 <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
                  <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
-         
-               
-               
-                
               </ul>
             </li> 
             
@@ -60,8 +62,6 @@
                  <li><a href="/Tela de cadastro do Lider em Treinamento.html">Cadastro de Líder em Treinamento</a></li>
                 <li><a href="/ Tela de cadastro de Lider da Rede.html">Cadastro de Líder de Redes</a></li>
                  <li><a href="/Tela de cadastro do Lider de Setor.html">Cadastro de Líder de Setor</a></li>
-                
-                
               </ul>
             </li>   
             
@@ -85,13 +85,84 @@
  
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Consulta de todos os Membros</h3>
- <form action="index.html">
+ <h3 class="page-header">Consulta de Células</h3>
+
   <!-- area de campos do form -->
 
-<div class="container-fluid">
 
-<!-- Start tableless -->
+<div class="container-fluid">
+<form action="/vemev/celula/consultaCelula" method="get">
+	
+		<br>		
+		<label for="comboCelula">Escolha a Célula:</label><br>
+		<div class="form-inline">
+			<select class="form-control" required="true" id="comboCelula" name="nome" style="width: 250px;">
+				<option value=""></option>
+				<c:forEach var="lista" items="${listaTodasCelulas}">
+					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
+				</c:forEach>
+			</select>
+			&nbsp;&nbsp;&nbsp;
+		    <button type="submit" class="btn btn-primary">Buscar</button>
+	    </div>
+</form>  
+  <hr />
+	<br>	
+	<h3>Dados da Célula:</h3>
+		
+	<c:if test="${celula != null}">
+		<br>
+		Nome da Celula: ${celula.nome_celula}
+		<br>
+		Total de membros: ${celula.total}
+		<br>
+		Endereço: ${celula.endereco}
+		<br><br>
+		<a class="popup-with-form" href="#membro-form">
+	  		<button>+ Incluir um membro</button>
+		</a>
+		<br><br>
+		<div id="divTablelessCelula">
+			<table id="table1" border="1" cellspacing="0" width="100%">
+			<thead>
+		      	<tr>
+		      		<th width="5%"> </th>
+		      		<th width="25%">Nome do membro</th>
+		      		<th width="15%">Celular</th>
+			    	<th width="15%">Telefone</th>  
+			    	<th width="20%">Endereço</th>
+			    	<th width="20%">Ações</th>
+		    	</tr>
+			</thead>
+	      <tbody style="height: 350px; overflow-y: scroll; -webkit-flex-flow: row wrap;">
+	      	<c:forEach var="lista" items="${listaMembrosDaCelula}" varStatus="contagem">
+		    	<tr>
+		    		<td width="5%">${contagem.count}</td>
+		    		<td width="25%">${lista.nome}</td>
+		    		<td width="15%">${lista.celular}</td>
+		    		<td width="15%">${lista.telefone}</td>
+		    		<td width="20%">${lista.endereco}</td>
+		    		<td width="20%">
+		    			&nbsp;&nbsp;
+			    		<a class="" href="#">
+			    			- Desvincular membro
+			    		</a>
+			    		<br>&nbsp;&nbsp;
+			    		<a class="" href="/vemev/participaCelula/excluirMembro?id_membro=${lista.id_membro}&nome_celula=${celula.nome_celula}">
+			    			x Excluir participação
+			    		</a>
+		    		</td>
+		    	</tr>
+		    </c:forEach>
+	      </tbody>
+	    </table>
+	    </div>
+    </c:if>
+    
+    
+<!-- Start tableless e form maginif popup-->
+
+<form id="membro-form" class="mfp-hide white-popup" action="">
 <div style="text-align:center; float:center;">
 <p style="padding:12px;">
         <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
@@ -99,40 +170,30 @@
 </p>
 </div>
      <div id="divTableless">
-		<table id="myTable" cellspacing="0" width="100%">
+	<table id="myTable" cellspacing="0" width="100%">
 		<thead>
 	      	<tr>
-	      		<th width="3%"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
-	      		<th width="15%">Nome do membro</th>
-	      		<th width="10%">Celular</th>
-		    	<th width="10%">Telefone</th>  
-		    	<th width="15%">Endereço</th>
-		    	<th width="12%">Bairro</th>		    	
-		    	<th width="10%">Cep</th>
-		    	<th width="5%">Estado</th>
-		    	<th width="8%">Cidade</th>
-		    	<th width="12%">Complemento</th>
+	      		<th width="35%">Nome</th>
+		    	<th width="15%">Celular</th>
+		    	<th width="15%">Telefone</th>
+		    	<th width="35%">Endereço</th>
+		    	<th width="10%">Ações</th>
+		    	<th width="5%"> </th>
 	    	</tr>
 		</thead>
-      <tbody>
-      	<c:forEach var="lista" items="${listaMembros}">
-	    	<tr>
-	    		<td width="3%"><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
-	    		<td width="15%">${lista.nome}</td>
-	    		<td width="1%">${lista.celular}</td>
-	    		<td width="10%">${lista.telefone}</td>
-	    		<td width="15%">${lista.endereco}</td>
-	    		<td width="12%">${lista.bairro}</td>	    		
-	    		<td width="10%">${lista.cep}</td>
-	    		<td width="5%">${lista.estado}</td>
-	    		<td width="8%">${lista.cidade}</td>
-	    		<td width="10%">${lista.complemento}</td>	    		
-	    	</tr>
-	    </c:forEach>
-      </tbody>
+	      <tbody>
+	      	<c:forEach var="lista" items="${listaTodosMembros}">
+		    	<tr>
+		    		<td width="35%">${lista.nome}</td>
+		    		<td width="15%">${lista.celular}</td>
+		    		<td width="15%">${lista.telefone}</td>
+		    		<td width="35%">${lista.endereco}</td>
+		    		<td width="10%"><a href="/vemev/participaCelula/incluirMembro?id_membro=${lista.id_membro}&nome_celula=${celula.nome_celula}">Incluir</a></td>    		
+		    	</tr>
+		    </c:forEach>
+	      </tbody>
     </table>
     </div>
-
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
@@ -152,18 +213,12 @@
 			</span>
 			<br>
     </div>
-    <!-- End tableless -->
-    
+ </form>
+    <!-- End tableless -->    
+
  </div>
  
-  <hr />
-  <div id="actions" class="row">
-    <div class="col-md-12">
-      <button type="submit" class="btn btn-primary">Salvar</button>
-      <a href="index.html" class="btn btn-default">Cancelar</a>
-    </div>
-  </div>
-</form>
+
 </div>
 
 <h6>
@@ -176,15 +231,25 @@
     
     <br><br>
     
- 
-   
 <br><br>
 </div>
 </div>
 
-<script>			
+<script>
+	$(document).ready(function() {
+		$('.popup-with-form').magnificPopup({
+			type: 'inline',
+			preloader: false,	
+		});
+	})
+	
+	function closePopup(){
+	  var magnificPopup = $.magnificPopup.instance; 
+	  magnificPopup.close(); 
+	}
+	
     $(function(){
-      
+
       $('#divTableless table > tbody > tr:odd').addClass('odd');
       
       $('#divTableless table > tbody > tr').hover(function(){
@@ -256,6 +321,7 @@
         });
       
     });
+
 </script>
   </body>
 </html>

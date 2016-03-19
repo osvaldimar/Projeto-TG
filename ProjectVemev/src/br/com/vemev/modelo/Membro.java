@@ -48,6 +48,10 @@ public class Membro {
 	@TipoDado(tipo = "String")
     private String complemento;	
 	
+    @ColunaBD(nome = "RG")
+	@TipoDado(tipo = "String")
+    private String RG;	
+    
 	public Membro(){
 		
 	}
@@ -132,5 +136,13 @@ public class Membro {
 		this.complemento = complemento;
 	}
 
+	public String getRG() {
+		return RG;
+	}
+
+	public void setRG(String RG) {
+		this.RG = RG;
+	}
+	
 	
 }
