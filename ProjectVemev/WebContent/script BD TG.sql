@@ -165,6 +165,7 @@ CREATE TABLE contata_visitante (
 );
 
 show tables;
+describe membro;
 
 use db_vemev;
 
@@ -187,9 +188,9 @@ insert into setor(nome_setor, cor_rede) values('Genérico', 'Azul');
 insert into setor(nome_setor, cor_rede) values('Genérico', 'Amarelo');
 
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Omega', 7, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1');
+	values('Célula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Apolo', 7, 1, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
+	values('Célula Apolo', 0, 1, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
 
     
 select * from membro;
@@ -209,5 +210,4 @@ select * from lider_celula;
 select * from participa_celula;
 
 #delete from celula where nome_celula != '';
-#delete from participa_celula where id_membro > 3;
-
+#delete from participa_celula where id_membro >= 1;

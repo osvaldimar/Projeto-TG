@@ -148,6 +148,13 @@ public class CelulaControlador {
 		ParticipaCelulaDAO daoParticipa = new ParticipaCelulaDAO();		//dao acesso ao bd
 		daoParticipa.create(participa);									//cria participacao membro da celula
 		
+		//atualiza total de membros
+		Celula celula = dao.read(nomeCelula);	//ler celula no bd
+		int totalAtual = celula.getTotal();		//total atual
+		
+		celula.setTotal(totalAtual + 1);		//incrementa total
+		dao.update(celula, nomeCelula);			//atualiza a celula no bd
+		
 		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
 	}
 	
@@ -160,6 +167,13 @@ public class CelulaControlador {
 		
 		ParticipaCelulaDAO daoParticipa = new ParticipaCelulaDAO();				//dao acesso ao bd
 		daoParticipa.delete(idMembro, nomeCelula);								//excluir participacao do membro da celula
+		
+		//atualiza total de membros
+		Celula celula = dao.read(nomeCelula);	//ler celula no bd
+		int totalAtual = celula.getTotal();		//total atual
+		
+		celula.setTotal(totalAtual - 1);		//total-1
+		dao.update(celula, nomeCelula);			//atualiza a celula no bd
 		
 		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
 	}

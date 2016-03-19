@@ -102,8 +102,8 @@
                <input type="text" class="form-control" id="cep" name="cep">
                <label for="cidade">Cidade</label>
                <input type="text" class="form-control" id="cidade" name="cidade">
-               <label for="total">Total de Membros</label>
-               <input type="text" class="form-control" id="total" name="total">
+               
+               <input type="hidden" id="total" name="total" value="0">
              </div>
               <div class="form-group col-md-4">
 
