@@ -31,7 +31,7 @@ public abstract class GenericDAO {
 		
 		//usuario, senha, url bd
 		String usuario = "root";
-		String senha = "root";
+		String senha = "admin";
 		String url = "jdbc:mysql://localhost/db_vemev";
 		
 		Connection conexao = DriverManager.getConnection(url, usuario, senha);
