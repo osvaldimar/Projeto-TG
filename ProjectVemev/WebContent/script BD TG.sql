@@ -169,28 +169,28 @@ describe membro;
 
 use db_vemev;
 
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Jo√£o da Silva','11-4677-6545','11-99677-6545','Rua Teixeira, 564','S√£o Paulo','82728-098','SP','Carapicu√≠ba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Maria Joaquina','11-3000-6545','11-99000-6545','Rua Nogueira, 564','S√£o Paulo','82728-098','SP','Carapicu√≠ba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Jos√© Souza','11-4555-6545','11-98555-6545','Rua Jones, 564','S√£o Paulo','82728-098','SP','Carapicu√≠ba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-4222-6545','11-99222-6545','Rua Costa, 564','S√£o Paulo','82728-098','SP','Carapicu√≠ba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Amanda Croce','11-4111-7777','11-91111-7777','Rua Arthur, 123','Pirituba','02898-339','SP','S√£o Paulo','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Arnaldo Armada','11-3888-3333','11-98888-3333','Travessa Carlos Sampaio, 676','Ch√°cara Klabin','06765-998','SP','S√£o Paulo','prd23,ap67D');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-3555-0000','11-95555-0000','Rua Ypsulon, 564','S√£o Paulo','82728-098','SP','Carapicu√≠ba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Jo„o da Silva','11-4677-6545','11-99677-6545','Rua Teixeira, 564','S„o Paulo','82728-098','SP','CarapicuÌba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Maria Joaquina','11-3000-6545','11-99000-6545','Rua Nogueira, 564','S„o Paulo','82728-098','SP','CarapicuÌba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('JosÈ Souza','11-4555-6545','11-98555-6545','Rua Jones, 564','S„o Paulo','82728-098','SP','CarapicuÌba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-4222-6545','11-99222-6545','Rua Costa, 564','S„o Paulo','82728-098','SP','CarapicuÌba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Amanda Croce','11-4111-7777','11-91111-7777','Rua Arthur, 123','Pirituba','02898-339','SP','S„o Paulo','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Arnaldo Armada','11-3888-3333','11-98888-3333','Travessa Carlos Sampaio, 676','Ch·cara Klabin','06765-998','SP','S„o Paulo','prd23,ap67D');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-3555-0000','11-95555-0000','Rua Ypsulon, 564','S„o Paulo','82728-098','SP','CarapicuÌba','nada');	
 
 insert into rede values('Verde');
 insert into rede values('Vermelho');
 insert into rede values('Azul');
 insert into rede values('Amarelo');
 
-insert into setor(nome_setor, cor_rede) values('Gen√©rico', 'Verde');
-insert into setor(nome_setor, cor_rede) values('Gen√©rico', 'Vermelho');
-insert into setor(nome_setor, cor_rede) values('Gen√©rico', 'Azul');
-insert into setor(nome_setor, cor_rede) values('Gen√©rico', 'Amarelo');
+insert into setor(nome_setor, cor_rede) values('GenÈrico', 'Verde');
+insert into setor(nome_setor, cor_rede) values('GenÈrico', 'Vermelho');
+insert into setor(nome_setor, cor_rede) values('GenÈrico', 'Azul');
+insert into setor(nome_setor, cor_rede) values('GenÈrico', 'Amarelo');
 
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('C√©lula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'S√£o Paulo', 'casa 1');
+	values('CÈlula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'S„o Paulo', 'casa 1');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('C√©lula Apolo', 0, 1, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'S√£o Paulo', '');
+	values('CÈlula Apolo', 0, 1, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'S„o Paulo', '');
 
     
 select * from membro;
