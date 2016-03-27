@@ -79,7 +79,7 @@
 			<!--/.nav-collapse -->
 			<div id="main" class="container-fluid">
 				<h3 class="page-header">Cadastro dos Visitantes</h3>
-				<form action="index.html">
+				<form action="/vemev/visitante/createVisitante" method="post">
 					<!-- area de campos do form -->
 					<div class="row">
 						<div class="col-md-12">
@@ -136,8 +136,8 @@
 									class="form-control" id="txt_apelido" name="apelido"> <label
 									for="slc_sexo">Sexo</label> <select class="form-control"
 									name="sexo">
-									<option>F</option>
-									<option>M</option>
+									<option value = "f">F</option>
+									<option value = "m">M</option>
 								</select> <label for="txt_celular">Celular</label> <input type="text"
 									class="form-control" id="txt_celular" name="celular"> <label
 									for="txt_email">E-mail</label> <input type="text"
@@ -157,7 +157,7 @@
 								</div>
 								<div style="height: 59px;">
 									<label for="data_reuniao">Data da Visita</label> <input
-										type="date" class="form-control" id="data_reuniao">
+										type="date" class="form-control" id="data_reuniao" name = "data_reuniao" required="true">
 								</div>
 								<div style="height: 59px;">
 									<label for="txt_rdigreja">Pertence a alguma igreja?</label><br>
@@ -182,8 +182,8 @@
 								<div style="height: 59px;">
 									<label for="slc_visitou">Visitou célula ou reunião?</label> <select
 										class="form-control" name="celula_culto">
-										<option>Célula</option>
-										<option>Reunião de Celebração</option>
+										<option value ="celula">Célula</option>
+										<option value ="culto">Reunião de Celebração</option>
 									</select>
 								</div>
 								<div style="height: 59px;">

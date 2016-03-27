@@ -1,6 +1,9 @@
 package br.com.vemev.controlador;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mysql.fabric.Response;
 
 import br.com.vemev.dao.VisitanteDAO;
 import br.com.vemev.modelo.Visitante;
@@ -29,12 +34,12 @@ public class VisitanteControlador {
 	}
 	
 	@RequestMapping(value={"/visitante/createVisitante"}, method=RequestMethod.POST)
-	public String cadastrarVisitante(Visitante visitante){
+	public String cadastrarVisitante(Visitante visitante) throws IOException{
 				
 		//regras de negocio - salva visitante no banco		
 		dao.create(visitante);
-		
-		return "redirect:/visitante?id_visit=" + visitante.getId_visit();	//redireciona pagina da visitante cadastrada
+
+		return "redirect:/home.html";	//redireciona pagina da visitante cadastrada
 	}
 	
 	@RequestMapping(value={"/visitantes"}, method=RequestMethod.GET)

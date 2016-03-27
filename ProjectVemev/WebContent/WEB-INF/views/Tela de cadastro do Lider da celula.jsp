@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres das Células</title>
+	<title>Cadastro dos Lideres de Célula</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -20,10 +20,13 @@
 	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
 	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	
+	<!-- Ajax formulario --> 
+	<script src="http://malsup.github.com/jquery.form.js"></script>
 </head>
 <body> 
  <!-- Fixed navbar -->
- <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+ <div class="navbar navbar-default " role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -85,17 +88,26 @@
  
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres das Células</h3>
- <form action="index.html">
+ <h3 class="page-header">Cadastro dos Lideres de Celula</h3>
+ <form action="/vemev/lider/createLiderCelula" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-<div style="text-align:center; float:center;">
-<p style="padding:12px;">
-        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
-        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" name="pesquisar" size="30" type="text">
-</p>
+     <label for="nome_celula">Célula</label>
+			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
+				<option value=""></option>
+				<c:forEach var="lista" items="${listaTodasCelulas}">
+					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
+				</c:forEach>
+			</select>
+           
+       <label for="data"><br>Data</label>
+       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
+
+<div style="text-align:left; float:center;">
+      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
+         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
 </div>
 
 <!-- Start tableless -->
@@ -103,17 +115,17 @@
 		<table id="myTable" cellspacing="0">
 		<thead>
 	      	<tr>
-	      		<th width="10px"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
+		    	<th width="10px">&nbsp;&nbsp;&nbsp;</th>
 	      		<th width="300px">Nome do membro</th>
 		    	<th width="150px">Telefone</th>  
 		    	<th width="300px">Endereço</th>
 		    	<th width="150px">Bairro</th>
-	    	</tr> 
+	    	</tr>
 		</thead>
       <tbody>
       	<c:forEach var="lista" items="${listaMembros}">
 	    	<tr>
-	    		<td width="10px"><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
+	    		<td width="10px"><input value="${lista.id_membro}" name="id_membro" type="checkbox" onclick="changeCheckbox(this);"></td>
 	    		<td width="300px">${lista.nome}</td>
 	    		<td width="150px">${lista.telefone}</td>
 	    		<td width="300px">${lista.endereco}</td>
@@ -125,7 +137,6 @@
     </div>
     
     <div id="pager-tableless" class="pager-tableless">
-    	<div style="background-color:#f2f2f2; width:100%; text-align:left; height:50px;">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
     		<img src="/jquery-tableless/prev.png" class="prev">
@@ -143,7 +154,6 @@
 			</select> Registros&nbsp;&nbsp;&nbsp;
 			</span>
 			<br>
-    	</div>
     </div>
     <!-- End tableless -->
     
@@ -152,7 +162,7 @@
   <hr />
   <div id="actions" class="row">
     <div class="col-md-12">
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn btn-primary" onclick="validaLideres();">Salvar</button>
       <a href="index.html" class="btn btn-default">Cancelar</a>
     </div>
   </div>
@@ -175,7 +185,54 @@
 </div>
 </div>
 
-<script>			
+<script>
+	//valida quantidade de lideres no checkbox
+	function changeCheckbox(obj){
+		var checks = document.getElementsByName(obj.name);
+		var cont = 0;
+		for(var i = 0; i < checks.length; i++){
+			if(checks[i].checked){
+				cont++;
+			}
+			if(cont > 2){
+				alert("Só pode selecionar até 2 líderes!");
+				obj.checked = false;
+				break;
+			}
+		}		
+	}
+	//valida antes de enviar formulario
+	$('#form-lider').submit(function(e){ 
+		var checks = document.getElementsByName("id_membro");
+		var cont = 0;
+		for(var i = 0; i < checks.length; i++){
+			if(checks[i].checked){
+				cont++;
+			}			
+		}
+		if(cont < 1){
+			e.preventDefault(); 
+			alert("Por favor selecione 1 ou 2 líderes de Rede!");
+		}
+		if(cont > 2){
+			e.preventDefault(); 
+			alert("Só pode selecionar até 2 líderes!");
+		}
+	});
+	//valida o cadastro ok dos lideres da Rede
+	$(document).ready(function(){
+		$('#form-lider').ajaxForm({
+			success: function(respostaServer){
+				if(respostaServer == "ok"){
+					alert("Cadastro de líderes da Rede Ok!");
+					window.location.reload();		//cadastro ok e reload na pagina de cadastro
+				}else{
+					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
+				}				
+			}
+		});
+	});
+	
     $(function(){
       
       $('#divTableless table > tbody > tr:odd').addClass('odd');
@@ -197,13 +254,13 @@
       });
       
       $('#frm-filtro').submit(function(e){ e.preventDefault(); });
-
+          
       $('#pesquisar').keydown(function(e){
-        	if(e.keyCode==13){ 
-            	return false; //ignorar enter da caixa pesquisar
-          }
+      	if(e.keyCode==13){ 
+          	return false; //ignorar enter da caixa pesquisar
+        }
       });
-      
+    
       $('#pesquisar').keyup(function(e){
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
@@ -211,7 +268,14 @@
           $(this).find('td').each(function(){
             if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
           });
-          if(!encontrou) $(this).closest('tr').hide();
+          if(!encontrou){
+              //antes de ocultar, verificar se checkbox is checked para continuar visualizacao dos selecionados
+        	  if($(this).find('td > :checkbox').is(':checked')){ 
+            	  //ignore - nao oculta selecionados
+        	  }else{ 
+            	  $(this).closest('tr').hide();
+        	  }              
+          }
           else $(this).closest('tr').show();
           encontrou = false;
         });
