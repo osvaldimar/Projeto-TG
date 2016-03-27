@@ -26,6 +26,10 @@ public class LiderRede {
 	@ColunaBD(nome = "data_fim")
 	@TipoDado(tipo = "String")	
 	private String data_fim;
+	
+	@ColunaBD(nome = "status_lider") 		//Ativo = lider em atividade, Inativo = encerrou atividade de lider
+	@TipoDado(tipo = "String")	
+	private String status_lider;
 
 	public LiderRede(){
 		
@@ -69,6 +73,14 @@ public class LiderRede {
 
 	public void setData_fim(String data_fim) {
 		this.data_fim = data_fim;
+	}
+
+	public String getStatus_lider() {
+		return status_lider;
+	}
+
+	public void setStatus_lider(String status_lider) {
+		this.status_lider = status_lider;
 	}	
 	
 	

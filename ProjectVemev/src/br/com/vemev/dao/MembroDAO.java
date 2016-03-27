@@ -1,6 +1,7 @@
 package br.com.vemev.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap; 
 
 import br.com.vemev.modelo.Membro;
 
@@ -73,10 +74,36 @@ public class MembroDAO extends GenericDAO {
 		String clausulaSql = "select t1.id_membro, t1.nome, t1.telefone, t1.celular, t1.endereco, t1.bairro, t1.cep, t1.cidade, t1.estado, t1.complemento, t1.RG"
 				+ " from membro as t1"
 				+ " join participa_celula as t2 on t1.id_membro = t2.id_membro"
-				+ " where t2.nome_celula = '" + nomeCelula + "';";
+				+ " where t2.nome_celula = '" + nomeCelula + "' and t2.frequenta = 'Sim';";
 		ArrayList<Membro> lista = super.getListSqlJoin(clausulaSql, Membro.class);
 		return lista;
 	}
 	
+	/**
+	 * Retorna uma lista dos membros e detalhes das celulas que participa (tabelas usadas membro, participa_celula e celula)
+	 * - Exemplo na view JSP: ${lista.get("membro").get("nome")} >> ${lista.get("nometabela").get("nomecoluna")}
+	 * @return
+	 */
+	public ArrayList<HashMap<String,HashMap<String,String>>> getListaMembrosDetalhes(){
+		//sql traz todos membros do banco + a participacao da celula + a celula
+		//sql ignora participacoes de celula que o membro nao frequenta mais
+		//sql traz dados da celula do membro que ele frequenta atualmente
+		String sqlAvancado = 				
+				"select * from membro as t1 left join participa_celula as t2 on t1.id_membro = t2.id_membro "
+				+ "left join celula as t3 on t2.nome_celula = t3.nome_celula  "
+				+ "where t2.frequenta NOT IN ( "
+					 	+ "SELECT p.frequenta FROM participa_celula as p "
+						+ "WHERE t2.id_participa=p.id_participa and p.frequenta = 'Não' "
+						+ "and (SELECT count(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) >= 2 "
+						+ "and (SELECT count(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro and p2.frequenta = 'Sim') >= 1 "
+						+ "or "
+				        + "t2.id_participa=p.id_participa and p.frequenta = 'Não' "
+				        + "and (SELECT max(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) != t2.id_participa "
+					+") "
+				+ "order by t1.nome;";
+				
+		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
+		return lista;
+	}
 	
 }

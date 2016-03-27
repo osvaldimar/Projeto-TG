@@ -1,6 +1,7 @@
 package br.com.vemev.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap; 
 
 import br.com.vemev.modelo.LiderRede;
 
@@ -47,12 +48,33 @@ public class LiderRedeDAO extends GenericDAO {
 	
 	
 	/**
-	 * Retorna uma lista de todos os liders das Redes
+	 * Retorna uma lista simples dos lideres das Redes da tabela lider_rede
 	 * @return
 	 */
 	public ArrayList<LiderRede> getLista(){
 		String clausulaWhere = "";
 		ArrayList<LiderRede> lista = super.getList(clausulaWhere, LiderRede.class);
+		return lista;
+	}
+	
+	/**
+	 * Retorna uma lista simples dos lideres ativo em uma rede especifica informada no parametro
+	 * @return
+	 */
+	public ArrayList<LiderRede> getListaLideresAtivo(String cor_rede){
+		String clausulaWhere = "cor_rede = '" +cor_rede+ "' and status_lider = 'Ativo'";
+		ArrayList<LiderRede> lista = super.getList(clausulaWhere, LiderRede.class);
+		return lista;
+	}
+	
+	/**
+	 * Retorna uma lista dos lideres das Redes e os dados do lider como nome, telefone... (tabelas lider_rede e membro)
+	 * - Exemplo na view JSP: ${lista.get("membro").get("nome")} >> ${lista.get("nometabela").get("nomecoluna")}
+	 * @return
+	 */
+	public ArrayList<HashMap<String,HashMap<String,String>>> getListaDadosLideresRedes(){
+		String sqlAvancado = "select * from lider_rede as t1 join membro as t2 on t1.id_membro = t2.id_membro order by t1.status_lider, t2.nome;";
+		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;
 	}
 	

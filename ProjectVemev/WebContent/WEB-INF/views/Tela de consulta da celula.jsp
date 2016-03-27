@@ -25,7 +25,61 @@
 	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
 	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
-
+ 
+	<style type="text/css">
+	.membro-table table{
+    	border: 1px solid grey;
+    	width: 100%;
+	}
+	.membro-table table td, table th {
+	    padding: 0.3em;
+	    border: 1px solid grey;
+	}
+	.membro-table table th {
+	    border: none;
+	    color: white;
+	}
+	.divRede-Lider{
+		width: 300px; 
+		height: auto; 
+		color: black; 
+		padding: 1%; 
+		font-size: 14px;
+		border: 1px solid lightgrey;
+		vertical-align: text-top; 
+		padding: 6px;
+		margin-right: 10px;
+		margin-top: 10px;
+		float: left;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
+	}
+	.divTitulo{
+		width: 100%; 
+		height: 30px;
+		color: white;
+		font-weight: 600;
+		padding: 1%;
+		font-size: 16px;
+		padding: 6px;
+	}
+	.corTitulo-Verde{
+		background-color: #00cc00; 
+	}
+	.corTitulo-Azul{
+		background-color: #0033ff; 
+	}
+	.corTitulo-Vermelho{
+		background-color: #cc0000; 
+	}
+	.corTitulo-Amarelo{
+		background-color: #ffcc00;
+	}
+	.incluirMembro{
+		width: 99%; color: white; font-size: 16px; padding: 4px; font-weight: 600;
+	}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -112,19 +166,42 @@
 		
 	<c:if test="${celula != null}">
 		<br>
-		Nome da Celula: ${celula.nome_celula}
+		<div class="divRede-Lider">
+			<div class="divTitulo corTitulo-${setor.cor_rede}">${celula.nome_celula}</div>
+			<br>
+			Total de membros: ${celula.total}<br>
+			Endereço: ${celula.endereco}<br>
+			Complemento: ${celula.complemento}<br>
+			Cep: ${celula.cep}<br>
+			Bairro: ${celula.bairro}<br>
+			Cidade: ${celula.cidade}<br>
+			Estado: ${celula.estado}<br>
+		</div>
+		<div class="divRede-Lider">
+			<div class="divTitulo corTitulo-${setor.cor_rede}">Líderes</div><br>
+			Líder: teste lider 1<br>
+			Líder: teste lider 2<br>
+			Líder em treinamento: teste lider 3
+		</div>
+		<div class="divRede-Lider">
+			<div class="divTitulo corTitulo-${setor.cor_rede}">Rede / Setor</div><br>
+			Rede: ${setor.cor_rede}<br>
+			Setor: ${setor.nome_setor}
+		</div>
+		<div style="clear: both; width: 100%;"> </div>
 		<br>
-		Total de membros: ${celula.total}
+		<hr>
+  		<div id="actions" class="row">
+    		<div class="col-md-12">
+				<a class="popup-with-form" href="#membro-form">
+			    	<button class="btn btn-primary">+ Incluir Membro</button>
+				</a>
+    		</div>
+ 		</div>
 		<br>
-		Endereço: ${celula.endereco}
-		<br><br>
-		<a class="popup-with-form" href="#membro-form">
-	  		<button>+ Incluir um membro</button>
-		</a>
-		<br><br>
-		<div id="divTablelessCelula">
-			<table id="table1" border="1" cellspacing="0" width="100%">
-			<thead>
+		<div class="membro-table">
+			<table>
+			<thead class="corTitulo-${setor.cor_rede}">
 		      	<tr>
 		      		<th width="5%"> </th>
 		      		<th width="25%">Nome do membro</th>
@@ -134,7 +211,7 @@
 			    	<th width="20%">Ações</th>
 		    	</tr>
 			</thead>
-	      <tbody style="height: 350px; overflow-y: scroll; -webkit-flex-flow: row wrap;">
+	      <tbody>
 	      	<c:forEach var="lista" items="${listaMembrosDaCelula}" varStatus="contagem">
 		    	<tr>
 		    		<td width="5%">${contagem.count}</td>
@@ -144,11 +221,11 @@
 		    		<td width="20%">${lista.endereco}</td>
 		    		<td width="20%">
 		    			&nbsp;&nbsp;
-			    		<a class="" href="#">
+			    		<a class="popup-with-form" href="#desvincular-form" onclick="desvincularMembroDaCelula('${lista.id_membro}');">
 			    			- Desvincular membro
 			    		</a>
 			    		<br>&nbsp;&nbsp;
-			    		<a class="" href="/vemev/participaCelula/excluirMembro?id_membro=${lista.id_membro}&nome_celula=${celula.nome_celula}">
+			    		<a class="popup-with-form" href="#excluir-form" onclick="excluirMembroDaCelula('${lista.id_membro}');">
 			    			x Excluir participação
 			    		</a>
 		    		</td>
@@ -162,33 +239,50 @@
     
 <!-- Start tableless e form maginif popup-->
 
-<form id="membro-form" class="mfp-hide white-popup" action="">
-<div style="text-align:center; float:center;">
-<p style="padding:12px;">
-        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
-        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
-</p>
-</div>
-     <div id="divTableless">
-	<table id="myTable" cellspacing="0" width="100%">
+<form id="membro-form" class="mfp-hide white-popup" action="/vemev/participaCelula/incluirMembro" method="post">
+	
+	<div class="incluirMembro corTitulo-${setor.cor_rede}">
+		Incluir membro - ${celula.nome_celula}
+	</div>
+	<br>
+	<label for="data">Data de ínicio</label>
+    <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"><br>
+	<div style="text-align:left; float:center;">
+    	<label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
+        <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
+	</div>
+	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
+	
+    <div id="divTableless">
+	<table id="myTable" cellspacing="0">
 		<thead>
 	      	<tr>
-	      		<th width="35%">Nome</th>
-		    	<th width="15%">Celular</th>
-		    	<th width="15%">Telefone</th>
-		    	<th width="35%">Endereço</th>
-		    	<th width="10%">Ações</th>
-		    	<th width="5%"> </th>
+	      		<th width="10px">&nbsp;&nbsp;&nbsp;</th>
+	      		<th width="280px">Nome</th>
+		    	<th width="150px">Celular</th>
+		    	<th width="150px">Telefone</th>
+		    	<th width="280px">Endereço</th>
+		    	<th width="140px">Célula atual</th>
 	    	</tr>
 		</thead>
 	      <tbody>
 	      	<c:forEach var="lista" items="${listaTodosMembros}">
 		    	<tr>
-		    		<td width="35%">${lista.nome}</td>
-		    		<td width="15%">${lista.celular}</td>
-		    		<td width="15%">${lista.telefone}</td>
-		    		<td width="35%">${lista.endereco}</td>
-		    		<td width="10%"><a href="/vemev/participaCelula/incluirMembro?id_membro=${lista.id_membro}&nome_celula=${celula.nome_celula}">Incluir</a></td>    		
+		    		<td width="10px">
+		    			<!-- verifica se o membro ja esta em uma celula frequente ativo, nao deixar incluir em outra -->
+		    			<c:if test="${lista.get('participa_celula').get('frequenta') != 'Sim'}">
+		    				<input type="radio" name="id_membro" value="${lista.get('membro').get('id_membro')}" required="true">
+		    			</c:if>		    			
+		    		</td>
+		    		<td width="280px">${lista.get("membro").get("nome")}</td>
+		    		<td width="150px">${lista.get("membro").get("celular")}</td>
+		    		<td width="150px">${lista.get("membro").get("telefone")}</td>
+		    		<td width="280px">${lista.get("membro").get("endereco")}</td>
+		    		<td width="140px">
+		    			<c:if test="${lista.get('participa_celula').get('frequenta') eq 'Sim'}">
+		    				${lista.get("celula").get("nome_celula")}
+		    			</c:if>
+		    		</td>
 		    	</tr>
 		    </c:forEach>
 	      </tbody>
@@ -213,12 +307,57 @@
 			</span>
 			<br>
     </div>
+    <hr>
+    <div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">+ Incluir</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
  </form>
     <!-- End tableless -->    
 
+<!-- form para excluir um membro -->
+<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/participaCelula/excluirMembro" method="get" style="width: 400px;">
+	<div class="incluirMembro corTitulo-${setor.cor_rede}">
+		Excluir membro - ${celula.nome_celula}
+	</div>
+	<br>
+	Você tem certeza que deseja excluir o histórico de participação do membro desta Célula?
+	<br><br><br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">- Excluir</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" id="id_membro_exc" name="id_membro" value="">
+	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
+</form>
+
+<!-- form para desvincular um membro -->
+<form id="desvincular-form" class="mfp-hide white-popup" action="/vemev/participaCelula/desvincularMembro" method="get" style="width: 400px;">
+	<div class="incluirMembro corTitulo-${setor.cor_rede}">
+		Desvincular membro - ${celula.nome_celula}
+	</div>
+	<br>
+	Escolha a data final do membro na Célula.
+	<br><br>
+	<label for="data">Data final</label>
+    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<br><br><br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">- Desvincular</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" id="id_membro_des" name="id_membro" value="">
+	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
+</form>
+
  </div>
  
-
 </div>
 
 <h6>
@@ -236,6 +375,17 @@
 </div>
 
 <script>
+
+	//funcao para excluir membro da celula
+	function excluirMembroDaCelula(id){
+		$('#id_membro_exc').val(id);		//passa o id clicado para o campo hidden do form excluir
+	}
+	//funcao para desvincular membro da celula
+	function desvincularMembroDaCelula(id){
+		$('#id_membro_des').val(id);		//passa o id clicado para o campo hidden do form desvincular
+	}
+
+	//maginific-poup
 	$(document).ready(function() {
 		$('.popup-with-form').magnificPopup({
 			type: 'inline',
@@ -266,6 +416,20 @@
         var tr = $(this).parent().parent();
         if($(this).is(':checked')) $(tr).addClass('selected');
         else $(tr).removeClass('selected');
+      });
+
+      //funcao para selecionar radio
+      $('#divTableless table > tbody > tr > td > :radio').bind('click change', function(){
+          var tr = $(this).parent().parent();
+          if($(this).is(':checked')) $(tr).addClass('selected');
+          else $(tr).removeClass('selected');
+          //verifica todos radio
+          var radios = document.getElementsByName($(this)[0].name);
+          for(var i = 0; i < radios.length; i++){
+        	  var trRadio = radios[i].parentNode.parentNode;
+        	  if(radios[i].checked) $(trRadio).addClass('selected');
+              else $(trRadio).removeClass('selected');
+          }
       });
       
       $('#frm-filtro').submit(function(e){ e.preventDefault(); });

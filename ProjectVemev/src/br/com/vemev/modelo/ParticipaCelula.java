@@ -26,7 +26,11 @@ public class ParticipaCelula {
 	@ColunaBD(nome = "data_fim")
 	@TipoDado(tipo = "String")	
 	private String data_fim;
-
+	
+	@ColunaBD(nome = "frequenta") 
+	@TipoDado(tipo = "String")	
+	private String frequenta;
+	
 	public ParticipaCelula(){
 		
 	}
@@ -69,6 +73,14 @@ public class ParticipaCelula {
 
 	public void setData_fim(String data_fim) {
 		this.data_fim = data_fim;
+	}
+
+	public String getFrequenta() {
+		return frequenta;
+	}
+
+	public void setFrequenta(String frequenta) {
+		this.frequenta = frequenta;
 	}	
 	
 	

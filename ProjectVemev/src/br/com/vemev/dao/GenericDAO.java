@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData; 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public abstract class GenericDAO {
 		
 		//usuario, senha, url bd
 		String usuario = "root";
-		String senha = "admin";
+		String senha = "root";
 		String url = "jdbc:mysql://localhost/db_vemev";
 		
 		Connection conexao = DriverManager.getConnection(url, usuario, senha);
@@ -488,67 +489,6 @@ public abstract class GenericDAO {
 		return getList(clausulaSqlJoin, clazz, true);
 	}	
 	
-	/**
-	 * Metodo retorna uma lista de registros do banco de dados conforme o sql avancado, necessario passar os alias para os campos e alias das tabelas
-	 * @param sql String - Exemplo parametro: select t1.id_membro as id, t1.nome as nome, t2.nome_celula as nome_celula from membro as t1 join celula as t2 ...
-	 * @return ArrayList<HashMap<String, String>> - Ex: lista.get(posicao).get(key) >> lista.get(0).get("nome") = retorna valor do nome do membro da posicao do registro 0...
-	 */
-	public ArrayList<HashMap<String, String>> getListSqlAvancado(String sql, int totalColunas){
-		
-		//SQL
-		System.out.println("PRINT SQL SELECT AVANCADO: " + sql);
-		ArrayList<HashMap<String, String>> lista = new ArrayList<HashMap<String, String>>();
-		
-		Connection conexao = null;
-		PreparedStatement stmt = null;
-		try {
-			//execute query select
-			conexao = this.getConnection();
-			stmt = conexao.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
-			
-			while(rs.next()){
-				System.out.println("Dados list select:");
-	
-				Integer contadorColunas = 1;
-				HashMap<String, String> linhaRegistro = new HashMap<String, String>();
-				
-				while(contadorColunas <= totalColunas){
-					Object objeto = rs.getObject(contadorColunas);		//detalhe: tipo generico pode ser String, Integer, Long, Date, Time
-					String valor = objeto.toString();					//Qualquer tipo sera transformado em String
-					
-					//HashMap<"chave", valor> - (chave=nome da coluna) e (valor=valor do campo da coluna)
-					//rs.
-					
-					//contadorColunas++;
-				}
-				System.out.println();
-				
-				//add na lista o 
-				lista.add(linhaRegistro);
-			}
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try{
-				if(stmt != null){
-					stmt.close();
-				}
-				if(conexao != null){
-					conexao.close();
-				}
-			}catch (Exception e){
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
-				e.printStackTrace();
-			}
-		}
-		
-		return lista;
-	}
 
 	/**
 	 * Se selectJoin eh false - Metodo fornece um select simples em uma tabela(classe informada no parametro) com clausula where se necessario
@@ -637,6 +577,86 @@ public abstract class GenericDAO {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try{
+				if(stmt != null){
+					stmt.close();
+				}
+				if(conexao != null){
+					conexao.close();
+				}
+			}catch (Exception e){
+				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				e.printStackTrace();
+			}
+		}
+		
+		return lista;
+	}
+
+
+	/**
+	 * Metodo retorna uma lista de registros do banco de dados conforme o sql avancado, pode conter varias tabelas e colunas no sql
+	 * @param sql String - Exemplo parametro: select t1.id_membro, t1.nome, t2.nome_celula from membro as t1 join celula as t2 ...
+	 * @return ArrayList<HashMap<String, HashMap<String, String>>> - Ex: lista.get(posicao).get(key).get(key) >> lista.get(0).get("tabela").get("coluna") ...
+	 * 		lista.get(1).get("membro").get("nome");           traz o valor do nome do membro
+	 * 		lista.get(1).get("celula").get("nome_celula");    traz o valor do nome da celula
+	 */
+	protected ArrayList<HashMap<String, HashMap<String, String>>> getListSqlAvancado(String sql){
+		
+		//SQL
+		System.out.println("PRINT SQL SELECT AVANCADO: " + sql);
+		ArrayList<HashMap<String, HashMap<String, String>>> lista = new ArrayList<HashMap<String, HashMap<String, String>>>();
+		
+		Connection conexao = null;
+		PreparedStatement stmt = null;
+		try {
+			//execute query select
+			conexao = this.getConnection();
+			stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			System.out.println("Dados list select:");
+			while(rs.next()){
+				HashMap<String, HashMap<String, String>> linhaRegistro = new HashMap<String, HashMap<String, String>>();				
+				ResultSetMetaData rsmd = rs.getMetaData();  	//MetaDados das tabelas e colunas
+			    int numColumns = rsmd.getColumnCount();			//contador de colunas do select
+			    
+			    for (int i=1; i<numColumns+1; i++) {  
+			    	String columnName = rsmd.getColumnName(i);  //nome da coluna
+			    	String tableName = rsmd.getTableName(i);  	//nome da tabela
+			    	Object objeto = rs.getObject(i);			//detalhe: tipo generico pode ser String, Integer, Long, Date, Time
+			    	String valor = null;
+			    	if(objeto != null){
+			    		valor = objeto.toString();				//Qualquer tipo sera transformado em String
+			    	}
+			    	System.out.printf("Tabela: %s - coluna: %s - valor: %s", tableName, columnName, valor);
+			    	System.out.println();
+			    	
+			    	//Exemplo recuperar dados: lista(posicaoRegistro)<"nomeTabela", <"nomeColuna", valorColuna>>
+			    	//lista.get(1).get("membro").get("nome");           traz o valor do nome do membro
+			    	//lista.get(1).get("celula").get("nome_celula");    traz o valor do nome da celula
+			    	
+			    	if(linhaRegistro.containsKey(tableName)){
+			    		HashMap<String, String> mapColumnAndValue = linhaRegistro.get(tableName);	//hashmap para guardar coluna e valor
+			    		mapColumnAndValue.put(columnName, valor);				//add no hashmap a 'coluna=valor'
+			    		linhaRegistro.put(tableName, mapColumnAndValue);		//add na linha de registro a 'tabela=hashmap'
+			    	}else{
+			    		HashMap<String, String> mapColumnAndValue = new HashMap<String, String>();	//hashmap para guardar coluna e valor
+			    		mapColumnAndValue.put(columnName, valor);				//add no hashmap a 'coluna=valor'
+			    		linhaRegistro.put(tableName, mapColumnAndValue);		//add na linha de registro a 'tabela=hashmap'
+			    	}
+			    }					
+				System.out.println();
+				
+				lista.add(linhaRegistro);	//add cada linha de registro na lista
+			}
+		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();

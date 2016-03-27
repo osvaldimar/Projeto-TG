@@ -20,6 +20,9 @@
 	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
 	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	
+	<!-- Ajax formulario --> 
+	<script src="http://malsup.github.com/jquery.form.js"></script>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -86,20 +89,20 @@
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
  <h3 class="page-header">Cadastro dos Lideres de Redes</h3>
- <form action="/vemev/lider/createLiderRede" method="post">
+ <form action="/vemev/lider/createLiderRede" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
     <label for="campo1"> Cor da Rede</label> <br>
     
-        	<input type ="radio" value = "azul" name = "cor_rede"> Azul <br> 
-            <input type ="radio" value = "amarelo" name = "cor_rede"> Amarelo <br>
-           <input type ="radio" value = "verde" name ="cor_rede"> Verde <br>
-           <input type ="radio" value = "vermelho" name = "cor_rede"> Vermelho <br><br>
+        	<input type ="radio" value = "Azul" name = "cor_rede" required="true"> Azul <br> 
+            <input type ="radio" value = "Amarelo" name = "cor_rede" required="true"> Amarelo <br>
+           <input type ="radio" value = "Verde" name ="cor_rede" required="true"> Verde <br>
+           <input type ="radio" value = "Vermelho" name = "cor_rede" required="true"> Vermelho <br><br>
            
        <label for="data">Data</label>
-       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px"> <br>
+       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
 
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
@@ -108,24 +111,24 @@
 
 <!-- Start tableless -->
      <div id="divTableless">
-		<table id="myTable" cellspacing="0" width="100%">
+		<table id="myTable" cellspacing="0">
 		<thead>
 	      	<tr>
-	      		<th width="5%"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
-	      		<th>Nome do membro</th>
-		    	<th>Telefone</th>  
-		    	<th>Endereço</th>
-		    	<th>Bairro</th>
+		    	<th width="10px">&nbsp;&nbsp;&nbsp;</th>
+	      		<th width="300px">Nome do membro</th>
+		    	<th width="150px">Telefone</th>  
+		    	<th width="300px">Endereço</th>
+		    	<th width="150px">Bairro</th>
 	    	</tr>
 		</thead>
       <tbody>
       	<c:forEach var="lista" items="${listaMembros}">
 	    	<tr>
-	    		<td><input value="${lista.id_membro}" name="id_membro" type="checkbox"></td>
-	    		<td>${lista.nome}</td>
-	    		<td>${lista.telefone}</td>
-	    		<td>${lista.endereco}</td>
-	    		<td>${lista.bairro}</td>
+	    		<td width="10px"><input value="${lista.id_membro}" name="id_membro" type="checkbox" onclick="changeCheckbox(this);"></td>
+	    		<td width="300px">${lista.nome}</td>
+	    		<td width="150px">${lista.telefone}</td>
+	    		<td width="300px">${lista.endereco}</td>
+	    		<td width="150px">${lista.bairro}</td>
 	    	</tr>
 	    </c:forEach>
       </tbody>
@@ -158,7 +161,7 @@
   <hr />
   <div id="actions" class="row">
     <div class="col-md-12">
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn btn-primary" onclick="validaLideres();">Salvar</button>
       <a href="index.html" class="btn btn-default">Cancelar</a>
     </div>
   </div>
@@ -181,7 +184,54 @@
 </div>
 </div>
 
-<script>			
+<script>
+	//valida quantidade de lideres no checkbox
+	function changeCheckbox(obj){
+		var checks = document.getElementsByName(obj.name);
+		var cont = 0;
+		for(var i = 0; i < checks.length; i++){
+			if(checks[i].checked){
+				cont++;
+			}
+			if(cont > 2){
+				alert("Só pode selecionar até 2 líderes!");
+				obj.checked = false;
+				break;
+			}
+		}		
+	}
+	//valida antes de enviar formulario
+	$('#form-lider').submit(function(e){ 
+		var checks = document.getElementsByName("id_membro");
+		var cont = 0;
+		for(var i = 0; i < checks.length; i++){
+			if(checks[i].checked){
+				cont++;
+			}			
+		}
+		if(cont < 1){
+			e.preventDefault(); 
+			alert("Por favor selecione 1 ou 2 líderes de Rede!");
+		}
+		if(cont > 2){
+			e.preventDefault(); 
+			alert("Só pode selecionar até 2 líderes!");
+		}
+	});
+	//valida o cadastro ok dos lideres da Rede
+	$(document).ready(function(){
+		$('#form-lider').ajaxForm({
+			success: function(respostaServer){
+				if(respostaServer == "ok"){
+					alert("Cadastro de líderes da Rede Ok!");
+					window.location.reload();		//cadastro ok e reload na pagina de cadastro
+				}else{
+					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
+				}				
+			}
+		});
+	});
+	
     $(function(){
       
       $('#divTableless table > tbody > tr:odd').addClass('odd');
@@ -217,7 +267,14 @@
           $(this).find('td').each(function(){
             if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
           });
-          if(!encontrou) $(this).closest('tr').hide();
+          if(!encontrou){
+              //antes de ocultar, verificar se checkbox is checked para continuar visualizacao dos selecionados
+        	  if($(this).find('td > :checkbox').is(':checked')){ 
+            	  //ignore - nao oculta selecionados
+        	  }else{ 
+            	  $(this).closest('tr').hide();
+        	  }              
+          }
           else $(this).closest('tr').show();
           encontrou = false;
         });

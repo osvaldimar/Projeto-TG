@@ -9,7 +9,7 @@ public class SetorDAO extends GenericDAO {
 
 	
 	/**
-	 * Cria uma Setor no banco de dados
+	 * Cria uma Setor no banco de dados 
 	 * @param setor
 	 */
 	public void create(Setor setor){
@@ -21,7 +21,7 @@ public class SetorDAO extends GenericDAO {
 	 * @param idSetor
 	 * @return
 	 */
-	public Setor read(String idSetor){
+	public Setor read(int idSetor){
 		String clausulaWhere = "id_setor = " + idSetor;			//busca utilizando a clausula where, PK coluna id_setor
 		Setor setor = (Setor) super.read(clausulaWhere, Setor.class);
 		return setor;

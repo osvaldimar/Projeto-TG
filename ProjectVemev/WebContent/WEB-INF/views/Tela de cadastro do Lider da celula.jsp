@@ -100,24 +100,24 @@
 
 <!-- Start tableless -->
      <div id="divTableless">
-		<table id="myTable" cellspacing="0" width="100%">
+		<table id="myTable" cellspacing="0">
 		<thead>
 	      	<tr>
-	      		<th width="5%"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
-	      		<th>Nome do membro</th>
-		    	<th>Telefone</th>  
-		    	<th>Endereço</th>
-		    	<th>Bairro</th>
-	    	</tr>
+	      		<th width="10px"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
+	      		<th width="300px">Nome do membro</th>
+		    	<th width="150px">Telefone</th>  
+		    	<th width="300px">Endereço</th>
+		    	<th width="150px">Bairro</th>
+	    	</tr> 
 		</thead>
       <tbody>
       	<c:forEach var="lista" items="${listaMembros}">
 	    	<tr>
-	    		<td><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
-	    		<td>${lista.nome}</td>
-	    		<td>${lista.telefone}</td>
-	    		<td>${lista.endereco}</td>
-	    		<td>${lista.bairro}</td>
+	    		<td width="10px"><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
+	    		<td width="300px">${lista.nome}</td>
+	    		<td width="150px">${lista.telefone}</td>
+	    		<td width="300px">${lista.endereco}</td>
+	    		<td width="150px">${lista.bairro}</td>
 	    	</tr>
 	    </c:forEach>
       </tbody>
@@ -125,7 +125,7 @@
     </div>
     
     <div id="pager-tableless" class="pager-tableless">
-    	<form style="background-color:#f2f2f2; width:100%; text-align:left; height:50px;">
+    	<div style="background-color:#f2f2f2; width:100%; text-align:left; height:50px;">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
     		<img src="/jquery-tableless/prev.png" class="prev">
@@ -143,7 +143,7 @@
 			</select> Registros&nbsp;&nbsp;&nbsp;
 			</span>
 			<br>
-    	</form>
+    	</div>
     </div>
     <!-- End tableless -->
     

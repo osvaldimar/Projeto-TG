@@ -1,21 +1,5 @@
 
-table.scroll{
-	width: 100%;
-}
-table.scroll tbody,
-table.scroll thead { display: block; }
-
-
-table.scroll tbody {
-    height: 100px;
-    overflow-y: scroll;
-    overflow-x: auto;
-    width: 100%;
-}
-table.scroll tbody td, table.scroll thead th {
-
-}
-
+ 
 #divTableless table tbody {
     height: 200px;
     overflow-y: scroll;
@@ -24,18 +8,20 @@ table.scroll tbody td, table.scroll thead th {
     display: block;
 }
 #divTableless{
-  width:100%;
+  
   overflow-x: auto;
-  min-width: 300px;
+  min-width: 400px;
   display: block;
 }
 
 #divTableless table thead { 
 	display: block; 
+	width: 100%;
+	background-color:#ad2525;
 }
 
 #divTableless table{
-  width:100%;
+  
   border:1px solid #ccc;
 }
 #divTableless table thead th, #divTableless table thead td{
@@ -84,4 +70,17 @@ table.scroll tbody td, table.scroll thead th {
 	padding-top: 1%;
 	width: 300px;
 	min-width: 250px;
+}
+
+
+/* decorations */
+#divTableless table {
+    border: 1px solid lightgrey;
+}
+#divTableless table td {
+    padding: 0.3em;
+    border: 1px solid lightgrey;
+}
+#divTableless table thead th {
+    border: none;
 }

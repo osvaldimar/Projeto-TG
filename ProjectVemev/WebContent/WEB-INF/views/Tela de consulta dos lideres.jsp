@@ -3,7 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="pt-br">
+<html lang="pt-br"> 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +20,62 @@
 	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
 	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	
+	<style type="text/css">
+	.rede table {
+    	border: 1px solid lightgrey;
+    	width: 100%;
+	}
+	.rede table td, table th {
+	    padding: 0.3em;
+	    border: 1px solid lightgrey;
+	}
+	.rede table th {
+	    border: 1px solid grey;
+	}
+	.rede{
+		border: 1px solid lightgrey;
+		width: 80%; 
+		vertical-align: text-top; 
+		padding: 6px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
+	}
+	.rede-verde{
+		background-color: #00cc00; 
+		width: 100%; 
+		height: 50px; 
+		color: white; 
+		padding: 1%; 
+		font-size: 24px;"
+	}
+	.rede-vermelho{
+		background-color: #cc0000; 
+		width: 100%; 
+		height: 50px; 
+		color: white; 
+		padding: 1%; 
+		font-size: 24px;"
+	}
+	.rede-azul{
+		background-color: #0033ff; 
+		width: 100%; 
+		height: 50px; 
+		color: white; 
+		padding: 1%; 
+		font-size: 24px;"
+	}
+	.rede-amarelo{
+		background-color: #ffcc00; 
+		width: 100%; 
+		height: 50px; 
+		color: white; 
+		padding: 1%; 
+		font-size: 24px;"
+	}
+		
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -85,84 +141,148 @@
  
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Consulta de todos os Membros</h3>
+ <h3 class="page-header">Consulta dos líderes das Redes</h3>
  <form action="index.html">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-<!-- Start tableless -->
-<div style="text-align:center; float:center;">
-<p style="padding:12px;">
-        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
-        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
-</p>
-</div>
-     <div id="divTableless">
-		<table id="myTable" cellspacing="0"> 
-		<thead>
-	      	<tr>
-	      		<th width="10px"><input value="1" id="marcar-todos" name="marcar-todos" type="checkbox"></th>
-	      		<th width="150px">Nome do membro</th>
-	      		<th width="100px">Celular</th>
-		    	<th width="100px">Telefone</th>  
-		    	<th width="150px">Endereço</th>
-		    	<th width="100px">Bairro</th>		    	
-		    	<th width="100px">Cep</th>
-		    	<th width="100px">Estado</th>
-		    	<th width="100px">Cidade</th>
-		    	<th width="100px">Complemento</th>
-	    	</tr>
-		</thead>
-      <tbody>
-      	<c:forEach var="lista" items="${listaMembros}">
-	    	<tr>
-	    		<td width="10px"><input value="${lista.id_membro}" name="check_inbox" type="checkbox"></td>
-	    		<td width="150px">${lista.nome}</td>
-	    		<td width="100px">${lista.celular}</td>
-	    		<td width="100px">${lista.telefone}</td>
-	    		<td width="150px">${lista.endereco}</td>
-	    		<td width="100px">${lista.bairro}</td>	    		
-	    		<td width="100px">${lista.cep}</td>
-	    		<td width="100px">${lista.estado}</td>
-	    		<td width="100px">${lista.cidade}</td>
-	    		<td width="100px">${lista.complemento}</td>	    		
-	    	</tr>
-	    </c:forEach>
-      </tbody>
-    </table>
-    </div>
 
-    <div id="pager-tableless" class="pager-tableless">
-			<br>&nbsp;&nbsp;&nbsp;		
-			<img src="/jquery-tableless/first.png" class="first">
-    		<img src="/jquery-tableless/prev.png" class="prev">
-    		<input class="pagedisplay" type="text">
-    		<img src="/jquery-tableless/next.png" class="next">
-    		<img src="/jquery-tableless/last.png" class="last">
-            <span>
-			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-			</select> Registros&nbsp;&nbsp;&nbsp;
-			</span>
-			<br>
-    </div>
-    <!-- End tableless -->
+	<div class="rede">
+		<div class="rede-verde">
+			Lideres - Rede Verde
+		</div>
+		<br>
+		<table>
+			<thead>
+    			<tr>
+        			<th width="30%">Nome Líder</th>
+        			<th width="20%">Telefone</th>
+        			<th width="20%">Data inicio</th>
+        			<th width="20%">Data fim</th>
+        			<th width="10%">Status</th>
+    			</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${listaLideres}" var="lista">
+					<c:if test="${lista.get('lider_rede').get('cor_rede') eq 'Verde'}">
+	    			<tr>
+	        			<td>${lista.get("membro").get("nome")}</td>
+	        			<td>${lista.get("membro").get("telefone")}</td>
+	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
+	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
+	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        		</tr>
+	        		</c:if>
+        		</c:forEach>
+        	</tbody>
+    	</table>
+	</div>
+	
+	<br><br>
+	
+	<div class="rede">
+		<div class="rede-azul">
+			Lideres - Rede Azul
+		</div>
+		<br>
+		<table>
+			<thead>
+    			<tr>
+        			<th width="30%">Nome Líder</th>
+        			<th width="20%">Telefone</th>
+        			<th width="20%">Data inicio</th>
+        			<th width="20%">Data fim</th>
+        			<th width="10%">Status</th>
+    			</tr>
+			</thead>
+			<tbody>
+    			<c:forEach items="${listaLideres}" var="lista">
+					<c:if test="${lista.get('lider_rede').get('cor_rede') eq 'Azul'}">
+	    			<tr>
+	        			<td>${lista.get("membro").get("nome")}</td>
+	        			<td>${lista.get("membro").get("telefone")}</td>
+	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
+	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
+	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        		</tr>
+	        		</c:if>
+        		</c:forEach>
+        	</tbody>
+    	</table>
+	</div>
+	
+	<br><br>
+	
+	<div class="rede">
+		<div class="rede-vermelho">
+			Lideres - Rede Vermelho
+		</div>
+		<br>
+		<table>
+			<thead>
+    			<tr>
+        			<th width="30%">Nome Líder</th>
+        			<th width="20%">Telefone</th>
+        			<th width="20%">Data inicio</th>
+        			<th width="20%">Data fim</th>
+        			<th width="10%">Status</th>
+    			</tr>
+			</thead>
+			<tbody>
+    			<c:forEach items="${listaLideres}" var="lista">
+					<c:if test="${lista.get('lider_rede').get('cor_rede') eq 'Vermelho'}">
+	    			<tr>
+	        			<td>${lista.get("membro").get("nome")}</td>
+	        			<td>${lista.get("membro").get("telefone")}</td>
+	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
+	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
+	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        		</tr>
+	        		</c:if>
+        		</c:forEach>
+        	</tbody>
+    	</table>
+	</div>
+	
+	<br><br>
+	
+	<div class="rede">
+		<div class="rede-amarelo">
+			Lideres - Rede Amarelo
+		</div>
+		<br>
+		<table>
+			<thead>
+    			<tr>
+        			<th width="30%">Nome Líder</th>
+        			<th width="20%">Telefone</th>
+        			<th width="20%">Data inicio</th>
+        			<th width="20%">Data fim</th>
+        			<th width="10%">Status</th>
+    			</tr>
+			</thead>
+			<tbody>
+	    		<c:forEach items="${listaLideres}" var="lista">
+					<c:if test="${lista.get('lider_rede').get('cor_rede') eq 'Amarelo'}">
+	    			<tr>
+	        			<td>${lista.get("membro").get("nome")}</td>
+	        			<td>${lista.get("membro").get("telefone")}</td>
+	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
+	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
+	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        		</tr>
+	        		</c:if>
+        		</c:forEach>
+        	</tbody>
+    	</table>
+	</div>
+		
     
- </div>
+</div>
  
   <hr />
-  <div id="actions" class="row">
-    <div class="col-md-12">
-      <button type="submit" class="btn btn-primary">Salvar</button>
-      <a href="index.html" class="btn btn-default">Cancelar</a>
-    </div>
-  </div>
+  
 </form>
 </div>
 
