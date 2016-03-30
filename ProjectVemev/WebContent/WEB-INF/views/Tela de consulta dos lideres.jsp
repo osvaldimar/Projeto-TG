@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Consulta dos Membros</title>
+	<title>Consulta dos Líderes</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -16,15 +16,17 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	<!-- Magnific Popup core JS CSS file -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
+	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
 	
 	<style type="text/css">
 	.rede table {
     	border: 1px solid lightgrey;
+    	overflow-y: scroll;
     	width: 100%;
+    	background-color: #fff; 
 	}
 	.rede table td, table th {
 	    padding: 0.3em;
@@ -35,7 +37,7 @@
 	}
 	.rede{
 		border: 1px solid lightgrey;
-		width: 80%; 
+		width: 100%; 
 		vertical-align: text-top; 
 		padding: 6px;
 		-moz-border-radius:10px;
@@ -49,6 +51,9 @@
 		color: white; 
 		padding: 1%; 
 		font-size: 24px;"
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
 	}
 	.rede-vermelho{
 		background-color: #cc0000; 
@@ -57,6 +62,9 @@
 		color: white; 
 		padding: 1%; 
 		font-size: 24px;"
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
 	}
 	.rede-azul{
 		background-color: #0033ff; 
@@ -65,6 +73,9 @@
 		color: white; 
 		padding: 1%; 
 		font-size: 24px;"
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
 	}
 	.rede-amarelo{
 		background-color: #ffcc00; 
@@ -73,6 +84,9 @@
 		color: white; 
 		padding: 1%; 
 		font-size: 24px;"
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+ 		border-radius:10px;
 	}
 		
 	</style>
@@ -97,13 +111,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin das Células</li>
-                 <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
-                <li><a href="/Tela de cadastro de Celula.html">Cadastro de Célula</a></li>
+                <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
+                <li><a href="/vemev/celula/cadastrarCelula">Cadastro de Célula</a></li>
                 <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
-                 <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
-         
-               
-               
+                <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
+         		<li><a href="/vemev/reuniao/cadastrarReuniao">Cadastro de Reuniões</a></li>
                 
               </ul>
             </li> 
@@ -113,10 +125,9 @@
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin Líderes</li>
                 <li><a href="/vemev/cadastro/liderCelula">Cadastro de Líder de Célula</a></li>
-                 <li><a href="/Tela de cadastro do Lider em Treinamento.html">Cadastro de Líder em Treinamento</a></li>
-                <li><a href="/ Tela de cadastro de Lider da Rede.html">Cadastro de Líder de Redes</a></li>
-                 <li><a href="/Tela de cadastro do Lider de Setor.html">Cadastro de Líder de Setor</a></li>
-                
+                 <li><a href="/vemev/cadastro/liderTreinamento">Cadastro de Líder em Treinamento</a></li>
+                <li><a href="/vemev/cadastro/liderRede">Cadastro de Líder de Redes</a></li>
+                 <li><a href="/vemev/lider/CadastrarLiderSetor">Cadastro de Líder de Setor</a></li>
                 
               </ul>
             </li>   
@@ -125,14 +136,14 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Consultas</li>
-                 <li><a href="#">Consulta dos Membros</a></li>
-                  <li><a href="#">Consulta das Células</a></li>
+                 <li><a href="/vemev/membro/consultaMembros">Consulta dos Membros</a></li>
+                  <li><a href="/vemev/celula/consultaCelula">Consulta das Células</a></li>
                 <li><a href="#">Consulta dos  Setores</a></li>
                  <li><a href="#">Consulta dos Visitantes</a></li>
                       <li class="divider">teste teste</li>
                 <li><a href="#">Consulta dos  Líderes Célula</a></li>
                  <li><a href="#">Consulta dos Líderes em Treinamentos</a></li>
-                <li><a href="#">Consulta dos Líderes de Redes</a></li>
+                <li><a href="/vemev/lider/consultaLiderRede">Consulta dos Líderes de Redes</a></li>
                  <li><a href="#">Consulta dos Líderes de Setor</a></li>
               </ul>
             </li> 
@@ -153,14 +164,15 @@
 			Lideres - Rede Verde
 		</div>
 		<br>
-		<table>
+		<table class="table-verde">
 			<thead>
     			<tr>
         			<th width="30%">Nome Líder</th>
         			<th width="20%">Telefone</th>
-        			<th width="20%">Data inicio</th>
-        			<th width="20%">Data fim</th>
+        			<th width="15%">Data inicio</th>
+        			<th width="15%">Data fim</th>
         			<th width="10%">Status</th>
+        			<th width="10%">Ação</th>
     			</tr>
 			</thead>
 			<tbody>
@@ -172,6 +184,14 @@
 	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
 	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        			<td>
+			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
 	        		</tr>
 	        		</c:if>
         		</c:forEach>
@@ -179,21 +199,22 @@
     	</table>
 	</div>
 	
-	<br><br>
+	<br><br><br>
 	
 	<div class="rede">
 		<div class="rede-azul">
 			Lideres - Rede Azul
 		</div>
 		<br>
-		<table>
+		<table class="table-azul">
 			<thead>
     			<tr>
         			<th width="30%">Nome Líder</th>
         			<th width="20%">Telefone</th>
-        			<th width="20%">Data inicio</th>
-        			<th width="20%">Data fim</th>
+        			<th width="15%">Data inicio</th>
+        			<th width="15%">Data fim</th>
         			<th width="10%">Status</th>
+        			<th width="10%">Ação</th>
     			</tr>
 			</thead>
 			<tbody>
@@ -205,6 +226,14 @@
 	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
 	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        			<td>
+	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
 	        		</tr>
 	        		</c:if>
         		</c:forEach>
@@ -212,7 +241,7 @@
     	</table>
 	</div>
 	
-	<br><br>
+	<br><br><br>
 	
 	<div class="rede">
 		<div class="rede-vermelho">
@@ -224,9 +253,10 @@
     			<tr>
         			<th width="30%">Nome Líder</th>
         			<th width="20%">Telefone</th>
-        			<th width="20%">Data inicio</th>
-        			<th width="20%">Data fim</th>
+        			<th width="15%">Data inicio</th>
+        			<th width="15%">Data fim</th>
         			<th width="10%">Status</th>
+        			<th width="10%">Ação</th>
     			</tr>
 			</thead>
 			<tbody>
@@ -238,6 +268,14 @@
 	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
 	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        			<td>
+	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
 	        		</tr>
 	        		</c:if>
         		</c:forEach>
@@ -245,7 +283,7 @@
     	</table>
 	</div>
 	
-	<br><br>
+	<br><br><br>
 	
 	<div class="rede">
 		<div class="rede-amarelo">
@@ -257,9 +295,10 @@
     			<tr>
         			<th width="30%">Nome Líder</th>
         			<th width="20%">Telefone</th>
-        			<th width="20%">Data inicio</th>
-        			<th width="20%">Data fim</th>
+        			<th width="15%">Data inicio</th>
+        			<th width="15%">Data fim</th>
         			<th width="10%">Status</th>
+        			<th width="10%">Ação</th>
     			</tr>
 			</thead>
 			<tbody>
@@ -271,6 +310,14 @@
 	        			<td>${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td>${lista.get("lider_rede").get("data_fim")}</td>
 	        			<td>${lista.get("lider_rede").get("status_lider")}</td>
+	        			<td>
+	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
 	        		</tr>
 	        		</c:if>
         		</c:forEach>
@@ -285,6 +332,26 @@
   
 </form>
 </div>
+
+<!-- form para desvincular um membro -->
+<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusLider" method="get" style="width: 400px;">
+	<div style="font-weight: 600; font-size: 16px;">
+		Alterar Status do Lider para 'Inativo'
+	</div>
+	<br>
+	Escolha a data final do Lider na Rede.
+	<br><br>
+	<label for="data">Data final</label>
+    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<br><br><br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">Salvar</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" id="id_lider" name="id_lider" value="">
+</form>
 
 <h6>
       <!-- Bootstrap core JavaScript
@@ -303,79 +370,24 @@
 </div>
 
 <script>			
-    $(function(){
-      
-      $('#divTableless table > tbody > tr:odd').addClass('odd');
-      
-      $('#divTableless table > tbody > tr').hover(function(){
-        $(this).toggleClass('hover');
-      });
-      
-      $('#marcar-todos').click(function(){
-        $('#divTableless table > tbody > tr > td > :checkbox')
-          .attr('checked', $(this).is(':checked'))
-          .trigger('change');
-      });
-      
-      $('#divTableless table > tbody > tr > td > :checkbox').bind('click change', function(){
-        var tr = $(this).parent().parent();
-        if($(this).is(':checked')) $(tr).addClass('selected');
-        else $(tr).removeClass('selected');
-      });
-      
-      $('#frm-filtro').submit(function(e){ e.preventDefault(); });
 
-      $('#pesquisar').keydown(function(e){
-        	if(e.keyCode==13){ 
-            	return false; //ignorar enter da caixa pesquisar
-          }
-      });
-      
-      $('#pesquisar').keyup(function(e){
-        var encontrou = false;
-        var termo = $(this).val().toLowerCase();
-        $('#divTableless table > tbody > tr').each(function(){
-          $(this).find('td').each(function(){
-            if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
-          });
-          if(!encontrou) $(this).closest('tr').hide();
-          else $(this).closest('tr').show();
-          encontrou = false;
-        });
-      });
+	//funcao para alterar status inativo do lider
+	function alterarLider(id){
+		$('#id_lider').val(id);		//passa o id do lider para alterar o status
+	}
 
-      if($('#pesquisar').val() != ""){
-          var encontrou = false;
-          var termo = $('#pesquisar').val().toLowerCase();
-          $('#divTableless table > tbody > tr').each(function(){
-            $(this).find('td').each(function(){
-              if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
-            });
-            if(!encontrou) $(this).closest('tr').hide();
-            else $(this).closest('tr').show();
-            encontrou = false;
-          });
-      }
-      
-      $("#divTableless table") 
-        .tablesorter({
-          dateFormat: 'uk',
-          headers: {
-            0: {
-              sorter: false
-            },
-            5: {
-              sorter: false
-            }
-          }
-        }) 
-        .tablesorterPager({container: $("#pager-tableless")})
-        .bind('sortEnd', function(){
-          $('#divTableless table > tbody > tr').removeClass('odd');
-          $('#divTableless table > tbody > tr:odd').addClass('odd');
-        });
-      
-    });
+	//maginific-poup
+	$(document).ready(function() {
+		$('.popup-with-form').magnificPopup({
+			type: 'inline',
+			preloader: false,	
+		});
+	})
+	
+	function closePopup(){
+	  var magnificPopup = $.magnificPopup.instance; 
+	  magnificPopup.close(); 
+	}
 </script>
   </body>
 </html>

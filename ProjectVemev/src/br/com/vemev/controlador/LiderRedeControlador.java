@@ -68,12 +68,22 @@ public class LiderRedeControlador {
 	
 	
 	@RequestMapping(value={"/lider/consultaLiderRede"}, method=RequestMethod.GET)
-	public ModelAndView consultaCelula(Model model) {
+	public ModelAndView consultaLider(Model model) {
 		
 		ArrayList<HashMap<String,HashMap<String,String>>> listaLideres = dao.getListaDadosLideresRedes();		//recupera todos lideres do bd
 		model.addAttribute("listaLideres", listaLideres);		//add lista na view jsp
 		
 		return new ModelAndView("Tela de consulta dos lideres.jsp"); //retorna tela de consulta lideres
+	}
+	
+	@RequestMapping(value={"/lider/alterarStatusLider"}, method=RequestMethod.GET)
+	public String updateStatusLider(LiderRede lider) {
+		
+		//atualiza status do Lider
+		lider.setStatus_lider("Inativo");
+		dao.update(lider);		
+		
+		return "redirect:/vemev/lider/consultaLiderRede";
 	}
 	
 }

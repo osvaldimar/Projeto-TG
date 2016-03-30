@@ -30,6 +30,7 @@
 	.membro-table table{
     	border: 1px solid grey;
     	width: 100%;
+    	background-color: #fff; 
 	}
 	.membro-table table td, table th {
 	    padding: 0.3em;
@@ -54,6 +55,7 @@
 		-moz-border-radius:10px;
 		-webkit-border-radius:10px;
  		border-radius:10px;
+ 		background-color: #fff;
 	}
 	.divTitulo{
 		width: 100%; 
@@ -63,6 +65,9 @@
 		padding: 1%;
 		font-size: 16px;
 		padding: 6px;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+ 		border-radius:5px;
 	}
 	.corTitulo-Verde{
 		background-color: #00cc00; 
@@ -101,10 +106,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin das Células</li>
-                 <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
-                <li><a href="/Tela de cadastro de Celula.html">Cadastro de Célula</a></li>
+                <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
+                <li><a href="/vemev/celula/cadastrarCelula">Cadastro de Célula</a></li>
                 <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
-                 <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
+                <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
+         		<li><a href="/vemev/reuniao/cadastrarReuniao">Cadastro de Reuniões</a></li>
+                
               </ul>
             </li> 
             
@@ -113,9 +120,10 @@
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin Líderes</li>
                 <li><a href="/vemev/cadastro/liderCelula">Cadastro de Líder de Célula</a></li>
-                 <li><a href="/Tela de cadastro do Lider em Treinamento.html">Cadastro de Líder em Treinamento</a></li>
-                <li><a href="/ Tela de cadastro de Lider da Rede.html">Cadastro de Líder de Redes</a></li>
-                 <li><a href="/Tela de cadastro do Lider de Setor.html">Cadastro de Líder de Setor</a></li>
+                 <li><a href="/vemev/cadastro/liderTreinamento">Cadastro de Líder em Treinamento</a></li>
+                <li><a href="/vemev/cadastro/liderRede">Cadastro de Líder de Redes</a></li>
+                 <li><a href="/vemev/lider/CadastrarLiderSetor">Cadastro de Líder de Setor</a></li>
+                
               </ul>
             </li>   
             
@@ -123,14 +131,14 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Consultas</li>
-                 <li><a href="#">Consulta dos Membros</a></li>
-                  <li><a href="#">Consulta das Células</a></li>
+                 <li><a href="/vemev/membro/consultaMembros">Consulta dos Membros</a></li>
+                  <li><a href="/vemev/celula/consultaCelula">Consulta das Células</a></li>
                 <li><a href="#">Consulta dos  Setores</a></li>
                  <li><a href="#">Consulta dos Visitantes</a></li>
                       <li class="divider">teste teste</li>
                 <li><a href="#">Consulta dos  Líderes Célula</a></li>
                  <li><a href="#">Consulta dos Líderes em Treinamentos</a></li>
-                <li><a href="#">Consulta dos Líderes de Redes</a></li>
+                <li><a href="/vemev/lider/consultaLiderRede">Consulta dos Líderes de Redes</a></li>
                  <li><a href="#">Consulta dos Líderes de Setor</a></li>
               </ul>
             </li> 
@@ -169,24 +177,27 @@
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">${celula.nome_celula}</div>
 			<br>
-			Total de membros: ${celula.total}<br>
-			Endereço: ${celula.endereco}<br>
-			Complemento: ${celula.complemento}<br>
-			Cep: ${celula.cep}<br>
-			Bairro: ${celula.bairro}<br>
-			Cidade: ${celula.cidade}<br>
-			Estado: ${celula.estado}<br>
+			<b>Total de membros:</b> ${celula.total}<br>
+			<b>Endereço:</b> ${celula.endereco}<br>
+			<b>Complemento:</b> ${celula.complemento}<br>
+			<b>Cep:</b> ${celula.cep}<br>
+			<b>Bairro:</b> ${celula.bairro}<br>
+			<b>Cidade:</b> ${celula.cidade}<br>
+			<b>Estado:</b> ${celula.estado}<br>
 		</div>
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Líderes</div><br>
-			Líder: teste lider 1<br>
-			Líder: teste lider 2<br>
-			Líder em treinamento: teste lider 3
+			<c:forEach var="lista" items="${listaLideresCelula}" varStatus="contagem">			
+				<b>${contagem.count}º Líder de Célula:</b> ${lista.nome}<br>			
+			</c:forEach>
+			<c:forEach var="lista" items="${listaLideresTrein}" varStatus="contagem">			
+				<b>${contagem.count}º Líder em Treinamento:</b> ${lista.nome}<br>			
+			</c:forEach>
 		</div>
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Rede / Setor</div><br>
-			Rede: ${setor.cor_rede}<br>
-			Setor: ${setor.nome_setor}
+			<b>Rede:</b> ${setor.cor_rede}<br>
+			<b>Setor:</b> ${setor.nome_setor}
 		</div>
 		<div style="clear: both; width: 100%;"> </div>
 		<br>
@@ -214,7 +225,7 @@
 	      <tbody>
 	      	<c:forEach var="lista" items="${listaMembrosDaCelula}" varStatus="contagem">
 		    	<tr>
-		    		<td width="5%">${contagem.count}</td>
+		    		<td width="5%" align="center">${contagem.count}</td>
 		    		<td width="25%">${lista.nome}</td>
 		    		<td width="15%">${lista.celular}</td>
 		    		<td width="15%">${lista.telefone}</td>

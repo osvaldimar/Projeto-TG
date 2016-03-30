@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Rede</title>
+	<title>Cadastro dos Lideres em Treinamento</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -85,21 +85,21 @@
  
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres de Setor</h3>
- <form action="/vemev/lider/createLiderSetor" method="post" id="form-lider">
+ <h3 class="page-header">Cadastro dos Lideres em Treinamento</h3>
+ <form action="/vemev/lider/createLiderTreinamento" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-   <label for="setor_celula">Rede / Setor</label>
-        <select class="form-control" required="true" name="id_setor" style="width: 250px;">
-        	<option value=""></option>
-        	<c:forEach items="${listaSetores}" var="lista">
-      			<option value="${lista.id_setor}">${lista.cor_rede} - ${lista.nome_setor}</option> 
-        	</c:forEach>
-        </select>
+     <label for="nome_celula">Célula</label>
+			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
+				<option value=""></option>
+				<c:forEach var="lista" items="${listaTodasCelulas}">
+					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
+				</c:forEach>
+			</select>
            
-       <label for="data">Data</label>
+       <label for="data"><br>Data</label>
        <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
 
 <div style="text-align:left; float:center;">
@@ -209,7 +209,7 @@
 		}
 		if(cont < 1){
 			e.preventDefault(); 
-			alert("Por favor selecione 1 ou 2 líderes de Rede!");
+			alert("Por favor selecione 1 ou 2 líderes em Treinamento!");
 		}
 		if(cont > 2){
 			e.preventDefault(); 
@@ -221,7 +221,7 @@
 		$('#form-lider').ajaxForm({
 			success: function(respostaServer){
 				if(respostaServer == "ok"){
-					alert("Cadastro de líderes de Setor Ok!");
+					alert("Cadastro de líderes em Treinamento Ok!");
 					window.location.reload();		//cadastro ok e reload na pagina de cadastro
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor

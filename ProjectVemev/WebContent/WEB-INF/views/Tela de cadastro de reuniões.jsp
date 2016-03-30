@@ -41,11 +41,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin das Células</li>
-                 <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
-                <li><a href="/Tela de cadastro de Celula.html">Cadastro de Célula</a></li>
+                <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
+                <li><a href="/vemev/celula/cadastrarCelula">Cadastro de Célula</a></li>
                 <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
-                 <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
-           
+                <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
+         		<li><a href="/vemev/reuniao/cadastrarReuniao">Cadastro de Reuniões</a></li>
+                
               </ul>
             </li> 
             
@@ -54,10 +55,10 @@
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Admin Líderes</li>
                 <li><a href="/vemev/cadastro/liderCelula">Cadastro de Líder de Célula</a></li>
-                 <li><a href="/Tela de cadastro do Lider em Treinamento.html">Cadastro de Líder em Treinamento</a></li>
-                <li><a href="/ Tela de cadastro de Lider da Rede.html">Cadastro de Líder de Redes</a></li>
-                 <li><a href="/Tela de cadastro do Lider de Setor.html">Cadastro de Líder de Setor</a></li>
-              
+                 <li><a href="/vemev/cadastro/liderTreinamento">Cadastro de Líder em Treinamento</a></li>
+                <li><a href="/vemev/cadastro/liderRede">Cadastro de Líder de Redes</a></li>
+                 <li><a href="/vemev/lider/CadastrarLiderSetor">Cadastro de Líder de Setor</a></li>
+                
               </ul>
             </li>   
             
@@ -65,14 +66,14 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
               <ul class="dropdown-menu">
              	<li class="dropdown-header">Consultas</li>
-                 <li><a href="#">Consulta dos Membros</a></li>
-                  <li><a href="#">Consulta das Células</a></li>
+                 <li><a href="/vemev/membro/consultaMembros">Consulta dos Membros</a></li>
+                  <li><a href="/vemev/celula/consultaCelula">Consulta das Células</a></li>
                 <li><a href="#">Consulta dos  Setores</a></li>
                  <li><a href="#">Consulta dos Visitantes</a></li>
                       <li class="divider">teste teste</li>
                 <li><a href="#">Consulta dos  Líderes Célula</a></li>
                  <li><a href="#">Consulta dos Líderes em Treinamentos</a></li>
-                <li><a href="#">Consulta dos Líderes de Redes</a></li>
+                <li><a href="/vemev/lider/consultaLiderRede">Consulta dos Líderes de Redes</a></li>
                  <li><a href="#">Consulta dos Líderes de Setor</a></li>
               </ul>
             </li> 
@@ -95,7 +96,7 @@
 				</c:forEach>
 			</select>
  	<label for="dia_reuniao">Dia Da Célula</label>
-        <select class="form-control" name="dia_reuniao">
+        <select class="form-control" name="dia_reuniao" required="true">
         	<option value ="Segunda">Segunda</option>
             <option value ="Terça">Terça</option>
             <option value ="Quarta">Quarta</option>
@@ -106,14 +107,14 @@
           
         </select>
           <label for="num_visitantes">Número de Visitantes</label>
-       <input type="text" class="form-control" id="num_visitantes" name = "num_visitantes">
+       <input type="text" class="form-control" id="num_visitantes" name = "num_visitantes" required="true">
     </div>
     
      <div class="form-group col-md-4">
        <label for="horario">Horário</label>
-       <input type="time" class="form-control" id="horario" name ="horario">
+       <input type="time" class="form-control" id="horario" name ="horario" required="true">
        <label for="num_membros">Número de Membros</label>
-       <input type="text" class="form-control" id="num_membros" name ="num_membros">
+       <input type="text" class="form-control" id="num_membros" name ="num_membros" required="true">
        
      </div>
      
@@ -127,7 +128,7 @@
   <div id="actions" class="row">
     <div class="col-md-12">
       <button type="submit" class="btn btn-primary">Salvar</button>
-      <a href="index.html" class="btn btn-default">Cancelar</a>
+      <a href="/home.html" class="btn btn-default">Cancelar</a>
     </div>
   </div>
 </form>

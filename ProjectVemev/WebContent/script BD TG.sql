@@ -118,6 +118,7 @@ CREATE TABLE lider_treinamento (
     nome_celula VARCHAR(20) NOT NULL,
     data_ini DATE,
     data_fim DATE,
+    status_lider VARCHAR(10),
     FOREIGN KEY (nome_celula)
         REFERENCES celula (nome_celula),
     FOREIGN KEY (id_membro)
@@ -190,9 +191,12 @@ insert into setor(nome_setor, cor_rede) values('Genérico', 'Amarelo');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
 	values('Célula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Apolo', 0, 1, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
-
-    
+	values('Célula Apolo', 0, 2, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
+	values('Célula Bravo', 0, 3, 'Rua da celula de Bravo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
+	values('Célula Pegasus', 0, 4, 'Rua da celula de Pegasus', 'Pegasinho', '09862-100', 'SP', 'São Paulo', '');   
+ 
 select * from membro;
 
 select * from visitante;
@@ -206,6 +210,8 @@ select * from celula;
 select * from lider_rede;
 
 select * from lider_celula;
+
+select * from lider_treinamento;
 
 select * from participa_celula;
 

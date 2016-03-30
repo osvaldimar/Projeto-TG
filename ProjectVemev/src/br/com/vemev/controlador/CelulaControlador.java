@@ -1,17 +1,13 @@
 package br.com.vemev.controlador;
 
-import java.awt.image.SampleModel;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap; 
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.vemev.dao.CelulaDAO;
+import br.com.vemev.dao.LiderCelulaDAO;
+import br.com.vemev.dao.LiderTreinamentoDAO;
 import br.com.vemev.dao.MembroDAO;
 import br.com.vemev.dao.ParticipaCelulaDAO;
 import br.com.vemev.dao.SetorDAO;
 import br.com.vemev.modelo.Celula;
+import br.com.vemev.modelo.LiderCelula;
+import br.com.vemev.modelo.LiderTreinamento;
 import br.com.vemev.modelo.Membro;
 import br.com.vemev.modelo.ParticipaCelula;
 import br.com.vemev.modelo.Setor;
@@ -130,6 +130,26 @@ public class CelulaControlador {
 				SetorDAO daoSetor = new SetorDAO();
 				Setor setor = daoSetor.read(celula.getId_setor());
 				model.addAttribute("setor", setor);		//add o objeto Setor na view jsp
+				
+				//ler os dados dos Lideres da Celula
+				LiderCelulaDAO daoLider = new LiderCelulaDAO();
+				ArrayList<LiderCelula> listCel = daoLider.getListaLideresAtivo(nomeCelula); //lista lider celula 	
+				ArrayList<Membro> listaLideresCelula = new ArrayList<Membro>();	//lista com dados do membro lider da celula
+				for(LiderCelula l : listCel){
+					Membro m = daoDoMembro.read(l.getId_membro());
+					listaLideresCelula.add(m);
+				}
+				model.addAttribute("listaLideresCelula", listaLideresCelula);	//add o objeto na view jsp				
+			
+				//ler os dados dos Lideres em Treinamento
+				LiderTreinamentoDAO daoLiderTrein = new LiderTreinamentoDAO();
+				ArrayList<LiderTreinamento> listTrein = daoLiderTrein.getListaLideresAtivo(nomeCelula);	//lista lider treinamento			
+				ArrayList<Membro> listaLideresTrein = new ArrayList<Membro>();	//lista com dados do membro lider em treinamento
+				for(LiderTreinamento l : listTrein){
+					Membro m = daoDoMembro.read(l.getId_membro());
+					listaLideresTrein.add(m);			
+				}
+				model.addAttribute("listaLideresTrein", listaLideresTrein);		//add o objeto na view jsp	
 			}
 		}
 		
