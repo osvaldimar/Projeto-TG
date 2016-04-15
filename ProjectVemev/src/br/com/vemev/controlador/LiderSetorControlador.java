@@ -1,6 +1,6 @@
 package br.com.vemev.controlador;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.vemev.dao.LiderRedeDAO;
 import br.com.vemev.dao.LiderSetorDAO;
 import br.com.vemev.dao.MembroDAO;
 import br.com.vemev.dao.SetorDAO;
-import br.com.vemev.modelo.LiderRede;
 import br.com.vemev.modelo.LiderSetor;
 import br.com.vemev.modelo.Membro;
 import br.com.vemev.modelo.Setor;
@@ -72,16 +70,17 @@ public class LiderSetorControlador {
 		//return "redirect:/vemev/lider/consultaLiderRede";	//redireciona pagina consulta lideres
 	}
 	
-	
-	@RequestMapping(value={"/lider/consultaLiderSetor"}, method=RequestMethod.GET)
-	public ModelAndView consultaCelula(Model model) {
+	@RequestMapping(value={"/setor/alterarStatusLider"}, method=RequestMethod.GET)
+	public String updateStatusLider(LiderSetor lider) {
 		
-		ArrayList<HashMap<String,HashMap<String,String>>> listaLideres = null;		//recupera todos lideres do bd
-		model.addAttribute("listaLideres", listaLideres);		//add lista na view jsp
+		//atualiza status do Lider
+		lider.setStatus_lider("Inativo");
+		dao.update(lider);
 		
-		return new ModelAndView("Tela de consulta dos lideres.jsp"); //retorna tela de consulta lideres
+		return "redirect:/vemev/setor/consultaSetor?id_setor=" + lider.getId_setor();	//direciona para pagina consulta setor
 	}
 	
+
 	@RequestMapping(value={"/lider/CadastrarLiderSetor"}, method=RequestMethod.GET)
 	public ModelAndView cadastrarLiderSetor(Model model) {
 		

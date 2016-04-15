@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Consulta dos Membros</title>
+	<title>Consulta da Célula</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -101,50 +101,102 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="/home.html">Home</a></li>       
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Células <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-             	<li class="dropdown-header">Admin das Células</li>
-                <li><a href="/Tela de cadastro de Membros.html">Cadastro de Membro</a></li>
-                <li><a href="/vemev/celula/cadastrarCelula">Cadastro de Célula</a></li>
-                <li><a href="/Tela de cadastro do setor.html">Cadastro de Setor</a></li>
-                <li><a href="/Tela de cadastro dos Visitantes.html">Cadastro de Visitante</a></li>
-         		<li><a href="/vemev/reuniao/cadastrarReuniao">Cadastro de Reuniões</a></li>
-                
-              </ul>
-            </li> 
-            
-             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Líderes <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-             	<li class="dropdown-header">Admin Líderes</li>
-                <li><a href="/vemev/cadastro/liderCelula">Cadastro de Líder de Célula</a></li>
-                 <li><a href="/vemev/cadastro/liderTreinamento">Cadastro de Líder em Treinamento</a></li>
-                <li><a href="/vemev/cadastro/liderRede">Cadastro de Líder de Redes</a></li>
-                 <li><a href="/vemev/lider/CadastrarLiderSetor">Cadastro de Líder de Setor</a></li>
-                
-              </ul>
-            </li>   
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-             	<li class="dropdown-header">Consultas</li>
-                 <li><a href="/vemev/membro/consultaMembros">Consulta dos Membros</a></li>
-                  <li><a href="/vemev/celula/consultaCelula">Consulta das Células</a></li>
-                <li><a href="#">Consulta dos  Setores</a></li>
-                 <li><a href="#">Consulta dos Visitantes</a></li>
-                      <li class="divider">teste teste</li>
-                <li><a href="#">Consulta dos  Líderes Célula</a></li>
-                 <li><a href="#">Consulta dos Líderes em Treinamentos</a></li>
-                <li><a href="/vemev/lider/consultaLiderRede">Consulta dos Líderes de Redes</a></li>
-                 <li><a href="#">Consulta dos Líderes de Setor</a></li>
-              </ul>
-            </li> 
-             <li><a href="#">Conheça a Visão MDA</a></li>
-          </ul>
- 
+					<li class="active">
+						<a href="/home.html">Home</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Membro<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li><a href="/Tela de cadastro de Membros.html">Cadastrar</a></li>
+							<li><a href="/vemev/membro/consultaMembros">Consultar</a></li>
+							<li><a href="/vemev/membro/consultaMembros">Alterar</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Visitante<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li><a href="/Tela de cadastro dos Visitantes.html">Cadastrar</a></li>
+							<li><a href="#">Consultar</a></li>
+							<li><a href="#">Alterar</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Célula<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li><a href="/vemev/celula/cadastrarCelula">Cadastrar</a></li>
+							<li><a href="/vemev/celula/consultaCelula">Consultar</a></li>
+							<li><a href="/vemev/celula/consultaCelula">Alterar</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Setor<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li><a href="/Tela de cadastro do setor.html">Cadastrar</a></li>
+							<li><a href="/vemev/setor/consultaSetor">Consultar</a></li>
+							<li><a href="/vemev/setor/consultaSetor">Alterar</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Lider <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li class="dropdown-submenu" id="btn-liderCelula">
+								<a tabindex="-1" href="#"> < Lider de Célula </a>
+								<ul class="dropdown-menu" id="menu-liderCelula"
+									style="right: 192px; top: 2px;">
+									<li><a tabindex="-1" href="/vemev/cadastro/liderCelula">Cadastrar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Consultar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Alterar</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu" id="btn-liderTreinamento">
+								<a tabindex="-1" href="#"> < Lider em Treinamento </a>
+								<ul class="dropdown-menu" id="menu-liderTreinamento"
+									style="right: 192px; top: 31px;">
+									<li><a tabindex="-1" href="/vemev/cadastro/liderTreinamento">Cadastrar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Consultar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Alterar</a></li>
+								</ul>
+							</li>
+							
+							<li class="divider"></li>
+							<li class="dropdown-submenu" id="btn-liderSetor">
+								<a tabindex="-1" href="#"> < Lider de Setor </a>
+								<ul class="dropdown-menu" id="menu-liderSetor"
+									style="right: 192px; top: 99px;">
+									<li><a tabindex="-1" href="/vemev/lider/CadastrarLiderSetor">Cadastrar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Consultar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Alterar</a></li>
+								</ul>
+							</li>							
+							<li class="dropdown-submenu" id="btn-liderRede">
+								<a tabindex="-1" href="#"> < Lider de Rede </a>
+								<ul class="dropdown-menu" id="menu-liderRede"
+									style="right: 192px; top: 72px;">
+									<li><a tabindex="-1" href="/vemev/cadastro/liderRede">Cadastrar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Consultar</a></li>
+									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Alterar</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rede<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header"></li>
+							<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Consultar</a></li>
+						</ul>
+					</li>
+				</ul>
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
  <h3 class="page-header">Consulta de Células</h3>
@@ -170,10 +222,10 @@
 </form>  
   <hr />
 	<br>	
-	<h3>Dados da Célula:</h3>
 		
 	<c:if test="${celula != null}">
-		<br>
+		<h3>Detalhes da Célula:</h3>
+		
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">${celula.nome_celula}</div>
 			<br>
@@ -183,21 +235,35 @@
 			<b>Cep:</b> ${celula.cep}<br>
 			<b>Bairro:</b> ${celula.bairro}<br>
 			<b>Cidade:</b> ${celula.cidade}<br>
-			<b>Estado:</b> ${celula.estado}<br>
+			<b>Estado:</b> ${celula.estado}
+			<hr>
+			<div style="width: 300px; height: auto; color: grey; ">Reunião da Célula</div>			
+			<b>Dia da semana:</b> ${celula.dia_reuniao}<br>
+			<b>Horário:</b> ${celula.horario}
+			<hr>
+			<a class="popup-with-form" href="#alterarDados-form">
+				Alterar dados
+			</a>
+			<br>
 		</div>
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Líderes</div><br>
 			<c:forEach var="lista" items="${listaLideresCelula}" varStatus="contagem">			
 				<b>${contagem.count}º Líder de Célula:</b> ${lista.nome}<br>			
 			</c:forEach>
+			<hr>
 			<c:forEach var="lista" items="${listaLideresTrein}" varStatus="contagem">			
 				<b>${contagem.count}º Líder em Treinamento:</b> ${lista.nome}<br>			
 			</c:forEach>
+			<br>
+			<a href="/vemev/lider/consultaLideres?tipoLider=Celula">
+				Detalhes dos líderes
+			</a>
 		</div>
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Rede / Setor</div><br>
 			<b>Rede:</b> ${setor.cor_rede}<br>
-			<b>Setor:</b> ${setor.nome_setor}
+			<b>Setor:</b> ${setor.nome_setor}<br>
 		</div>
 		<div style="clear: both; width: 100%;"> </div>
 		<br>
@@ -367,6 +433,100 @@
 	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
 </form>
 
+
+<!-- form para alterar os dados da celula -->
+<form id="alterarDados-form" class="mfp-hide white-popup" action="/vemev/celula/updateCelula" method="post" style="max-width: 1000px;">
+	<div class="incluirMembro corTitulo-${setor.cor_rede}">
+		Alterar dados - ${celula.nome_celula}
+	</div>
+	<br><br>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group col-md-6">
+						<label for="nome">Nome</label> 
+						<input type="text" class="form-control" value="${celula.nome_celula}" id="nome_celula" name="nome_celula" required="true">
+					</div>
+				</div>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="endereco">Endereço</label> 
+				<input type="text" class="form-control" value="${celula.endereco}" id="endereco" name="endereco" required="true"> 
+				<label for="cep">CEP</label> 
+				<input type="text" class="form-control" value="${celula.cep}" id="cep" name="cep" onkeypress="formataCEP(this, event)" required="true"> 
+				<label for="cidade">Cidade</label>
+				<input type="text" class="form-control" value="${celula.cidade}" id="cidade"	name="cidade" required="true"> 
+				<label for="dia_reuniao">Dia Da Célula</label>
+		        <select class="form-control" name="dia_reuniao" required="true">
+		       		<option value ="${celula.dia_reuniao}">${celula.dia_reuniao}</option>
+		        	<option value ="Segunda">Segunda</option>
+		            <option value ="Terça">Terça</option>
+		            <option value ="Quarta">Quarta</option>
+		            <option value ="Quinta">Quinta</option>
+		            <option value ="Sexta">Sexta</option>
+		            <option value ="Sábado">Sábado</option>
+		            <option value ="Domingo">Domingo</option>          
+		        </select>
+				<label for="setor_celula">Rede / Setor</label> 
+				<select class="form-control" required="true" name="id_setor">
+					<option value="${setor.id_setor}">${setor.cor_rede} - ${setor.nome_setor}</option>
+					<c:forEach items="${listaSetores}" var="lista">
+						<option value="${lista.id_setor}">${lista.cor_rede} - ${lista.nome_setor}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="complemento">Complemento</label> 
+				<input type="text" class="form-control" value="${celula.complemento}" id="complemento" name="complemento">
+				<label for="bairro">Bairro</label>
+				<input type="text" class="form-control" value="${celula.bairro}" id="bairro" name="bairro" required="true"> 
+				<label for="estado">Estado</label> 
+				<select class="form-control" required="true" name="estado" required="true">
+					<option value="${celula.estado}">${celula.estado}</option>
+					<option value="AC">AC</option>
+					<option value="AL">AL</option>
+					<option value="AP">AP</option>
+					<option value="AM">AM</option>
+					<option value="BA">BA</option>
+					<option value="CE">CE</option>
+					<option value="DF">DF</option>
+					<option value="ES">ES</option>
+					<option value="GO">GO</option>
+					<option value="MA">MA</option>
+					<option value="MT">MT</option>
+					<option value="MS">MS</option>
+					<option value="MG">MG</option>
+					<option value="PA">PA</option>
+					<option value="PB">PB</option>
+					<option value="PR">PR</option>
+					<option value="PE">PE</option>
+					<option value="PI">PI</option>
+					<option value="RJ">RJ</option>
+					<option value="RN">RN</option>
+					<option value="RS">RS</option>
+					<option value="RO">RO</option>
+					<option value="RR">RR</option>
+					<option value="SC">SC</option>
+					<option value="SP">SP</option>
+					<option value="SE">SE</option>
+					<option value="TO">TO</option>
+				</select>
+				<label for="horario">Horário</label>
+       			<input type="time" value="${celula.horario}" class="form-control" id="horario" name ="horario" required="true">
+			</div>
+		</div>
+	</div>
+	<br><br><br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">Salvar</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" name="nomeAtual" value="${celula.nome_celula}">
+</form>
+
  </div>
  
 </div>
@@ -377,6 +537,7 @@
       <!-- Placed at the end of the document so the pages load faster -->
      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
       
+      <script src="/js/submenus-bootstrap.js"></script>
     </h6>
     
     <br><br>

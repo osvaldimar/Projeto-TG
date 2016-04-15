@@ -44,6 +44,14 @@ public class Celula {
 	@TipoDado(tipo = "String")
 	private String complemento;
 	
+	@ColunaBD(nome = "horario")
+	@TipoDado(tipo = "String")
+	private String horario;	
+	
+	@ColunaBD(nome = "dia_reuniao")
+	@TipoDado(tipo = "String")	
+	private String dia_reuniao;	
+	
 	public Celula(){
 		
 	}
@@ -118,6 +126,22 @@ public class Celula {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+	public String getDia_reuniao() {
+		return dia_reuniao;
+	}
+
+	public void setDia_reuniao(String dia_reuniao) {
+		this.dia_reuniao = dia_reuniao;
 	}
 	
 }

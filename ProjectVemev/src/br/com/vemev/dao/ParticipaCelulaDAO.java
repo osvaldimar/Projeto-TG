@@ -1,5 +1,7 @@
 package br.com.vemev.dao;
 
+import java.util.ArrayList;
+
 import br.com.vemev.modelo.ParticipaCelula;
 
 public class ParticipaCelulaDAO extends GenericDAO {
@@ -52,5 +54,11 @@ public class ParticipaCelulaDAO extends GenericDAO {
 	public boolean delete(int idParticipa){
 		String clausulaWhere = "id_participa = " + idParticipa;
 		return super.delete(clausulaWhere, ParticipaCelula.class);
+	}
+
+	public ArrayList<ParticipaCelula> getListaParticipacoesCelulaDeUmMembro(int id) {
+		String clausulaWhere = "id_membro = " +id;
+		ArrayList<ParticipaCelula> lista = super.getList(clausulaWhere, ParticipaCelula.class);
+		return lista;
 	}
 }

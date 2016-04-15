@@ -81,12 +81,13 @@ public class CelulaControlador {
 	
 	
 	@RequestMapping(value={"/celula/updateCelula"}, method=RequestMethod.POST)
-	public String updateCelula(@RequestParam String nomeAtual, Celula celula){
+	public String updateCelula(HttpServletRequest request, Celula celula) throws UnsupportedEncodingException{
 				
 		//regras de negocio - atualiza celula no banco
+		String nomeAtual = request.getParameter("nomeAtual");
 		dao.update(celula, nomeAtual);
 		
-		return "redirect:/naotem?nome=" + celula.getNome_celula();	//redireciona pagina da celula
+		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(celula.getNome_celula(), "utf-8");	//redireciona pagina consulta da celula
 	}
 	
 	@RequestMapping(value={"/celula/deleteCelula"}, method=RequestMethod.POST)
@@ -131,6 +132,10 @@ public class CelulaControlador {
 				Setor setor = daoSetor.read(celula.getId_setor());
 				model.addAttribute("setor", setor);		//add o objeto Setor na view jsp
 				
+				//adiciona na view jsp a lista de setores para a combo de alteracao
+				ArrayList<Setor> listaDeSetores = daoSetor.getLista();		//recupera lista dos setores no bd
+				model.addAttribute("listaSetores", listaDeSetores);			//add lista na view jsp
+				
 				//ler os dados dos Lideres da Celula
 				LiderCelulaDAO daoLider = new LiderCelulaDAO();
 				ArrayList<LiderCelula> listCel = daoLider.getListaLideresAtivo(nomeCelula); //lista lider celula 	
@@ -149,7 +154,7 @@ public class CelulaControlador {
 					Membro m = daoDoMembro.read(l.getId_membro());
 					listaLideresTrein.add(m);			
 				}
-				model.addAttribute("listaLideresTrein", listaLideresTrein);		//add o objeto na view jsp	
+				model.addAttribute("listaLideresTrein", listaLideresTrein);		//add o objeto na view jsp
 			}
 		}
 		

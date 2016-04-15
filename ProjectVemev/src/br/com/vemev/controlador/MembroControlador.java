@@ -2,9 +2,6 @@ package br.com.vemev.controlador;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.vemev.dao.LiderCelulaDAO;
+import br.com.vemev.dao.LiderRedeDAO;
+import br.com.vemev.dao.LiderSetorDAO;
+import br.com.vemev.dao.LiderTreinamentoDAO;
 import br.com.vemev.dao.MembroDAO;
-import br.com.vemev.modelo.Celula;
+import br.com.vemev.dao.ParticipaCelulaDAO;
+import br.com.vemev.modelo.LiderCelula;
+import br.com.vemev.modelo.LiderRede;
+import br.com.vemev.modelo.LiderSetor;
+import br.com.vemev.modelo.LiderTreinamento;
 import br.com.vemev.modelo.Membro;
+import br.com.vemev.modelo.ParticipaCelula;
 
 @Controller
 public class MembroControlador {
@@ -23,14 +29,48 @@ public class MembroControlador {
 	private MembroDAO dao = new MembroDAO();	//data access object - classe de acesso ao banco de dados
 	
 	
-	@RequestMapping(value={"/membro/"}, method = RequestMethod.GET)
-	public ModelAndView paginaMembro(@RequestParam int id_membro, Model model){
+	@RequestMapping(value={"/membro/ajaxAlterarDadosMembro"}, method = RequestMethod.GET)
+	public String ajaxFormularioAlterarDadosMembro(@RequestParam(required=true, value="id_membro") int id, Model model){
 				
 		//regras de negocio		
-		Membro membro = dao.read(id_membro);	//ler membro pelo id no banco		
-		model.addAttribute("membro", membro);	//seta objeto membro na view para jsp		
+		Membro membro = dao.read(id);				//ler membro pelo id no banco
+		model.addAttribute("membro", membro);		//seta objeto membro na view para jsp	
 		
-		return new ModelAndView("membro.jsp");	//retorna pagina visualizar membro
+		return "formulario-alterar-membro.jsp";		//retorna somente um formulario(pop up) para alterar os dados do membro
+	}
+	
+	@RequestMapping(value={"/membro/ajaxRelatorioDadosMembro"}, method = RequestMethod.GET)
+	public String ajaxRelatorioDadosMembro(@RequestParam(required=true, value="id_membro") int id, Model model){
+				
+		//regras de negocio	- recupera dados do membro, participaceos em celulas e liderancas.	
+		Membro membro = dao.read(id);
+		model.addAttribute("membro", membro);
+		
+		ParticipaCelulaDAO daoParticipa = new ParticipaCelulaDAO();
+		ArrayList<ParticipaCelula> listaParticipacoes = daoParticipa.getListaParticipacoesCelulaDeUmMembro(id);
+		model.addAttribute("listaParticipacoes", listaParticipacoes);
+		
+		
+		//lideres celula, treinamento, setor e rede
+		
+		LiderCelulaDAO daoLiderCelula = new LiderCelulaDAO();
+		ArrayList<LiderCelula> listaLiderancaCelulas = daoLiderCelula.getListaLiderancaCelulaDeUmMembro(id);
+		model.addAttribute("listaLiderancaCelulas", listaLiderancaCelulas);
+		
+		LiderTreinamentoDAO daoLiderTrein = new LiderTreinamentoDAO();
+		ArrayList<LiderTreinamento> listaLiderancaTrein = daoLiderTrein.getListaLiderancaTreinamentoDeUmMembro(id);
+		model.addAttribute("listaLiderancaTrein", listaLiderancaTrein);
+		
+		LiderSetorDAO daoLiderSetor = new LiderSetorDAO();
+		ArrayList<LiderSetor> listaLiderancaSetores = daoLiderSetor.getListaLiderancaSetorDeUmMembro(id);
+		model.addAttribute("listaLiderancaSetores", listaLiderancaSetores);
+		
+		LiderRedeDAO daoLiderRede = new LiderRedeDAO();
+		ArrayList<LiderRede> listaLiderancaRedes = daoLiderRede.getListaLiderancaRedeDeUmMembro(id);
+		model.addAttribute("listaLiderancaRedes", listaLiderancaRedes);
+		
+		
+		return "formulario-relatorio-membro.jsp";		//retorna um formulario via ajax com os dados do membro
 	}
 	
 	@RequestMapping(value={"/membro/createMembro"}, method=RequestMethod.POST)
@@ -59,7 +99,7 @@ public class MembroControlador {
 		//regras de negocio - atualiza membro no banco		
 		dao.update(membro);
 		
-		return "redirect:/membro?id_membro=" + membro.getId_membro();	//redireciona pagina da membro
+		return "redirect:/vemev/membro/consultaMembros";	//redireciona pagina da membro
 	}
 	
 	@RequestMapping(value={"/membro/deleteMembro"}, method=RequestMethod.POST)

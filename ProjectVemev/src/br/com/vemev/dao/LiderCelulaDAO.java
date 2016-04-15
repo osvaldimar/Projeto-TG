@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import br.com.vemev.modelo.LiderCelula;
 import br.com.vemev.modelo.LiderRede;
+import br.com.vemev.modelo.ParticipaCelula;
 
 public class LiderCelulaDAO extends GenericDAO {
 
@@ -76,6 +77,12 @@ public class LiderCelulaDAO extends GenericDAO {
 	public ArrayList<HashMap<String,HashMap<String,String>>> getListaDadosLideresCelulas(){
 		String sqlAvancado = "select * from lider_celula as t1 join membro as t2 on t1.id_membro = t2.id_membro order by t1.status_lider, t2.nome;";
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
+		return lista;
+	}
+
+	public ArrayList<LiderCelula> getListaLiderancaCelulaDeUmMembro(int id) {
+		String clausulaWhere = "id_membro = " +id;
+		ArrayList<LiderCelula> lista = super.getList(clausulaWhere, LiderCelula.class);
 		return lista;
 	}
 	

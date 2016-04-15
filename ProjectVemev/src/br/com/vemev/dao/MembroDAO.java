@@ -106,4 +106,25 @@ public class MembroDAO extends GenericDAO {
 		return lista;
 	}
 	
+	
+	public HashMap<String,HashMap<String,String>> getRelatorioDeUmMembro(int id_membro){
+		//sql traz todos membros do banco + a participacao da celula + a celula
+		//sql ignora participacoes de celula que o membro nao frequenta mais
+		//sql traz dados da celula do membro que ele frequenta atualmente
+		String sqlAvancado = 				
+				"select * from membro as t1 "
+				+ "left join participa_celula as t2 on t1.id_membro = t2.id_membro "
+				+ "left join lider_celula as t3 on t1.id_membro = t3.id_membro "
+				+ "left join lider_treinamento as t4 on t1.id_membro = t4.id_membro "
+				+ "left join lider_setor as t5 on t1.id_membro = t5.id_membro "
+				+ "left join lider_rede as t6 on t1.id_membro = t6.id_membro "
+				+ "where t1.id_membro = " + id_membro;
+				
+		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
+		if(!lista.isEmpty()){
+			return lista.get(0);
+		}else{
+			return null;
+		}
+	}
 }

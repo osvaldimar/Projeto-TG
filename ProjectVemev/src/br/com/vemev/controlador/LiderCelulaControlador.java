@@ -15,9 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.vemev.dao.CelulaDAO;
 import br.com.vemev.dao.LiderCelulaDAO;
+import br.com.vemev.dao.LiderRedeDAO;
+import br.com.vemev.dao.LiderSetorDAO;
+import br.com.vemev.dao.LiderTreinamentoDAO;
 import br.com.vemev.dao.MembroDAO;
 import br.com.vemev.modelo.Celula;
 import br.com.vemev.modelo.LiderCelula;
+import br.com.vemev.modelo.LiderRede;
+import br.com.vemev.modelo.LiderSetor;
+import br.com.vemev.modelo.LiderTreinamento;
 import br.com.vemev.modelo.Membro;
 
 @Controller
@@ -83,17 +89,77 @@ public class LiderCelulaControlador {
 		}	
 		response.getWriter().write("ok");
 		response.setStatus(200);
-		//return "redirect:/vemev/lider/consultaLiderRede";	//redireciona pagina consulta lideres
+	}
+		
+	
+	
+	//gerenciar lideres
+	@RequestMapping(value={"/lider/consultaLideres"}, method=RequestMethod.GET)
+	public String lideres(HttpServletRequest request, Model model) {
+		
+		LiderCelulaDAO daoLiderCel = dao;
+		LiderTreinamentoDAO daoLiderTrein = new LiderTreinamentoDAO();
+		LiderSetorDAO daoLiderSetor = new LiderSetorDAO();
+		LiderRedeDAO daoLiderRede = new LiderRedeDAO();
+		
+		String tituloTipoLider = "";
+		String tipo = request.getParameter("tipoLider");
+		if(tipo != null && tipo.equalsIgnoreCase("Celula")){
+			tituloTipoLider = "Consulta Líder de Célula";
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresCel = daoLiderCel.getListaDadosLideresCelulas();
+			model.addAttribute("listaLideresCel", listaLideresCel);		//add lista na view jsp
+			
+		}else if(tipo != null && tipo.equalsIgnoreCase("Treinamento")){
+			tituloTipoLider = "Consulta Líder em Treinamento";
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresTrein = daoLiderTrein.getListaDadosLideresTreinamento();
+			model.addAttribute("listaLideresTrein", listaLideresTrein);		//add lista na view jsp
+			
+		}else if(tipo != null && tipo.equalsIgnoreCase("Setor")){
+			tituloTipoLider = "Consulta Líder de Setor";
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresSetor = daoLiderSetor.getListaDadosLideresSetores();
+			model.addAttribute("listaLideresSetor", listaLideresSetor);		//add lista na view jsp
+			
+		}else if(tipo != null && tipo.equalsIgnoreCase("Rede")){
+			tituloTipoLider = "Consulta Líder de Rede";
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresRede = daoLiderRede.getListaDadosLideresRedes();
+			model.addAttribute("listaLideresRede", listaLideresRede);		//add lista na view jsp
+			
+		}else{
+			tituloTipoLider = "Consulta de Todos os líderes";
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresCel = daoLiderCel.getListaDadosLideresCelulas();
+			model.addAttribute("listaLideresCel", listaLideresCel);		//add lista na view jsp
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresTrein = daoLiderTrein.getListaDadosLideresTreinamento();
+			model.addAttribute("listaLideresTrein", listaLideresTrein);		//add lista na view jsp
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresSetor = daoLiderSetor.getListaDadosLideresSetores();
+			model.addAttribute("listaLideresSetor", listaLideresSetor);		//add lista na view jsp
+			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresRede = daoLiderRede.getListaDadosLideresRedes();
+			model.addAttribute("listaLideresRede", listaLideresRede);		//add lista na view jsp
+		}
+		
+		return "Tela gerenciar todos lideres.jsp?tituloTipoLider=" + tituloTipoLider; //retorna tela de consulta lideres
 	}
 	
 	
-	@RequestMapping(value={"/lider/consultaLiderCelula"}, method=RequestMethod.GET)
-	public ModelAndView consultaCelula(Model model) {
+	@RequestMapping(value={"/lider/alterarStatusQualquerLider"}, method=RequestMethod.POST)
+	public String lideres(HttpServletRequest request, LiderCelula liderCel, LiderTreinamento LiderTrein, LiderSetor liderSetor, LiderRede liderRede) {
 		
-		ArrayList<HashMap<String,HashMap<String,String>>> listaLideres = dao.getListaDadosLideresCelulas();		//recupera todos lideres do bd
-		model.addAttribute("listaLideres", listaLideres);		//add lista na view jsp
+		LiderCelulaDAO daoLiderCel = dao;
+		LiderTreinamentoDAO daoLiderTrein = new LiderTreinamentoDAO();
+		LiderSetorDAO daoLiderSetor = new LiderSetorDAO();
+		LiderRedeDAO daoLiderRede = new LiderRedeDAO();
 		
-		return new ModelAndView("Tela de consulta dos lideres.jsp"); //retorna tela de consulta lideres
+		String tipo = request.getParameter("tipo_lider");
+		if(tipo != null && tipo.equalsIgnoreCase("Celula")){
+			daoLiderCel.update(liderCel);
+		}else if(tipo != null && tipo.equalsIgnoreCase("Treinamento")){
+			daoLiderTrein.update(LiderTrein);
+		}else if(tipo != null && tipo.equalsIgnoreCase("Setor")){
+			daoLiderSetor.update(liderSetor);
+		}else if(tipo != null && tipo.equalsIgnoreCase("Rede")){
+			daoLiderRede.update(liderRede);
+		}
+		
+		return "redirect:/vemev/lider/consultaLideres?tipoLider=" + tipo; //retorna tela de consulta lideres
 	}
 	
 }

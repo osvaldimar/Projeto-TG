@@ -95,6 +95,8 @@ CREATE TABLE celula (
     estado VARCHAR(2),
     cidade VARCHAR(50),
     complemento VARCHAR(12),
+    horario TIME NOT NULL,
+    dia_reuniao VARCHAR(10) NOT NULL,
     FOREIGN KEY (id_setor)
         REFERENCES setor (id_setor)
 );
@@ -188,14 +190,14 @@ insert into setor(nome_setor, cor_rede) values('Genérico', 'Vermelho');
 insert into setor(nome_setor, cor_rede) values('Genérico', 'Azul');
 insert into setor(nome_setor, cor_rede) values('Genérico', 'Amarelo');
 
-insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1');
-insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Apolo', 0, 2, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
-insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Bravo', 0, 3, 'Rua da celula de Bravo', 'Centro', '04462-111', 'SP', 'São Paulo', '');
-insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento) 
-	values('Célula Pegasus', 0, 4, 'Rua da celula de Pegasus', 'Pegasinho', '09862-100', 'SP', 'São Paulo', '');   
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
+	values('Célula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1', '09:00', 'Segunda');
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
+	values('Célula Apolo', 0, 2, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '', '18:00', 'Terça');
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
+	values('Célula Bravo', 0, 3, 'Rua da celula de Bravo', 'Centro', '04462-111', 'SP', 'São Paulo', '', '18:30', 'Quarta');
+insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
+	values('Célula Pegasus', 0, 4, 'Rua da celula de Pegasus', 'Pegasinho', '09862-100', 'SP', 'São Paulo', '', '14:00', 'Sábado');   
  
 select * from membro;
 

@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres em Treinamento</title>
+	<title>Cadastro dos Lideres de Rede</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -21,8 +21,10 @@
 	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
 	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
 	
-	<!-- Ajax formulario --> 
-	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<!-- Magnific Popup core JS CSS file -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
+	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -38,7 +40,7 @@
           <a class="navbar-brand" href="#">Vem e Vê</a>
         </div>
         <div class="navbar-collapse collapse">
-          	<ul class="nav navbar-nav navbar-right">
+         	<ul class="nav navbar-nav navbar-right">
 					<li class="active">
 						<a href="/home.html">Home</a>
 					</li>
@@ -137,23 +139,22 @@
 				</ul>
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres em Treinamento</h3>
- <form action="/vemev/lider/createLiderTreinamento" method="post" id="form-lider">
+ <h3 class="page-header">Gerenciar Líderes</h3>
+ <form action="/vemev/lider/createLiderRede" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-     <label for="nome_celula">Célula</label>
-			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
-				<option value=""></option>
-				<c:forEach var="lista" items="${listaTodasCelulas}">
-					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
-				</c:forEach>
-			</select>
-           
-       <label for="data"><br>Data</label>
-       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
-
+    <a href="/vemev/lider/consultaLideres?tipoLider=Celula" style="text-decoration: underline;">Líder de Célula</a>&nbsp;&nbsp;
+    <a href="/vemev/lider/consultaLideres?tipoLider=Treinamento" style="text-decoration: underline;">Líder em Treinamento</a>&nbsp;&nbsp;
+    <a href="/vemev/lider/consultaLideres?tipoLider=Setor" style="text-decoration: underline;">Líder de Setor</a>&nbsp;&nbsp;
+    <a href="/vemev/lider/consultaLideres?tipoLider=Rede" style="text-decoration: underline;">Líder de Rede</a>&nbsp;&nbsp;
+    <a href="/vemev/lider/consultaLideres?tipoLider=Todos" style="text-decoration: underline;">Todos líderes</a>&nbsp;&nbsp;
+	
+	<br><br>
+	<h4>${param.tituloTipoLider}</h4>
+	<br><br>
+	
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
          <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
@@ -162,27 +163,92 @@
 <!-- Start tableless -->
      <div id="divTableless">
 		<table id="myTable" cellspacing="0">
-		<thead>
-	      	<tr>
-		    	<th width="10px">&nbsp;&nbsp;&nbsp;</th>
-	      		<th width="300px">Nome do membro</th>
-		    	<th width="150px">Telefone</th>  
-		    	<th width="300px">Endereço</th>
-		    	<th width="150px">Bairro</th>
-	    	</tr>
-		</thead>
-      <tbody>
-      	<c:forEach var="lista" items="${listaMembros}">
-	    	<tr>
-	    		<td width="10px"><input value="${lista.id_membro}" name="id_membro" type="checkbox" onclick="changeCheckbox(this);"></td>
-	    		<td width="300px">${lista.nome}</td>
-	    		<td width="150px">${lista.telefone}</td>
-	    		<td width="300px">${lista.endereco}</td>
-	    		<td width="150px">${lista.bairro}</td>
-	    	</tr>
-	    </c:forEach>
-      </tbody>
-    </table>
+			<thead>
+    			<tr>
+        			<th width="300px">Nome Líder</th>
+        			<th width="200px">Celular</th>
+        			<th width="100px;">Data inicio</th>
+        			<th width="100px">Data fim</th>
+        			<th width="100px">Tipo líder</th>
+        			<th width="100px">Status</th>
+        			<th width="100px">Ação</th>
+    			</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${listaLideresCel}" var="lista">
+	    			<tr>
+	        			<td width="300px">${lista.get("membro").get("nome")}</td>
+	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="100px">${lista.get("lider_celula").get("data_ini")}</td>
+	        			<td width="100px">${lista.get("lider_celula").get("data_fim")}</td>
+	        			<td width="100px">Célula</td>
+	        			<td width="100px">${lista.get("lider_celula").get("status_lider")}</td>
+	        			<td width="100px">
+			    			<c:if test="${lista.get('lider_celula').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_celula').get('id_lider')}', 'Celula', '${lista.get('membro').get('nome')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
+	        		</tr>
+        		</c:forEach>
+        		<c:forEach items="${listaLideresTrein}" var="lista">
+	    			<tr>
+	        			<td width="300px">${lista.get("membro").get("nome")}</td>
+	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="100px">${lista.get("lider_treinamento").get("data_ini")}</td>
+	        			<td width="100px">${lista.get("lider_treinamento").get("data_fim")}</td>
+	        			<td width="100px">Treinamento</td>
+	        			<td width="100px">${lista.get("lider_treinamento").get("status_lider")}</td>
+	        			<td width="100px">
+			    			<c:if test="${lista.get('lider_treinamento').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_treinamento').get('id_lider')}', 'Treinamento', '${lista.get('membro').get('nome')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
+	        		</tr>
+        		</c:forEach>
+        		<c:forEach items="${listaLideresSetor}" var="lista">
+	    			<tr>
+	        			<td width="300px">${lista.get("membro").get("nome")}</td>
+	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="100px">${lista.get("lider_setor").get("data_ini")}</td>
+	        			<td width="100px">${lista.get("lider_setor").get("data_fim")}</td>
+	        			<td width="100px">Setor</td>
+	        			<td width="100px">${lista.get("lider_setor").get("status_lider")}</td>
+	        			<td width="100px">
+			    			<c:if test="${lista.get('lider_setor').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_setor').get('id_lider')}', 'Setor', '${lista.get('membro').get('nome')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
+	        		</tr>
+        		</c:forEach>
+        		<c:forEach items="${listaLideresRede}" var="lista">
+	    			<tr>
+	        			<td width="300px">${lista.get("membro").get("nome")}</td>
+	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="100px">${lista.get("lider_rede").get("data_ini")}</td>
+	        			<td width="100px">${lista.get("lider_rede").get("data_fim")}</td>
+	        			<td width="100px">Rede</td>
+	        			<td width="100px">${lista.get("lider_rede").get("status_lider")}</td>
+	        			<td width="100px">
+			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
+		        				<a class="popup-with-form" href="#alterar-form" 
+		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}', 'Rede', '${lista.get('membro').get('nome')}');">
+				    				Alterar
+				    			</a>
+			    			</c:if>
+	        			</td>
+	        		</tr>
+        		</c:forEach>
+        	</tbody>
+    	</table>
     </div>
     
     <div id="pager-tableless" class="pager-tableless">
@@ -207,16 +273,40 @@
     <!-- End tableless -->
     
  </div>
- 
-  <hr />
-  <div id="actions" class="row">
-    <div class="col-md-12">
-      <button type="submit" class="btn btn-primary" onclick="validaLideres();">Salvar</button>
-      <a href="index.html" class="btn btn-default">Cancelar</a>
-    </div>
-  </div>
+
+ <br>
+ <hr>
 </form>
 </div>
+
+
+<!-- form para alterar um lider -->
+<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusQualquerLider" method="post" style="width: 600px;">
+	<div style="font-weight: 600; font-size: 16px;">
+		<h4>Alterar Status do Lider para 'Inativo'</h4>
+	</div>
+	<br>
+	<b>Escolha a data final do Lider</b><br><br>
+	<b>Nome: </b><span id="spanNomeLider"> </span><br>
+	<b>Tipo Líder: </b><span id="spanTipoLider"> </span>
+	<br><br>
+	<label for="data">Data final</label>
+    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<br>
+	<hr>
+	<br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">Salvar</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" id="id_lider" name="id_lider" value="">
+	<input type="hidden" id="tipo_lider" name="tipo_lider" value="">
+	<input type="hidden" id="status_lider" name="status_lider" value="Inativo">
+</form>
+
+
 
 <h6>
       <!-- Bootstrap core JavaScript
@@ -235,52 +325,27 @@
 </div>
 
 <script>
-	//valida quantidade de lideres no checkbox
-	function changeCheckbox(obj){
-		var checks = document.getElementsByName(obj.name);
-		var cont = 0;
-		for(var i = 0; i < checks.length; i++){
-			if(checks[i].checked){
-				cont++;
-			}
-			if(cont > 2){
-				alert("Só pode selecionar até 2 líderes!");
-				obj.checked = false;
-				break;
-			}
-		}		
+	//funcao altera o status dos lideres (celula, treinamento, setor e rede)
+	//funcao para alterar status inativo do lider
+	function alterarLider(id, tipo, nome){
+		$('#id_lider').val(id);				//passa o id do lider para alterar o status
+		$('#tipo_lider').val(tipo);			//passa o tipo de lider
+		$('#spanNomeLider').html(nome);		//nome do membro(lider)
+		$('#spanTipoLider').html(tipo);
 	}
-	//valida antes de enviar formulario
-	$('#form-lider').submit(function(e){ 
-		var checks = document.getElementsByName("id_membro");
-		var cont = 0;
-		for(var i = 0; i < checks.length; i++){
-			if(checks[i].checked){
-				cont++;
-			}			
-		}
-		if(cont < 1){
-			e.preventDefault(); 
-			alert("Por favor selecione 1 ou 2 líderes em Treinamento!");
-		}
-		if(cont > 2){
-			e.preventDefault(); 
-			alert("Só pode selecionar até 2 líderes!");
-		}
-	});
-	//valida o cadastro ok dos lideres da Rede
-	$(document).ready(function(){
-		$('#form-lider').ajaxForm({
-			success: function(respostaServer){
-				if(respostaServer == "ok"){
-					alert("Cadastro de líderes em Treinamento Ok!");
-					window.location.reload();		//cadastro ok e reload na pagina de cadastro
-				}else{
-					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
-				}				
-			}
+
+	//maginific-poup
+	$(document).ready(function() {
+		$('.popup-with-form').magnificPopup({
+			type: 'inline',
+			preloader: false,	
 		});
-	});
+	})
+	
+	function closePopup(){
+	  var magnificPopup = $.magnificPopup.instance; 
+	  magnificPopup.close(); 
+	}
 	
     $(function(){
       

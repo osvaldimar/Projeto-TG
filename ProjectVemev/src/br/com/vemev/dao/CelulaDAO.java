@@ -55,4 +55,13 @@ public class CelulaDAO extends GenericDAO {
 		return lista;
 	}
 	
+	/**
+	 * Metodo retorna uma lista de Celulas de um Setor, informar o id_setor no parametro
+	 * @return
+	 */
+	public ArrayList<Celula> getListaCelulasPeloSetor(int idSetor){
+		String clausulaWhere = "id_setor = " + idSetor;
+		ArrayList<Celula> lista = super.getList(clausulaWhere, Celula.class);
+		return lista;
+	}
 }
