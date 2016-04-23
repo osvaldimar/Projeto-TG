@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Rede</title>
+	<title>Consulta dos Visitantes</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -16,19 +16,22 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
-	
 	<!-- Magnific Popup core JS CSS file -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
 	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
+	
+	<!-- Tableless JS CSS file -->
+	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
+	
+	<!-- funcoes geral vemev -->
+	<script src="/js/funcoes-vemev.js"></script>
 </head>
 <body> 
  <!-- Fixed navbar -->
- <div class="navbar navbar-default " role="navigation">
+ <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,7 +43,7 @@
           <a class="navbar-brand" href="#">Vem e Vê</a>
         </div>
         <div class="navbar-collapse collapse">
-         	<ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right">
 					<li class="active">
 						<a href="/home.html">Home</a>
 					</li>
@@ -137,120 +140,59 @@
 						</ul>
 					</li>
 				</ul>
+ 
         </div><!--/.nav-collapse -->
         <div id="main" class="container-fluid">
- <h3 class="page-header">Gerenciar Líderes</h3>
- <form action="/vemev/lider/createLiderRede" method="post" id="form-lider">
+ <h3 class="page-header">Consulta de todos os Visitantes</h3>
+ <form action="index.html">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-    <a href="/vemev/lider/consultaLideres?tipoLider=Celula" style="text-decoration: underline;">Líder de Célula</a>&nbsp;&nbsp;
-    <a href="/vemev/lider/consultaLideres?tipoLider=Treinamento" style="text-decoration: underline;">Líder em Treinamento</a>&nbsp;&nbsp;
-    <a href="/vemev/lider/consultaLideres?tipoLider=Setor" style="text-decoration: underline;">Líder de Setor</a>&nbsp;&nbsp;
-    <a href="/vemev/lider/consultaLideres?tipoLider=Rede" style="text-decoration: underline;">Líder de Rede</a>&nbsp;&nbsp;
-    <a href="/vemev/lider/consultaLideres?tipoLider=Todos" style="text-decoration: underline;">Todos líderes</a>&nbsp;&nbsp;
-	
-	<br><br>
-	<h4>${param.tituloTipoLider}</h4>
-	<br><br>
-	
-<div style="text-align:left; float:center;">
-      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
-</div>
-
-<!-- Start tableless -->
-     <div id="divTableless">
-		<table id="myTable" cellspacing="0">
-			<thead>
-    			<tr>
-        			<th width="300px">Nome Líder</th>
-        			<th width="200px">Celular</th>
-        			<th width="100px;">Data inicio</th>
-        			<th width="100px">Data fim</th>
-        			<th width="100px">Tipo líder</th>
-        			<th width="100px">Status</th>
-        			<th width="100px">Ação</th>
-    			</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${listaLideresCel}" var="lista">
-	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
-	        			<td width="100px">${lista.get("lider_celula").get("data_ini")}</td>
-	        			<td width="100px">${lista.get("lider_celula").get("data_fim")}</td>
-	        			<td width="100px">Célula</td>
-	        			<td width="100px">${lista.get("lider_celula").get("status_lider")}</td>
-	        			<td width="100px">
-			    			<c:if test="${lista.get('lider_celula').get('status_lider') eq 'Ativo'}">
-		        				<a class="popup-with-form" href="#alterar-form" 
-		        					onclick="alterarLider('${lista.get('lider_celula').get('id_lider')}', 'Celula', '${lista.get('membro').get('nome')}');">
-				    				Alterar
-				    			</a>
-			    			</c:if>
-	        			</td>
-	        		</tr>
-        		</c:forEach>
-        		<c:forEach items="${listaLideresTrein}" var="lista">
-	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
-	        			<td width="100px">${lista.get("lider_treinamento").get("data_ini")}</td>
-	        			<td width="100px">${lista.get("lider_treinamento").get("data_fim")}</td>
-	        			<td width="100px">Treinamento</td>
-	        			<td width="100px">${lista.get("lider_treinamento").get("status_lider")}</td>
-	        			<td width="100px">
-			    			<c:if test="${lista.get('lider_treinamento').get('status_lider') eq 'Ativo'}">
-		        				<a class="popup-with-form" href="#alterar-form" 
-		        					onclick="alterarLider('${lista.get('lider_treinamento').get('id_lider')}', 'Treinamento', '${lista.get('membro').get('nome')}');">
-				    				Alterar
-				    			</a>
-			    			</c:if>
-	        			</td>
-	        		</tr>
-        		</c:forEach>
-        		<c:forEach items="${listaLideresSetor}" var="lista">
-	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
-	        			<td width="100px">${lista.get("lider_setor").get("data_ini")}</td>
-	        			<td width="100px">${lista.get("lider_setor").get("data_fim")}</td>
-	        			<td width="100px">Setor</td>
-	        			<td width="100px">${lista.get("lider_setor").get("status_lider")}</td>
-	        			<td width="100px">
-			    			<c:if test="${lista.get('lider_setor').get('status_lider') eq 'Ativo'}">
-		        				<a class="popup-with-form" href="#alterar-form" 
-		        					onclick="alterarLider('${lista.get('lider_setor').get('id_lider')}', 'Setor', '${lista.get('membro').get('nome')}');">
-				    				Alterar
-				    			</a>
-			    			</c:if>
-	        			</td>
-	        		</tr>
-        		</c:forEach>
-        		<c:forEach items="${listaLideresRede}" var="lista">
-	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
-	        			<td width="100px">${lista.get("lider_rede").get("data_ini")}</td>
-	        			<td width="100px">${lista.get("lider_rede").get("data_fim")}</td>
-	        			<td width="100px">Rede</td>
-	        			<td width="100px">${lista.get("lider_rede").get("status_lider")}</td>
-	        			<td width="100px">
-			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
-		        				<a class="popup-with-form" href="#alterar-form" 
-		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}', 'Rede', '${lista.get('membro').get('nome')}');">
-				    				Alterar
-				    			</a>
-			    			</c:if>
-	        			</td>
-	        		</tr>
-        		</c:forEach>
-        	</tbody>
-    	</table>
-    </div>
+<a href="/Tela de cadastro dos Visitantes.html" style="text-decoration: underline;">Cadastrar novo visitante</a>
     
+    
+<!-- Start tableless -->
+<div style="text-align:center; float:center;">
+<p style="padding:12px;">
+        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
+        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
+</p>
+</div>
+     <div id="divTableless">
+		<table id="myTable" cellspacing="0"> 
+		<thead>
+	      	<tr>
+	      		<th width="250px">Nome do visitante</th>
+	      		<th width="120px">Celular</th>
+		    	<th width="120px">Telefone</th>  
+		    	<th width="250px">Endereço</th>
+		    	<th width="150px">Bairro</th>		    	
+		    	<th width="150px">Cidade</th>
+		    	<th width="80px">Ação</th>
+	    	</tr>
+		</thead>
+      <tbody>
+      	<c:forEach var="lista" items="${listaVisitantes}">
+	    	<tr>
+	    		<td width="250px">
+	    			<a href="#" title="Exibir relatório" onclick="mostrarRelatorioVisitantePopup('${lista.id_visit}');">${lista.nome}</a>
+	    		</td>
+	    		<td width="120px">${lista.celular}</td>
+	    		<td width="120px">${lista.telefone}</td>
+	    		<td width="250px">${lista.endereco}</td>
+	    		<td width="150px">${lista.bairro}</td>	    		
+	    		<td width="150px">${lista.cidade}</td>
+	    		<td width="80px">
+					<a href="/vemev/visitante/alterarDadosVisitante?id_visit=${lista.id_visit}">Alterar</a>
+	    		</td>
+	    	</tr>
+	    </c:forEach>
+      </tbody>
+    </table>
+    <b>Total de visitantes: ${listaVisitantes.size()}</b>
+    </div>
+
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
@@ -273,40 +215,16 @@
     <!-- End tableless -->
     
  </div>
-
- <br>
- <hr>
+ 
+  <hr />
 </form>
 </div>
 
 
-<!-- form para alterar um lider -->
-<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusQualquerLider" method="post" style="width: 600px;">
-	<div style="font-weight: 600; font-size: 16px;">
-		<h4>Alterar Status do Lider para 'Inativo'</h4>
-	</div>
-	<br>
-	<b>Escolha a data final do Lider</b><br><br>
-	<b>Nome: </b><span id="spanNomeLider"> </span><br>
-	<b>Tipo Líder: </b><span id="spanTipoLider"> </span>
-	<br><br>
-	<label for="data">Data final</label>
-    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
-	<br>
-	<hr>
-	<br>
-	<div id="actions" class="row">
-	    <div class="col-md-12">
-	      <button type="submit" class="btn btn-primary">Salvar</button>
-	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
-	    </div>
-  	</div>
-	<input type="hidden" id="id_lider" name="id_lider" value="">
-	<input type="hidden" id="tipo_lider" name="tipo_lider" value="">
-	<input type="hidden" id="status_lider" name="status_lider" value="Inativo">
-</form>
-
-
+<div id="divFormAlterarMembro">
+	<form id="alterarDados-form" class="mfp-hide white-popup" style="max-width: 1000px;">
+	</form>
+</div>
 
 <h6>
       <!-- Bootstrap core JavaScript
@@ -316,37 +234,29 @@
       <script src="/js/submenus-bootstrap.js"></script>
     </h6>
     
-    <br><br>
-    
- 
-   
+<br><br>
 <br><br>
 </div>
 </div>
 
-<script>
-	//funcao altera o status dos lideres (celula, treinamento, setor e rede)
-	//funcao para alterar status inativo do lider
-	function alterarLider(id, tipo, nome){
-		$('#id_lider').val(id);				//passa o id do lider para alterar o status
-		$('#tipo_lider').val(tipo);			//passa o tipo de lider
-		$('#spanNomeLider').html(nome);		//nome do membro(lider)
-		$('#spanTipoLider').html(tipo);
-	}
-
+<script>		
+	
 	//maginific-poup
 	$(document).ready(function() {
 		$('.popup-with-form').magnificPopup({
 			type: 'inline',
 			preloader: false,	
 		});
+		$('.ajax-popup-link').magnificPopup({
+			  type: 'ajax'
+			});
 	})
 	
 	function closePopup(){
 	  var magnificPopup = $.magnificPopup.instance; 
 	  magnificPopup.close(); 
 	}
-	
+
     $(function(){
       
       $('#divTableless table > tbody > tr:odd').addClass('odd');
@@ -368,13 +278,13 @@
       });
       
       $('#frm-filtro').submit(function(e){ e.preventDefault(); });
-          
+
       $('#pesquisar').keydown(function(e){
-      	if(e.keyCode==13){ 
-          	return false; //ignorar enter da caixa pesquisar
-        }
+        	if(e.keyCode==13){ 
+            	return false; //ignorar enter da caixa pesquisar
+          }
       });
-    
+      
       $('#pesquisar').keyup(function(e){
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
@@ -382,18 +292,24 @@
           $(this).find('td').each(function(){
             if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
           });
-          if(!encontrou){
-              //antes de ocultar, verificar se checkbox is checked para continuar visualizacao dos selecionados
-        	  if($(this).find('td > :checkbox').is(':checked')){ 
-            	  //ignore - nao oculta selecionados
-        	  }else{ 
-            	  $(this).closest('tr').hide();
-        	  }              
-          }
+          if(!encontrou) $(this).closest('tr').hide();
           else $(this).closest('tr').show();
           encontrou = false;
         });
       });
+
+      if($('#pesquisar').val() != ""){
+          var encontrou = false;
+          var termo = $('#pesquisar').val().toLowerCase();
+          $('#divTableless table > tbody > tr').each(function(){
+            $(this).find('td').each(function(){
+              if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
+            });
+            if(!encontrou) $(this).closest('tr').hide();
+            else $(this).closest('tr').show();
+            encontrou = false;
+          });
+      }
       
       $("#divTableless table") 
         .tablesorter({

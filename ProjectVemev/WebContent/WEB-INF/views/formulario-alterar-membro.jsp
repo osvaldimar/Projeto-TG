@@ -1,6 +1,10 @@
 <!-- form para alterar os dados do membro -->
 <form id="alterarDados-form" class="white-popup" action="/vemev/membro/updateMembro" method="post" style="max-width: 1000px;">
-	<div style="float: right;"><a href="#" style="text-decoration: underline;" onclick="closePopup()">Fechar</a></div>
+	
+	<div style="float: right;">
+		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
+	</div>
+	<br>
 	<h3>
 		Alterar dados do membro
 	</h3>

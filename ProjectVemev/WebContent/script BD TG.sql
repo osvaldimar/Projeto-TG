@@ -20,7 +20,7 @@ CREATE TABLE visitante (
     cidade VARCHAR(50),
     complemento VARCHAR(30),
     descricao_reuniao VARCHAR(100),
-    pertence_igreja CHAR,
+    pertence_igreja VARCHAR(3),
     qual_igreja VARCHAR(30),
     pertence_celula VARCHAR(3),
     conhecer_celula VARCHAR(3),

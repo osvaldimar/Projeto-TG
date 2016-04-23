@@ -37,8 +37,9 @@
 <!-- form para alterar os dados do membro -->
 <form id="alterarDados-form" class="white-popup" action="/vemev/membro/updateMembro" method="post" style="max-width: 1000px; background-color: #fff;">
 	<div style="float: right;">
-		<a href="#" style="text-decoration: underline;" onclick="closePopup()">Fechar</a>
+		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
 	</div>
+	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
 		<h3>Relatório do membro</h3>
@@ -278,6 +279,9 @@
 	    
 	</div>
 	<br>
-	<div style="float: right;"><a href="#" style="text-decoration: underline;" onclick="closePopup()">Fechar</a></div>
+	<div style="float: right;">
+		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
+	</div>
+	<br>
 	<br>
 </form>

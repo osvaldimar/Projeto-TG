@@ -18,6 +18,25 @@
 		);
 	}
 	
+	//funcao para mostrar o relatorio do visitante em pop up
+	function mostrarRelatorioVisitantePopup(id){
+		$.get("/vemev/visitante/ajaxRelatorioDadosVisitante",
+		    {
+		        id_visit: id		//parametro
+		    },
+		    function(data, status){
+		        //pop up com detalhes do membro
+		        $.magnificPopup.open({
+		            items: {
+		                src: data,
+		                type:'inline'
+		            },
+		            modal: true
+		        });
+		    }
+		);
+	}
+	
 	//maginific-poup
 	$(document).ready(function() {
 		$('.popup-with-form').magnificPopup({

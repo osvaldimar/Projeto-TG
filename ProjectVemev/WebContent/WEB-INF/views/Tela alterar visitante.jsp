@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cadastro dos Visitantes</title>
+<title>Alterar dados do Visitante</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 <script src="/js/mascaras-validacoes.js"></script>
 </head>
 <body>
@@ -21,7 +21,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Vem e V√™</a>
+				<a class="navbar-brand" href="#">Vem e VÍ</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -49,7 +49,7 @@
 					</li>
 
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">C√©lula<b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">CÈlula<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header"></li>
 							<li><a href="/vemev/celula/cadastrarCelula">Cadastrar</a></li>
@@ -73,7 +73,7 @@
 						<ul class="dropdown-menu">
 							<li class="dropdown-header"></li>
 							<li class="dropdown-submenu" id="btn-liderCelula">
-								<a tabindex="-1" href="#"> < Lider de C√©lula </a>
+								<a tabindex="-1" href="#"> < Lider de CÈlula </a>
 								<ul class="dropdown-menu" id="menu-liderCelula"
 									style="right: 192px; top: 2px;">
 									<li><a tabindex="-1" href="/vemev/cadastro/liderCelula">Cadastrar</a></li>
@@ -124,30 +124,32 @@
 			</div>
 			<!--/.nav-collapse -->
 			<div id="main" class="container-fluid">
-				<h3 class="page-header">Cadastro dos Visitantes</h3>
-				<form action="/vemev/visitante/createVisitante" method="post">
+				<h3 class="page-header">Alterar dados do Visitante</h3>
+				<form action="/vemev/visitante/updateVisitante" method="post">
 					<!-- area de campos do form -->
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group col-md-3">
-								<label for="txt_nome">Nome</label> <input type="text"
-									class="form-control" id="txt_nome" name="nome" required="true"> <label
-									for="data_nascimento">Data de Nascimento</label> <input
-									type="date" class="form-control" id="data_nascimento"
-									name="data_nascimento" required="true"> <label for="txt_telefone">Telefone</label>
-								<input type="text" onkeypress="formataTelefone(this, event)" class="form-control" id="txt_telefone"
-									name="telefone"> <label for="slc_estadoCivil">Estado
-									Civil</label> <select class="form-control" name="estado_civil">
+								<label for="txt_nome">Nome</label> 
+								<input type="text" class="form-control" value="${visitante.nome}" id="txt_nome" name="nome" required="true"> 									
+								<label for="data_nascimento">Data de Nascimento</label> 
+								<input type="date" value="${visitante.data_nascimento}" class="form-control" id="data_nascimento" name="data_nascimento" required="true"> 
+								<label for="txt_telefone">Telefone</label>
+								<input type="text" value="${visitante.telefone}" onkeypress="formataTelefone(this, event)" class="form-control" id="txt_telefone" name="telefone"> 
+								<label for="slc_estadoCivil">Estado Civil</label> 
+								<select class="form-control" name="estado_civil">
+									<option>${visitante.estado_civil}</option>
 									<option>Solteiro(a)</option>
 									<option>Casado(a)</option>
 									<option>Divorciado(a)</option>
-								</select> <label for="txt_endereco">Endere√ßo</label> <input type="text"
-									class="form-control" id="txt_endereco" name="endereco" required="true">
-								<label for="txt_bairro">Bairro</label> <input type="text"
-									class="form-control" id="txt_bairro" name="bairro"> <label
-									for="estado">Estado</label> <select class="form-control"
-									name="estado" required="true">
-									<option></option>
+								</select> 
+								<label for="txt_endereco">EndereÁo</label> 
+								<input type="text" value="${visitante.endereco}" class="form-control" id="txt_endereco" name="endereco" required="true">
+								<label for="txt_bairro">Bairro</label> 
+								<input type="text" value="${visitante.bairro}" class="form-control" id="txt_bairro" name="bairro"> 
+								<label for="estado">Estado</label> 
+								<select class="form-control" name="estado" required="true">
+									<option>${visitante.estado}</option>
 									<option>AC</option>
 									<option>AL</option>
 									<option>AP</option>
@@ -179,94 +181,92 @@
 							</div>
 
 							<div class="form-group col-md-3">
-								<label for="txt_apelido">Apelido</label> <input type="text"
-									class="form-control" id="txt_apelido" name="apelido"> <label
-									for="slc_sexo">Sexo</label> <select class="form-control"
-									name="sexo" required="true">
+								<label for="txt_apelido">Apelido</label> 
+								<input type="text" value="${visitante.apelido}" class="form-control" id="txt_apelido" name="apelido"> 
+								<label for="slc_sexo">Sexo</label> 
+								<select class="form-control" name="sexo" required="true">
+									<option value="${visitante.sexo}">${visitante.sexo}</option>
 									<option value = "F">F</option>
 									<option value = "M">M</option>
-								</select> <label for="txt_celular">Celular</label> <input type="text"
-									class="form-control" id="txt_celular" onkeypress="formataCelular(this, event)" name="celular"> <label
-									for="txt_email">E-mail</label> <input type="text"
-									class="form-control" id="txt_email" name="email"> <label
-									for="txt_complemento">Complemento</label> <input type="text"
-									class="form-control" id="txt_complemento" name="complemento">
-								<label for="txt_cidade">Cidade</label> <input type="text"
-									class="form-control" id="txt_cidade" name="cidade" required="true"> <label
-									for="txt_cep">CEP</label> <input type="text"
-									class="form-control" id="txt_cep" name="cep" onkeypress="formataCEP(this, event)">
+								</select> 
+								<label for="txt_celular">Celular</label> 
+								<input type="text" value="${visitante.celular}" class="form-control" id="txt_celular" onkeypress="formataCelular(this, event)" name="celular"> 
+								<label for="txt_email">E-mail</label> 
+								<input type="text" value="${visitante.email}" class="form-control" id="txt_email" name="email"> 
+								<label for="txt_complemento">Complemento</label> 
+								<input type="text" value="${visitante.complemento}" class="form-control" id="txt_complemento" name="complemento">
+								<label for="txt_cidade">Cidade</label> 
+								<input type="text" value="${visitante.cidade}" class="form-control" id="txt_cidade" name="cidade" required="true"> 
+								<label for="txt_cep">CEP</label> 
+								<input type="text" value="${visitante.cep}" class="form-control" id="txt_cep" name="cep" onkeypress="formataCEP(this, event)">
 							</div>
 
 							<div class="form-group col-md-3">
 								<div style="height: 59px;">
-									<label for="txt_celula">RG</label> <input type="text"
-										class="form-control" id="txt_rg" name="RG">
+									<label for="txt_celula">RG</label> 
+									<input type="text" value="${visitante.RG}" class="form-control" id="txt_rg" name="RG">
 								</div>
 								<div style="height: 59px;">
-									<label for="data_reuniao">Data da Visita</label> <input
-										type="date" class="form-control" id="data_reuniao" name = "data_reuniao" required="true">
+									<label for="data_reuniao">Data da Visita</label> 
+									<input type="date" value="${visitante.data_reuniao}" class="form-control" id="data_reuniao" name="data_reuniao" required="true">
 								</div>
 								<div style="height: 59px;">
 									<label for="txt_rdigreja">Pertence a alguma igreja?</label><br>
 									<input type="radio" name="pertence_igreja" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_igreja" value="N√£o">N√£o<br>
+									<input type="radio" name="pertence_igreja" value="N„o">N„o<br>
 									<br>
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_rdpertence">Pertence a alguma c√©lula?</label><br>
+									<label for="txt_rdpertence">Pertence a alguma cÈlula?</label><br><br><br><br>
 									<input type="radio" name="pertence_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_celula" value="N√£o">N√£o<br>
+									<input type="radio" name="pertence_celula" value="N„o">N„o<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_rdoracao">Deseja ora√ß√£o?</label><br> <input
-										type="radio" name="deseja_oracao" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="deseja_oracao" value="N√£o">N√£o<br>
+									<label for="txt_rdoracao">Deseja oraÁ„o?</label><br> 
+									<input type="radio" name="deseja_oracao" value="Sim">Sim&nbsp;&nbsp;
+									<input type="radio" name="deseja_oracao" value="N„o">N„o<br>
 									<br>
 								</div>
 							</div>
 							<div class="form-group col-md-3">
 								<div style="height: 59px;">
-									<label for="slc_visitou">Visitou c√©lula ou reuni√£o?</label> <select
-										class="form-control" name="celula_culto">
-										<option value ="celula">C√©lula</option>
-										<option value ="culto">Reuni√£o de Celebra√ß√£o</option>
+									<label for="slc_visitou">Visitou cÈlula ou reuni„o?</label> 
+									<select class="form-control" name="celula_culto">
+										<option value="${visitante.celula_culto}">${visitante.celula_culto}</option>
+										<option value ="celula">CÈlula</option>
+										<option value ="culto">Reuni„o de CelebraÁ„o</option>
 									</select>
 								</div>
 								<div style="height: 59px;">
 									<label for="txt_rdconhecer">Quer conhecer Jesus?</label><br>
 									<input type="radio" name="conhecer_jesus" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_jesus" value="N√£o">N√£o<br>
+									<input type="radio" name="conhecer_jesus" value="N„o">N„o<br>
 									<br>
+								</div>	
+								<div style="height: 59px;">
+									<label for="txt_igreja">Pertence a qual igreja?</label> 
+									<input type="text" value="${visitante.qual_igreja}" class="form-control" id="txt_igreja" name="qual_igreja">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_igreja">Pertence a qual igreja?</label> <input
-										type="text" class="form-control" id="txt_igreja"
-										name="qual_igreja">
-								</div>
-								<div style="height: 59px;">
-									<label for="txt_rdcelula">Quer conhecer alguma c√©lula?</label><br>
+									<label for="txt_rdcelula">Quer conhecer alguma cÈlula?</label><br>
 									<input type="radio" name="conhecer_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_celula" value="N√£o">N√£o<br>
+									<input type="radio" name="conhecer_celula" value="N„o">N„o<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_oracao">Qual o motivo da ora√ß√£o?</label> <input
-										type="text" class="form-control" id="txt_oracao"
-										name="motivo_oracao">
+									<label for="txt_oracao">Qual o motivo da oraÁ„o?</label> 
+									<input type="text" value="${visitante.motivo_oracao}" class="form-control" id="txt_oracao" name="motivo_oracao">
 								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<div style="height: 59px;">
-									<label for="txt_ajuda">Precisa de alguma ajuda
-										espec√≠fica?</label> <input type="text" class="form-control"
-										id="txt_ajuda" name="precisa_ajuda">
+									<label for="txt_ajuda">Precisa de alguma ajuda especÌfica?</label> 
+									<input type="text" value="${visitante.precisa_ajuda}" class="form-control" id="txt_ajuda" name="precisa_ajuda">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_descricao">O que chamou a aten√ß√£o na
-										reuni√£o de celebra√ß√£o ou na c√©lula?</label> <input type="text"
-										class="form-control" id="txt_descricao"
-										name="descricao_reuniao">
+									<label for="txt_descricao">O que chamou a atenÁ„o na reuni„o de celebraÁ„o ou na cÈlula?</label> 
+									<input type="text" value="${visitante.descricao_reuniao}" class="form-control" id="txt_descricao" name="descricao_reuniao">
 								</div>
 							</div>
 
@@ -274,7 +274,6 @@
 					</div>
 
 
-			</div>
 
 
 			<hr />
@@ -282,11 +281,13 @@
 				<div class="col-md-12">
 					<button type="submit" class="btn btn-primary">Salvar</button>
 					<a href="/home.html" class="btn btn-default">Cancelar</a>
+					<input type="hidden" value="${visitante.id_visit}" id="id_visit" name="id_visit">
 				</div>
 			</div>
 			</form>
+			</div>
 		</div>
-
+</div>
 		<h6>
 			<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -294,7 +295,7 @@
 			<script
 				src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-			<script src="js/bootstrap.min.js"></script>
+			<script src="/js/bootstrap.min.js"></script>
 			<script src="/js/submenus-bootstrap.js"></script>
 		</h6>
 </body>
