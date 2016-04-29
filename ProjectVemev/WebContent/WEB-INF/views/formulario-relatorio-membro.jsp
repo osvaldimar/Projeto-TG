@@ -42,7 +42,7 @@
 	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
-		<h3>Relatório do membro</h3>
+		<h3>Visão geral do membro</h3>
 	</div>	
 	<br>
 	

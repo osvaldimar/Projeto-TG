@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Consulta dos Visitantes</title>
+	<title>Consulta dos Membros</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -48,15 +48,12 @@
         </div><!--/.nav-collapse -->
         
         <div id="main" class="container-fluid">
- <h3 class="page-header">Consulta de todos os Visitantes</h3>
+ <h3 class="page-header">Consulta de reuniões das células</h3>
  <form action="index.html">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
 
-<a href="/Tela de cadastro dos Visitantes.html" style="text-decoration: underline;">Cadastrar novo visitante</a>
-    
-    
 <!-- Start tableless -->
 <div style="text-align:center; float:center;">
 <p style="padding:12px;">
@@ -68,35 +65,36 @@
 		<table id="myTable" cellspacing="0"> 
 		<thead>
 	      	<tr>
-	      		<th width="250px">Nome do visitante</th>
-	      		<th width="120px">Celular</th>
-		    	<th width="120px">Telefone</th>  
-		    	<th width="250px">Endereço</th>
-		    	<th width="150px">Bairro</th>		    	
-		    	<th width="150px">Cidade</th>
-		    	<th width="80px">Ação</th>
+	      		<th width="250px">Célula</th>
+	      		<th width="150px">Dia</th>
+		    	<th width="150px">Horário</th>  
+		    	<th width="200px">Membros</th>
+		    	<th width="200px">Visitantes</th>
+		    	<th width="150px">Ações</th>		    	
 	    	</tr>
 		</thead>
       <tbody>
-      	<c:forEach var="lista" items="${listaVisitantes}">
+      	<c:forEach var="lista" items="${listaReunioes}">
 	    	<tr>
-	    		<td width="250px">
-	    			<a href="#" title="Exibir relatório" onclick="mostrarRelatorioVisitantePopup('${lista.id_visit}');">${lista.nome}</a>
-	    		</td>
-	    		<td width="120px">${lista.celular}</td>
-	    		<td width="120px">${lista.telefone}</td>
-	    		<td width="250px">${lista.endereco}</td>
-	    		<td width="150px">${lista.bairro}</td>	    		
-	    		<td width="150px">${lista.cidade}</td>
-	    		<td width="80px">
-					<a href="/vemev/visitante/alterarDadosVisitante?id_visit=${lista.id_visit}">Alterar</a>
-	    		</td>
+	    		<td width="250px">${lista.nome_celula}</td>
+	    		<td width="150px">${lista.dia_reuniao}</td>
+	    		<td width="150px">${lista.horario}</td>
+	    		<td width="200px">${lista.num_membros}</td>
+	    		<td width="200px">${lista.num_visitantes}</td>
+	    		<td width="150px">
+	    			&nbsp;&nbsp;
+		    		<a href="#" onclick="alterarDadosReuniao('${lista.id_reuniao}');">Alterar</a>
+		    		<br>&nbsp;&nbsp;
+		    		<a class="popup-with-form" href="#excluir-form" onclick="excluirReuniao('${lista.id_reuniao}');">
+		    			Excluir
+		    		</a>
+	    		</td>   		
 	    	</tr>
 	    </c:forEach>
       </tbody>
     </table>
     </div>
-    <b>Total de visitantes: ${listaVisitantes.size()}</b>
+    <b>Total de reuniões: ${listaReunioes.size()}</b>
 
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
@@ -125,12 +123,6 @@
 </form>
 </div>
 
-
-<div id="divFormAlterarMembro">
-	<form id="alterarDados-form" class="mfp-hide white-popup" style="max-width: 1000px;">
-	</form>
-</div>
-
 <h6>
       <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -144,7 +136,52 @@
 </div>
 </div>
 
+<!-- form para excluir reuniao -->
+<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/reuniao/excluirReuniao" method="get" style="width: 400px;">
+	<div class="">
+		Excluir reunião
+	</div>
+	<br>
+	Você tem certeza que deseja excluir o histórico dessa reunião da célula?
+	<br><br><br>
+	<div id="actions" class="row">
+	    <div class="col-md-12">
+	      <button type="submit" class="btn btn-primary">- Excluir</button>
+	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
+	    </div>
+  	</div>
+	<input type="hidden" id="id_reuniao_exc" name="id_reuniao" value="">
+</form>
+
+<!-- monta form via ajax para alterar dados da reuniao -->
+<form id="alterarDados-form" class="mfp-hide white-popup" style="max-width: 1000px;">
+</form>
+	
 <script>		
+
+	//funcao para excluir membro da celula
+	function excluirReuniao(id){
+		$('#id_reuniao_exc').val(id);		//passa o id clicado para o campo hidden do form excluir
+	}
+
+	//funcao para buscar formulario via ajax para alterar dados da reuniao
+	function alterarDadosReuniao(id){
+		$.get("/vemev/reuniao/ajaxAlterarDadosReuniao",
+		    {
+		        id_reuniao: id		//parametro
+		    },
+		    function(data, status){
+		        //forca o pop up dos campos
+		        $.magnificPopup.open({
+		            items: {
+		                src: data,
+		                type:'inline'
+		            },
+		            modal: true
+		        });
+		    }
+		);
+	}
 	
 	//maginific-poup
 	$(document).ready(function() {
@@ -152,9 +189,6 @@
 			type: 'inline',
 			preloader: false,	
 		});
-		$('.ajax-popup-link').magnificPopup({
-			  type: 'ajax'
-			});
 	})
 	
 	function closePopup(){

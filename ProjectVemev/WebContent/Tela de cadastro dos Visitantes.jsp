@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,108 +24,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Vem e Vê</a>
+				<a class="navbar-brand" href="#">Vem e VÃª</a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="active">
-						<a href="/home.html">Home</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Membro<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro de Membros.html">Cadastrar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Consultar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Visitante<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro dos Visitantes.html">Cadastrar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Consultar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Célula<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/vemev/celula/cadastrarCelula">Cadastrar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Consultar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Setor<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro do setor.html">Cadastrar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Consultar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Lider <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li class="dropdown-submenu" id="btn-liderCelula">
-								<a tabindex="-1" href="#"> < Lider de Célula </a>
-								<ul class="dropdown-menu" id="menu-liderCelula"
-									style="right: 192px; top: 2px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderCelula">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Alterar</a></li>
-								</ul>
-							</li>
-							<li class="dropdown-submenu" id="btn-liderTreinamento">
-								<a tabindex="-1" href="#"> < Lider em Treinamento </a>
-								<ul class="dropdown-menu" id="menu-liderTreinamento"
-									style="right: 192px; top: 31px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderTreinamento">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Alterar</a></li>
-								</ul>
-							</li>
-							
-							<li class="divider"></li>
-							<li class="dropdown-submenu" id="btn-liderSetor">
-								<a tabindex="-1" href="#"> < Lider de Setor </a>
-								<ul class="dropdown-menu" id="menu-liderSetor"
-									style="right: 192px; top: 99px;">
-									<li><a tabindex="-1" href="/vemev/lider/CadastrarLiderSetor">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Alterar</a></li>
-								</ul>
-							</li>							
-							<li class="dropdown-submenu" id="btn-liderRede">
-								<a tabindex="-1" href="#"> < Lider de Rede </a>
-								<ul class="dropdown-menu" id="menu-liderRede"
-									style="right: 192px; top: 72px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderRede">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Alterar</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rede<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Consultar</a></li>
-						</ul>
-					</li>
-				</ul>
+				<!-- cabecalho default -->
+				<%@include file="/cabecalho.jsp"%>
 			</div>
 			<!--/.nav-collapse -->
+			
 			<div id="main" class="container-fluid">
 				<h3 class="page-header">Cadastro dos Visitantes</h3>
 				<form action="/vemev/visitante/createVisitante" method="post">
@@ -141,7 +50,7 @@
 									<option>Solteiro(a)</option>
 									<option>Casado(a)</option>
 									<option>Divorciado(a)</option>
-								</select> <label for="txt_endereco">Endereço</label> <input type="text"
+								</select> <label for="txt_endereco">EndereÃ§o</label> <input type="text"
 									class="form-control" id="txt_endereco" name="endereco" required="true">
 								<label for="txt_bairro">Bairro</label> <input type="text"
 									class="form-control" id="txt_bairro" name="bairro"> <label
@@ -209,34 +118,34 @@
 								<div style="height: 59px;">
 									<label for="txt_rdigreja">Pertence a alguma igreja?</label><br>
 									<input type="radio" name="pertence_igreja" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_igreja" value="Não">Não<br>
+									<input type="radio" name="pertence_igreja" value="NÃ£o">NÃ£o<br>
 									<br>
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_rdpertence">Pertence a alguma célula?</label><br>
+									<label for="txt_rdpertence">Pertence a alguma cÃ©lula?</label><br>
 									<input type="radio" name="pertence_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_celula" value="Não">Não<br>
+									<input type="radio" name="pertence_celula" value="NÃ£o">NÃ£o<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_rdoracao">Deseja oração?</label><br> <input
+									<label for="txt_rdoracao">Deseja oraÃ§Ã£o?</label><br> <input
 										type="radio" name="deseja_oracao" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="deseja_oracao" value="Não">Não<br>
+									<input type="radio" name="deseja_oracao" value="NÃ£o">NÃ£o<br>
 									<br>
 								</div>
 							</div>
 							<div class="form-group col-md-3">
 								<div style="height: 59px;">
-									<label for="slc_visitou">Visitou célula ou reunião?</label> <select
+									<label for="slc_visitou">Visitou cÃ©lula ou reuniÃ£o?</label> <select
 										class="form-control" name="celula_culto">
-										<option value ="celula">Célula</option>
-										<option value ="culto">Reunião de Celebração</option>
+										<option value ="celula">CÃ©lula</option>
+										<option value ="culto">ReuniÃ£o de CelebraÃ§Ã£o</option>
 									</select>
 								</div>
 								<div style="height: 59px;">
 									<label for="txt_rdconhecer">Quer conhecer Jesus?</label><br>
 									<input type="radio" name="conhecer_jesus" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_jesus" value="Não">Não<br>
+									<input type="radio" name="conhecer_jesus" value="NÃ£o">NÃ£o<br>
 									<br>
 								</div>
 								<div style="height: 59px;">
@@ -245,13 +154,13 @@
 										name="qual_igreja">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_rdcelula">Quer conhecer alguma célula?</label><br>
+									<label for="txt_rdcelula">Quer conhecer alguma cÃ©lula?</label><br>
 									<input type="radio" name="conhecer_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_celula" value="Não">Não<br>
+									<input type="radio" name="conhecer_celula" value="NÃ£o">NÃ£o<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_oracao">Qual o motivo da oração?</label> <input
+									<label for="txt_oracao">Qual o motivo da oraÃ§Ã£o?</label> <input
 										type="text" class="form-control" id="txt_oracao"
 										name="motivo_oracao">
 								</div>
@@ -259,12 +168,12 @@
 							<div class="form-group col-md-6">
 								<div style="height: 59px;">
 									<label for="txt_ajuda">Precisa de alguma ajuda
-										específica?</label> <input type="text" class="form-control"
+										especÃ­fica?</label> <input type="text" class="form-control"
 										id="txt_ajuda" name="precisa_ajuda">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_descricao">O que chamou a atenção na
-										reunião de celebração ou na célula?</label> <input type="text"
+									<label for="txt_descricao">O que chamou a atenÃ§Ã£o na
+										reuniÃ£o de celebraÃ§Ã£o ou na cÃ©lula?</label> <input type="text"
 										class="form-control" id="txt_descricao"
 										name="descricao_reuniao">
 								</div>
@@ -281,7 +190,7 @@
 			<div id="actions" class="row">
 				<div class="col-md-12">
 					<button type="submit" class="btn btn-primary">Salvar</button>
-					<a href="/home.html" class="btn btn-default">Cancelar</a>
+					<a href="/home.jsp" class="btn btn-default">Cancelar</a>
 				</div>
 			</div>
 			</form>

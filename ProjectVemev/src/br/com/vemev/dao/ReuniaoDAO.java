@@ -31,8 +31,8 @@ public class ReuniaoDAO extends GenericDAO {
 	 * Atualiza uma reuniao pelo id
 	 * @param reuniao
 	 */
-	public void update(Reuniao reuniao, Integer idReuniao){
-		String clausulaWhere = "id_reuniao = '" + idReuniao + "'";			//atualiza utilizando a clausula where, PK coluna id_reuniao
+	public void update(Reuniao reuniao){
+		String clausulaWhere = "id_reuniao = " + reuniao.getId_reuniao();	//atualiza utilizando a clausula where, PK coluna id_reuniao
 		super.update(reuniao, clausulaWhere);
 	}
 	
@@ -42,7 +42,7 @@ public class ReuniaoDAO extends GenericDAO {
 	 * @return
 	 */
 	public boolean delete(Integer idReuniao){
-		String clausulaWhere = "id_reuniao = '" +idReuniao+ "'";				//deleta utilizando a clausula where, PK coluna id_reuniao	
+		String clausulaWhere = "id_reuniao = '" +idReuniao+ "'";			//deleta utilizando a clausula where, PK coluna id_reuniao	
 		return super.delete(clausulaWhere, Reuniao.class);
 	}
 	

@@ -17,6 +17,7 @@
 #divTableless table thead { 
 	display: block; 
 	width: 100%;
+	min-width: 400px;
 	background-color:#ad2525;
 }
 

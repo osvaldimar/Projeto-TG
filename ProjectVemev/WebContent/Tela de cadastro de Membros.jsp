@@ -1,4 +1,7 @@
-        <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
       <html lang="pt-br">
         <head>
          <meta charset="utf-8">
@@ -22,107 +25,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem e VÃª</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-					<li class="active">
-						<a href="/home.html">Home</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Membro<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro de Membros.html">Cadastrar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Consultar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Visitante<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro dos Visitantes.html">Cadastrar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Consultar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Célula<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/vemev/celula/cadastrarCelula">Cadastrar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Consultar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Setor<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro do setor.html">Cadastrar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Consultar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Lider <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li class="dropdown-submenu" id="btn-liderCelula">
-								<a tabindex="-1" href="#"> < Lider de Célula </a>
-								<ul class="dropdown-menu" id="menu-liderCelula"
-									style="right: 192px; top: 2px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderCelula">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Alterar</a></li>
-								</ul>
-							</li>
-							<li class="dropdown-submenu" id="btn-liderTreinamento">
-								<a tabindex="-1" href="#"> < Lider em Treinamento </a>
-								<ul class="dropdown-menu" id="menu-liderTreinamento"
-									style="right: 192px; top: 31px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderTreinamento">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Alterar</a></li>
-								</ul>
-							</li>
-							
-							<li class="divider"></li>
-							<li class="dropdown-submenu" id="btn-liderSetor">
-								<a tabindex="-1" href="#"> < Lider de Setor </a>
-								<ul class="dropdown-menu" id="menu-liderSetor"
-									style="right: 192px; top: 99px;">
-									<li><a tabindex="-1" href="/vemev/lider/CadastrarLiderSetor">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Alterar</a></li>
-								</ul>
-							</li>							
-							<li class="dropdown-submenu" id="btn-liderRede">
-								<a tabindex="-1" href="#"> < Lider de Rede </a>
-								<ul class="dropdown-menu" id="menu-liderRede"
-									style="right: 192px; top: 72px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderRede">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Alterar</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rede<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Consultar</a></li>
-						</ul>
-					</li>
-			</ul>
-      </div><!--/.nav-collapse -->
+        	<!-- cabecalho default -->
+			<%@include file="/cabecalho.jsp"%>
+      	</div><!--/.nav-collapse -->
+      	
                 <div id="main" class="container-fluid">
          <h3 class="page-header">Cadastro dos Membros</h3>
          <form action="/vemev/membro/createMembro" method="post">
@@ -141,7 +50,7 @@
                <input type="text" class="form-control" id="nome" name="nome" required="true">
                 <label for="telefone">Telefone</label>
                <input type="text" class="form-control" id="telefone" name="telefone" onkeypress="formataTelefone(this, event)">  
-                 <label for="endereco">Endereço</label>
+                 <label for="endereco">EndereÃ§o</label>
                <input type="text" class="form-control" id="endereco" name="endereco" required="true">
                <label for="cep">CEP</label>
                <input type="text" class="form-control" id="cep" name="cep" required="true" onkeypress="formataCEP(this, event)">

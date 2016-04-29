@@ -100,104 +100,10 @@
           <a class="navbar-brand" href="#">Vem e Vê</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-					<li class="active">
-						<a href="/home.html">Home</a>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Membro<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro de Membros.html">Cadastrar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Consultar</a></li>
-							<li><a href="/vemev/membro/consultaMembros">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Visitante<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro dos Visitantes.html">Cadastrar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Consultar</a></li>
-							<li><a href="/vemev/visitante/consultaVisitantes">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Célula<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/vemev/celula/cadastrarCelula">Cadastrar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Consultar</a></li>
-							<li><a href="/vemev/celula/consultaCelula">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Setor<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a href="/Tela de cadastro do setor.html">Cadastrar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Consultar</a></li>
-							<li><a href="/vemev/setor/consultaSetor">Alterar</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Lider <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li class="dropdown-submenu" id="btn-liderCelula">
-								<a tabindex="-1" href="#"> < Lider de Célula </a>
-								<ul class="dropdown-menu" id="menu-liderCelula"
-									style="right: 192px; top: 2px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderCelula">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Celula">Alterar</a></li>
-								</ul>
-							</li>
-							<li class="dropdown-submenu" id="btn-liderTreinamento">
-								<a tabindex="-1" href="#"> < Lider em Treinamento </a>
-								<ul class="dropdown-menu" id="menu-liderTreinamento"
-									style="right: 192px; top: 31px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderTreinamento">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Treinamento">Alterar</a></li>
-								</ul>
-							</li>
-							
-							<li class="divider"></li>
-							<li class="dropdown-submenu" id="btn-liderSetor">
-								<a tabindex="-1" href="#"> < Lider de Setor </a>
-								<ul class="dropdown-menu" id="menu-liderSetor"
-									style="right: 192px; top: 99px;">
-									<li><a tabindex="-1" href="/vemev/lider/CadastrarLiderSetor">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Alterar</a></li>
-								</ul>
-							</li>							
-							<li class="dropdown-submenu" id="btn-liderRede">
-								<a tabindex="-1" href="#"> < Lider de Rede </a>
-								<ul class="dropdown-menu" id="menu-liderRede"
-									style="right: 192px; top: 72px;">
-									<li><a tabindex="-1" href="/vemev/cadastro/liderRede">Cadastrar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Consultar</a></li>
-									<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Alterar</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rede<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header"></li>
-							<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Consultar</a></li>
-						</ul>
-					</li>
-				</ul>
+        	<!-- cabecalho default -->
+			<%@include file="/cabecalho.jsp"%>
         </div><!--/.nav-collapse -->
+        
         <div id="main" class="container-fluid">
  <h3 class="page-header">Consulta de Células</h3>
 
@@ -240,10 +146,14 @@
 			<div style="width: 300px; height: auto; color: grey; ">Reunião da Célula</div>			
 			<b>Dia da semana:</b> ${celula.dia_reuniao}<br>
 			<b>Horário:</b> ${celula.horario}
-			<hr>
-			<a class="popup-with-form" href="#alterarDados-form">
-				Alterar dados
-			</a>
+		
+			<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
+				<hr>
+				<a class="popup-with-form" href="#alterarDados-form">
+					Alterar dados
+				</a>
+			<%} %>
+		
 			<br>
 		</div>
 		<div class="divRede-Lider">
@@ -256,9 +166,14 @@
 				<b>${contagem.count}º Líder em Treinamento:</b> ${lista.nome}<br>			
 			</c:forEach>
 			<br>
-			<a href="/vemev/lider/consultaLideres?tipoLider=Celula">
-				Detalhes dos líderes
-			</a>
+			
+			<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso%>
+				<hr>
+				<a href="/vemev/lider/consultaLideres?tipoLider=Celula">
+					Detalhes dos líderes
+				</a>
+			<%} %>			
+			
 		</div>
 		<div class="divRede-Lider">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Rede / Setor</div><br>
@@ -268,13 +183,17 @@
 		<div style="clear: both; width: 100%;"> </div>
 		<br>
 		<hr>
-  		<div id="actions" class="row">
-    		<div class="col-md-12">
-				<a class="popup-with-form" href="#membro-form">
-			    	<button class="btn btn-primary">+ Incluir Membro</button>
-				</a>
-    		</div>
- 		</div>
+		
+		<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso incluir%>
+			<div id="actions" class="row">
+	    		<div class="col-md-12">
+					<a class="popup-with-form" href="#membro-form">
+				    	<button class="btn btn-primary">+ Incluir Membro</button>
+					</a>
+	    		</div>
+	 		</div>
+		<%} %>  		
+ 		
 		<br>
 		<div class="membro-table">
 			<table>
@@ -285,7 +204,9 @@
 		      		<th width="15%">Celular</th>
 			    	<th width="15%">Telefone</th>  
 			    	<th width="20%">Endereço</th>
-			    	<th width="20%">Ações</th>
+			    	<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
+						<th width="20%">Ações</th>
+					<%} %>			    	
 		    	</tr>
 			</thead>
 	      <tbody>
@@ -296,16 +217,18 @@
 		    		<td width="15%">${lista.celular}</td>
 		    		<td width="15%">${lista.telefone}</td>
 		    		<td width="20%">${lista.endereco}</td>
-		    		<td width="20%">
-		    			&nbsp;&nbsp;
-			    		<a class="popup-with-form" href="#desvincular-form" onclick="desvincularMembroDaCelula('${lista.id_membro}');">
-			    			- Desvincular membro
-			    		</a>
-			    		<br>&nbsp;&nbsp;
-			    		<a class="popup-with-form" href="#excluir-form" onclick="excluirMembroDaCelula('${lista.id_membro}');">
-			    			x Excluir participação
-			    		</a>
-		    		</td>
+		    		<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
+						<td width="20%">
+			    			&nbsp;&nbsp;
+				    		<a class="popup-with-form" href="#desvincular-form" onclick="desvincularMembroDaCelula('${lista.id_membro}');">
+				    			- Desvincular membro
+				    		</a>
+				    		<br>&nbsp;&nbsp;
+				    		<a class="popup-with-form" href="#excluir-form" onclick="excluirMembroDaCelula('${lista.id_membro}');">
+				    			x Excluir participação
+				    		</a>
+			    		</td>
+					<%} %>		    		
 		    	</tr>
 		    </c:forEach>
 	      </tbody>
