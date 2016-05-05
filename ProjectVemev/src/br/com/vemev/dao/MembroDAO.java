@@ -89,18 +89,28 @@ public class MembroDAO extends GenericDAO {
 		//sql ignora participacoes de celula que o membro nao frequenta mais
 		//sql traz dados da celula do membro que ele frequenta atualmente
 		String sqlAvancado = 				
-				"select * from membro as t1 left join participa_celula as t2 on t1.id_membro = t2.id_membro "
+				/*"select * from membro as t1 left join participa_celula as t2 on t1.id_membro = t2.id_membro "
 				+ "left join celula as t3 on t2.nome_celula = t3.nome_celula  "
 				+ "where t2.frequenta NOT IN ( "
 					 	+ "SELECT p.frequenta FROM participa_celula as p "
-						+ "WHERE t2.id_participa=p.id_participa and p.frequenta = 'Não' "
+						+ "WHERE t2.id_participa=p.id_participa and p.frequenta = 'NÃ£o' "
 						+ "and (SELECT count(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) >= 2 "
 						+ "and (SELECT count(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro and p2.frequenta = 'Sim') >= 1 "
 						+ "or "
-				        + "t2.id_participa=p.id_participa and p.frequenta = 'Não' "
+				        + "t2.id_participa=p.id_participa and p.frequenta = 'NÃ£o' "
 				        + "and (SELECT max(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) != t2.id_participa "
 					+") "
-				+ "order by t1.nome;";
+				+ "order by t1.nome;";*/
+				
+				"select * from membro as t1 left outer join participa_celula as t2 on t1.id_membro = t2.id_membro "
+					+"left outer join celula as t3 on t2.nome_celula = t3.nome_celula "
+					+"where t1.id_membro NOT IN ( "
+						+"SELECT p.id_membro FROM participa_celula as p "
+				        +"where p.id_participa = t2.id_participa "
+				        +"and (SELECT count(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) >= 2 "
+						+"and (SELECT max(id_participa) FROM participa_celula as p2 WHERE t1.id_membro=p2.id_membro) != t2.id_participa "
+					+") "
+				+"order by t1.nome;";
 				
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;

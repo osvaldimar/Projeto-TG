@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,9 +101,11 @@ public class CelulaControlador {
 	}
 	
 	
-	@RequestMapping(value={"/celula/consultaCelula"}, method=RequestMethod.GET)
-	public ModelAndView consultaCelula(HttpServletRequest request, Model model) {
+	@RequestMapping(value={"/celula/consultaCelula"})
+	public ModelAndView consultaCelula(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 
+		request.setCharacterEncoding("UTF-8");
+		
 		//regras de negocio
 		//lista de todas celulas para a combobox
 		ArrayList<Celula> listaTodasCelulas = dao.getLista();	
@@ -116,7 +119,7 @@ public class CelulaControlador {
 		
 
 		//busca no banco de dados a celula selecionada na combo
-		String nomeCelula = request.getParameter("nome");
+		String nomeCelula = request.getParameter("nome_celula");
 		Celula celula = null;
 		if(nomeCelula != null && !nomeCelula.isEmpty()){
 			celula = dao.read(nomeCelula);				//ler celula no bd
@@ -161,8 +164,8 @@ public class CelulaControlador {
 		return new ModelAndView("Tela de consulta da celula.jsp"); 	//retorna pagina consulta da celula
 	}
 	
-	@RequestMapping(value={"/participaCelula/incluirMembro"}, method=RequestMethod.POST)
-	public String participaCelula(HttpServletRequest request) throws UnsupportedEncodingException {
+	@RequestMapping(value={"/participaCelula/incluirMembro"})
+	public String participaCelula(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 				
 		//regras de negocio		
 		int idMembro = Integer.parseInt(request.getParameter("id_membro"));		//id membro
@@ -186,12 +189,15 @@ public class CelulaControlador {
 		
 		celula.setTotal(totalAtual + 1);		//incrementa total
 		dao.update(celula, nomeCelula);			//atualiza a celula no bd
-		
-		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
+	
+		String contentType= "text/html;charset=UTF-8";
+	    response.setContentType(contentType);
+	    response.setCharacterEncoding("utf-8"); 
+		return "redirect:/vemev/celula/consultaCelula?nome_celula=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
 	}
 	
-	@RequestMapping(value={"/participaCelula/excluirMembro"}, method=RequestMethod.GET)
-	public String excluirMembro(HttpServletRequest request) throws UnsupportedEncodingException {
+	@RequestMapping(value={"/participaCelula/excluirMembro"})
+	public String excluirMembro(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 				
 		//regras de negocio
 		int idMembro = Integer.parseInt(request.getParameter("id_membro"));		//recupera do parametro http o id_participa
@@ -209,11 +215,14 @@ public class CelulaControlador {
 		celula.setTotal(totalAtual - 1);					//total-1
 		dao.update(celula, participa.getNome_celula());		//atualiza a celula no bd
 		
-		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
+		String contentType= "text/html;charset=UTF-8";
+	    response.setContentType(contentType);
+	    response.setCharacterEncoding("utf-8");  
+		return "redirect:/vemev/celula/consultaCelula?nome_celula=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
 	}
 	
-	@RequestMapping(value={"/participaCelula/desvincularMembro"}, method=RequestMethod.GET)
-	public String desvincularMembro(HttpServletRequest request) throws UnsupportedEncodingException {
+	@RequestMapping(value={"/participaCelula/desvincularMembro"})
+	public String desvincularMembro(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 				
 		//regras de negocio
 		int idMembro = Integer.parseInt(request.getParameter("id_membro"));		//recupera do parametro http o id_membro
@@ -224,7 +233,7 @@ public class CelulaControlador {
 		ParticipaCelula participa = daoParticipa.readPeloMembroCelula(idMembro, nomeCelula);	//recupera participacao atual
 		
 		participa.setData_fim(dataFim);			//set data final para desvincular membro e guardar historico
-		participa.setFrequenta("Não"); 			//set frequenta Nao para desvincular membro e guardar historico
+		participa.setFrequenta("NÃ£o"); 			//set frequenta Nao para desvincular membro e guardar historico
 		daoParticipa.update(participa);			//atualiza participacao do membro da celula
 		
 		//atualiza total de membros
@@ -234,7 +243,11 @@ public class CelulaControlador {
 		celula.setTotal(totalAtual - 1);		//total-1
 		dao.update(celula, nomeCelula);			//atualiza a celula no bd
 		
-		return "redirect:/vemev/celula/consultaCelula?nome=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
+		
+		String contentType= "text/html;charset=UTF-8";
+	    response.setContentType(contentType);
+	    response.setCharacterEncoding("utf-8");  
+		return "redirect:/vemev/celula/consultaCelula?nome_celula=" + URLEncoder.encode(nomeCelula, "utf-8");	//redireciona pagina consulta da celula
 	}
 	
 }

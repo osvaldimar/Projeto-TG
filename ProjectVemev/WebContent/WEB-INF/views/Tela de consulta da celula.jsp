@@ -16,15 +16,15 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
+	
 	<!-- Magnific Popup core JS CSS file -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
-	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
-	
-	<!-- Tableless JS CSS file -->
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
+	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>	
  
 	<style type="text/css">
 	.membro-table table{
@@ -111,12 +111,12 @@
 
 
 <div class="container-fluid">
-<form action="/vemev/celula/consultaCelula" method="get">
+<form action="/vemev/celula/consultaCelula" method="post">
 	
 		<br>		
 		<label for="comboCelula">Escolha a Célula:</label><br>
 		<div class="form-inline">
-			<select class="form-control" required="true" id="comboCelula" name="nome" style="width: 250px;">
+			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
 				<option value=""></option>
 				<c:forEach var="lista" items="${listaTodasCelulas}">
 					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
@@ -288,6 +288,8 @@
 	      </tbody>
     </table>
     </div>
+    <b>Total de membros: ${listaTodosMembros.size()}</b>
+    
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">
@@ -318,7 +320,7 @@
     <!-- End tableless -->    
 
 <!-- form para excluir um membro -->
-<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/participaCelula/excluirMembro" method="get" style="width: 400px;">
+<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/participaCelula/excluirMembro" method="post" style="width: 400px;">
 	<div class="incluirMembro corTitulo-${setor.cor_rede}">
 		Excluir membro - ${celula.nome_celula}
 	</div>
@@ -336,7 +338,7 @@
 </form>
 
 <!-- form para desvincular um membro -->
-<form id="desvincular-form" class="mfp-hide white-popup" action="/vemev/participaCelula/desvincularMembro" method="get" style="width: 400px;">
+<form id="desvincular-form" class="mfp-hide white-popup" action="/vemev/participaCelula/desvincularMembro" method="post" style="width: 400px;">
 	<div class="incluirMembro corTitulo-${setor.cor_rede}">
 		Desvincular membro - ${celula.nome_celula}
 	</div>

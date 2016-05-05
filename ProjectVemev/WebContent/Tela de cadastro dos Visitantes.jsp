@@ -24,7 +24,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Vem e VÃª</a>
+				<a class="navbar-brand" href="#">Vem e Vê</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<!-- cabecalho default -->
@@ -50,7 +50,7 @@
 									<option>Solteiro(a)</option>
 									<option>Casado(a)</option>
 									<option>Divorciado(a)</option>
-								</select> <label for="txt_endereco">EndereÃ§o</label> <input type="text"
+								</select> <label for="txt_endereco">Endereço</label> <input type="text"
 									class="form-control" id="txt_endereco" name="endereco" required="true">
 								<label for="txt_bairro">Bairro</label> <input type="text"
 									class="form-control" id="txt_bairro" name="bairro"> <label
@@ -118,34 +118,34 @@
 								<div style="height: 59px;">
 									<label for="txt_rdigreja">Pertence a alguma igreja?</label><br>
 									<input type="radio" name="pertence_igreja" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_igreja" value="NÃ£o">NÃ£o<br>
+									<input type="radio" name="pertence_igreja" value="Não">Não<br>
 									<br>
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_rdpertence">Pertence a alguma cÃ©lula?</label><br>
+									<label for="txt_rdpertence">Pertence a alguma célula?</label><br>
 									<input type="radio" name="pertence_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="pertence_celula" value="NÃ£o">NÃ£o<br>
+									<input type="radio" name="pertence_celula" value="Não">Não<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_rdoracao">Deseja oraÃ§Ã£o?</label><br> <input
+									<label for="txt_rdoracao">Deseja oração?</label><br> <input
 										type="radio" name="deseja_oracao" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="deseja_oracao" value="NÃ£o">NÃ£o<br>
+									<input type="radio" name="deseja_oracao" value="Não">Não<br>
 									<br>
 								</div>
 							</div>
 							<div class="form-group col-md-3">
 								<div style="height: 59px;">
-									<label for="slc_visitou">Visitou cÃ©lula ou reuniÃ£o?</label> <select
+									<label for="slc_visitou">Visitou célula ou reunião?</label> <select
 										class="form-control" name="celula_culto">
-										<option value ="celula">CÃ©lula</option>
-										<option value ="culto">ReuniÃ£o de CelebraÃ§Ã£o</option>
+										<option value ="celula">Célula</option>
+										<option value ="culto">Reunião de Celebração</option>
 									</select>
 								</div>
 								<div style="height: 59px;">
 									<label for="txt_rdconhecer">Quer conhecer Jesus?</label><br>
 									<input type="radio" name="conhecer_jesus" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_jesus" value="NÃ£o">NÃ£o<br>
+									<input type="radio" name="conhecer_jesus" value="Não">Não<br>
 									<br>
 								</div>
 								<div style="height: 59px;">
@@ -154,13 +154,13 @@
 										name="qual_igreja">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_rdcelula">Quer conhecer alguma cÃ©lula?</label><br>
+									<label for="txt_rdcelula">Quer conhecer alguma célula?</label><br>
 									<input type="radio" name="conhecer_celula" value="Sim">Sim&nbsp;&nbsp;
-									<input type="radio" name="conhecer_celula" value="NÃ£o">NÃ£o<br>
+									<input type="radio" name="conhecer_celula" value="Não">Não<br>
 									<br>
 								</div>
 								<div style="height: 44px;">
-									<label for="txt_oracao">Qual o motivo da oraÃ§Ã£o?</label> <input
+									<label for="txt_oracao">Qual o motivo da oração?</label> <input
 										type="text" class="form-control" id="txt_oracao"
 										name="motivo_oracao">
 								</div>
@@ -168,12 +168,12 @@
 							<div class="form-group col-md-6">
 								<div style="height: 59px;">
 									<label for="txt_ajuda">Precisa de alguma ajuda
-										especÃ­fica?</label> <input type="text" class="form-control"
+										específica?</label> <input type="text" class="form-control"
 										id="txt_ajuda" name="precisa_ajuda">
 								</div>
 								<div style="height: 59px;">
-									<label for="txt_descricao">O que chamou a atenÃ§Ã£o na
-										reuniÃ£o de celebraÃ§Ã£o ou na cÃ©lula?</label> <input type="text"
+									<label for="txt_descricao">O que chamou a atenção na
+										reunião de celebração ou na célula?</label> <input type="text"
 										class="form-control" id="txt_descricao"
 										name="descricao_reuniao">
 								</div>

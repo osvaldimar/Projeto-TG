@@ -40,7 +40,7 @@ public class ReuniaoControlador {
 		CelulaDAO dao = new CelulaDAO();
 		ArrayList<Celula> listaTodasCelulas = dao.getLista();	
 		model.addAttribute("listaTodasCelulas", listaTodasCelulas);		//add o objeto na view jsp
-		return "Tela de cadastro de reuniões.jsp";
+		return "Tela de cadastro de reunioes.jsp";
 	}
 	
 	@RequestMapping(value={"/reuniao/createReuniao"}, method=RequestMethod.POST)

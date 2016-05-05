@@ -22,6 +22,8 @@ import br.com.vemev.modelo.MembroUserWeb;
 @WebFilter(filterName="FiltroPrincipal", urlPatterns="/vemev/*")
 public class FiltroPrincipal implements Filter {
 
+	private String encoding = "UTF-8";
+	
     /**
      * Default constructor. 
      */
@@ -39,9 +41,13 @@ public class FiltroPrincipal implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;		//http request protocol
 		HttpSession session = httpRequest.getSession();						//session aplication web
 		HttpServletResponse HttpResponse = (HttpServletResponse) response;	//response http protocol 
+		
+		request.setCharacterEncoding(encoding);		//forca encoding utf-8
+		response.setCharacterEncoding(encoding);
 		
 		//regras de negocio
 		//valida login session
@@ -72,7 +78,8 @@ public class FiltroPrincipal implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		encoding = fConfig.getInitParameter("requestEncoding");
+	    if( encoding==null ) encoding = "UTF-8";
 	}
 
 }

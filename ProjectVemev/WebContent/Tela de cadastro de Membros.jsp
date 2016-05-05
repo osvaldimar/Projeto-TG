@@ -16,7 +16,7 @@
         </head>
       <body> 
       <!-- Fixed navbar -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e VÃª</a>
+          <a class="navbar-brand" href="#">Vem e Vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -50,7 +50,7 @@
                <input type="text" class="form-control" id="nome" name="nome" required="true">
                 <label for="telefone">Telefone</label>
                <input type="text" class="form-control" id="telefone" name="telefone" onkeypress="formataTelefone(this, event)">  
-                 <label for="endereco">EndereÃ§o</label>
+                 <label for="endereco">Endereço</label>
                <input type="text" class="form-control" id="endereco" name="endereco" required="true">
                <label for="cep">CEP</label>
                <input type="text" class="form-control" id="cep" name="cep" required="true" onkeypress="formataCEP(this, event)">
