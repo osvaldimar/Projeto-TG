@@ -10,14 +10,14 @@
 #divTableless{
   
   overflow-x: auto;
-  min-width: 400px;
+  min-width: 300px;
   display: block;
 }
 
 #divTableless table thead { 
 	display: block; 
 	width: 100%;
-	min-width: 400px;
+	min-width: 300px;
 	background-color:#ad2525;
 }
 

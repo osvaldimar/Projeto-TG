@@ -25,6 +25,30 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
 	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
+	
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 #myTable tr > *:nth-child(2), tr > *:nth-child(6){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #myTable{
+		 	font-size: 11px;
+		 }
+		 #myTable thead tr th{
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -37,7 +61,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -87,7 +111,7 @@
 	        			<td width="200px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_celula").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_celula").get("data_fim")}</td>
-	        			<td width="100px">Célula</td>
+	        			<td width="100px">Célula<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_celula").get("status_lider")}</div></td>
 	        			<td width="100px">${lista.get("lider_celula").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_celula').get('status_lider') eq 'Ativo'}">
@@ -105,7 +129,7 @@
 	        			<td width="200px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("data_fim")}</td>
-	        			<td width="100px">Treinamento</td>
+	        			<td width="100px">Treinamento<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_treinamento").get("status_lider")}</div></td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_treinamento').get('status_lider') eq 'Ativo'}">
@@ -123,7 +147,7 @@
 	        			<td width="200px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_setor").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_setor").get("data_fim")}</td>
-	        			<td width="100px">Setor</td>
+	        			<td width="100px">Setor<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_setor").get("status_lider")}</div></td>
 	        			<td width="100px">${lista.get("lider_setor").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_setor').get('status_lider') eq 'Ativo'}">
@@ -141,7 +165,7 @@
 	        			<td width="200px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_rede").get("data_fim")}</td>
-	        			<td width="100px">Rede</td>
+	        			<td width="100px">Rede<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_rede").get("status_lider")}</div></td>
 	        			<td width="100px">${lista.get("lider_rede").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">

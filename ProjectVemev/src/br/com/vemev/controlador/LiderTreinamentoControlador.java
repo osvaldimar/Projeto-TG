@@ -43,7 +43,7 @@ public class LiderTreinamentoControlador {
 	@RequestMapping(value={"/lider/createLiderTreinamento"}, method=RequestMethod.POST)
 	public void cadastrarLider(LiderTreinamento lider, HttpServletRequest request, HttpServletResponse response) throws IOException{
 				
-		//regras de negocio - pode salvar ate dois lideres em Treinamento de uma mesma CÈlula
+		//regras de negocio - pode salvar ate dois lideres em Treinamento de uma mesma CÔøΩlula
 		
 		String[] idsDosMembros = request.getParameterValues("id_membro"); //recupera vetor de checkbox
 		
@@ -51,13 +51,13 @@ public class LiderTreinamentoControlador {
 		int totalLiderAtivo = dao.getListaLideresAtivo(lider.getNome_celula()).size();		//retorna tamanho da lista
 		if(totalLiderAtivo == 1 && idsDosMembros.length > 1){
 			//ja possui 1 lider ativo, pode adicionar so mais 1
-			response.getWriter().write("CÈlula j· possui 1 lÌder em treinamento ativo, sÛ È possÌvel adicionar mais 1");	//msg de resposta
+			response.getWriter().write("C√©lula j√° possui 1 l√≠der em treinamento ativo, s√≥ √© poss√≠vel adicionar mais 1");	//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}
 		if(totalLiderAtivo == 2 && idsDosMembros.length >= 1){			
 			//ja possui 2 lideres ativos, nao pode adicionar mais nenhum
-			response.getWriter().write("CÈlula j· possui 2 lÌderes em Treinamento ativos!");		//msg de resposta
+			response.getWriter().write("C√©lula j√° possui 2 l√≠deres em Treinamento ativos!");		//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}

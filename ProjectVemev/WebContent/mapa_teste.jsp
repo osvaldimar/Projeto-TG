@@ -11,6 +11,7 @@
 <meta name="author" content="BootstrapBay.com">
 <title>Home</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="/mapa-google/mapa_rota.css" rel="stylesheet">
 </head>
 <body>
 	<!-- Fixed navbar -->
@@ -35,10 +36,27 @@
 	</div>
 	<br>
 	<div class="container">
-		<h1 style="margin-top: 213px; text-align: center;">Qualquer</h1>
+	
+		<form method="post" action="index.html">
+		   <fieldset>
+		      <legend>Criar rotas</legend>		                
+		      <div>
+		         <label for="txtEnderecoPartida">Endereço de partida:</label>
+		         <input type="text" id="txtEnderecoPartida" name="txtEnderecoPartida" />
+		      </div>		                
+		      <div>
+		         <label for="txtEnderecoChegada">Endereço de chegada:</label>
+		         <input type="text" id="txtEnderecoChegada" name="txtEnderecoChegada" />
+		      </div>		                
+		      <div>
+		         <input type="submit" id="btnEnviar" name="btnEnviar" value="Enviar" />
+		      </div>
+		   </fieldset>
+		</form>		    
+		<div id="mapa" style="height: 500px; width: 700px"></div>
+        
 	</div>
-
-
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -47,5 +65,11 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="/js/submenus-bootstrap.js"></script>
 
+	<!-- Mapa google -->
+	<script src="/mapa-google/jquery.min.js"></script>	  
+	<!-- Maps API Javascript -->
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>	 
+	<!-- Arquivo de inicialização do mapa -->
+	<script src="/mapa-google/mapa_rota.js"></script>
 </body>
 </html>

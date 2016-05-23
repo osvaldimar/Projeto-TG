@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
           	<!-- cabecalho default -->

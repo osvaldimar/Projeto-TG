@@ -123,6 +123,10 @@ public class CelulaControlador {
 		Celula celula = null;
 		if(nomeCelula != null && !nomeCelula.isEmpty()){
 			celula = dao.read(nomeCelula);				//ler celula no bd
+			if(celula == null){
+				nomeCelula = new String(nomeCelula.getBytes("iso-8859-1"), "UTF-8"); //parse utf-8
+				celula = dao.read(nomeCelula);	//tenta ler apos parse
+			}
 			model.addAttribute("celula", celula);		//add o objeto na view jsp
 			
 			if(celula != null){
@@ -183,11 +187,14 @@ public class CelulaControlador {
 		ParticipaCelulaDAO daoParticipa = new ParticipaCelulaDAO();		//dao acesso ao bd
 		daoParticipa.create(participa);									//cria participacao membro da celula
 		
+		//calcula total de membros atual
+		MembroDAO daoDoMembro = new MembroDAO();
+		ArrayList<Membro> listaMembrosDaCelula = daoDoMembro.getListaMembrosDaCelula(nomeCelula);
+		int totalAtual = listaMembrosDaCelula.size();	//total atual da lista de membros		
+		
 		//atualiza total de membros
 		Celula celula = dao.read(nomeCelula);	//ler celula no bd
-		int totalAtual = celula.getTotal();		//total atual
-		
-		celula.setTotal(totalAtual + 1);		//incrementa total
+		celula.setTotal(totalAtual);		//incrementa total
 		dao.update(celula, nomeCelula);			//atualiza a celula no bd
 	
 		String contentType= "text/html;charset=UTF-8";
@@ -208,11 +215,14 @@ public class CelulaControlador {
 		
 		daoParticipa.delete(participa.getId_participa());	//excluir participacao do membro da celula
 		
+		//calcula total de membros atual
+		MembroDAO daoDoMembro = new MembroDAO();
+		ArrayList<Membro> listaMembrosDaCelula = daoDoMembro.getListaMembrosDaCelula(nomeCelula);
+		int totalAtual = listaMembrosDaCelula.size();	//total atual da lista de membros	
+		
 		//atualiza total de membros
 		Celula celula = dao.read(nomeCelula);				//ler celula no bd
-		int totalAtual = celula.getTotal();					//total atual
-		
-		celula.setTotal(totalAtual - 1);					//total-1
+		celula.setTotal(totalAtual);					//total-1
 		dao.update(celula, participa.getNome_celula());		//atualiza a celula no bd
 		
 		String contentType= "text/html;charset=UTF-8";
@@ -236,11 +246,14 @@ public class CelulaControlador {
 		participa.setFrequenta("Não"); 			//set frequenta Nao para desvincular membro e guardar historico
 		daoParticipa.update(participa);			//atualiza participacao do membro da celula
 		
+		//calcula total de membros atual
+		MembroDAO daoDoMembro = new MembroDAO();
+		ArrayList<Membro> listaMembrosDaCelula = daoDoMembro.getListaMembrosDaCelula(nomeCelula);
+		int totalAtual = listaMembrosDaCelula.size();	//total atual da lista de membros
+		
 		//atualiza total de membros
 		Celula celula = dao.read(nomeCelula);	//ler celula no bd
-		int totalAtual = celula.getTotal();		//total atual
-		
-		celula.setTotal(totalAtual - 1);		//total-1
+		celula.setTotal(totalAtual);		//total-1
 		dao.update(celula, nomeCelula);			//atualiza a celula no bd
 		
 		

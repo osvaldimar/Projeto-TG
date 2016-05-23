@@ -28,6 +28,30 @@
 	
 	<!-- funcoes geral vemev -->
 	<script src="/js/funcoes-vemev.js"></script>
+	
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 #myTable tr > *:nth-child(3){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #myTable{
+		 	font-size: 11px;
+		 }
+		 #myTable thead tr th{
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -40,7 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -55,11 +79,9 @@
 <div class="container-fluid">
 
 <!-- Start tableless -->
-<div style="text-align:center; float:center;">
-<p style="padding:12px;">
-        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
-        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
-</p>
+<div style="text-align:left; float:center;">
+      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
+         <input type="text" class="form-control" id="pesquisar" value="${param.pesquisa}" name="pesquisar" style ="width: 200px"><br>
 </div>
      <div id="divTableless">
 		<table id="myTable" cellspacing="0"> 
@@ -67,21 +89,21 @@
 	      	<tr>
 	      		<th width="250px">Célula</th>
 	      		<th width="150px">Dia</th>
-		    	<th width="150px">Horário</th>  
-		    	<th width="200px">Membros</th>
-		    	<th width="200px">Visitantes</th>
-		    	<th width="150px">Ações</th>		    	
+		    	<th width="100px">Horário</th>  
+		    	<th width="100px">Membros</th>
+		    	<th width="100px">Visitantes</th>
+		    	<th width="100px">Ações</th>		    	
 	    	</tr>
 		</thead>
       <tbody>
       	<c:forEach var="lista" items="${listaReunioes}">
 	    	<tr>
 	    		<td width="250px">${lista.nome_celula}</td>
-	    		<td width="150px">${lista.dia_reuniao}</td>
-	    		<td width="150px">${lista.horario}</td>
-	    		<td width="200px">${lista.num_membros}</td>
-	    		<td width="200px">${lista.num_visitantes}</td>
-	    		<td width="150px">
+	    		<td width="150px">${lista.dia_reuniao}<br><div id="divGridOcultar">${lista.horario}</div></td>
+	    		<td width="100px">${lista.horario}</td>
+	    		<td width="100px">${lista.num_membros}</td>
+	    		<td width="100px">${lista.num_visitantes}</td>
+	    		<td width="100px">
 	    			&nbsp;&nbsp;
 		    		<a href="#" onclick="alterarDadosReuniao('${lista.id_reuniao}');">Alterar</a>
 		    		<br>&nbsp;&nbsp;

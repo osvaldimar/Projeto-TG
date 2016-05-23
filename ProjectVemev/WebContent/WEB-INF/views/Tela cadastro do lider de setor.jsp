@@ -23,6 +23,29 @@
 	
 	<!-- Ajax formulario --> 
 	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 #myTable tr > *:nth-child(5), tr > *:nth-child(6){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #myTable{
+		 	font-size: 11px;
+		 }
+		 #myTable thead tr th{
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -35,7 +58,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
           	<!-- cabecalho default -->
@@ -76,6 +99,7 @@
 		    	<th width="150px">Telefone</th>  
 		    	<th width="300px">Endereço</th>
 		    	<th width="150px">Bairro</th>
+		    	<th width="150px">Cidade</th>
 	    	</tr>
 		</thead>
       <tbody>
@@ -83,9 +107,14 @@
 	    	<tr>
 	    		<td width="10px"><input value="${lista.id_membro}" name="id_membro" type="checkbox" onclick="changeCheckbox(this);"></td>
 	    		<td width="300px">${lista.nome}</td>
-	    		<td width="150px">${lista.telefone}</td>
-	    		<td width="300px">${lista.endereco}</td>
+	    		<td width="150px">${lista.telefone}<br>${lista.celular}</td>
+	    		<td width="300px">
+	    			${lista.endereco}<br>
+	    			<div id="divGridOcultar">${lista.bairro}</div>
+	    			<div id="divGridOcultar">${lista.cidade}</div>
+	    		</td>
 	    		<td width="150px">${lista.bairro}</td>
+	    		<td width="150px">${lista.cidade}</td>
 	    	</tr>
 	    </c:forEach>
       </tbody>
@@ -168,7 +197,7 @@
 		}
 		if(cont < 1){
 			e.preventDefault(); 
-			alert("Por favor selecione 1 ou 2 líderes de Rede!");
+			alert("Por favor selecione 1 ou 2 líderes de Setor!");
 		}
 		if(cont > 2){
 			e.preventDefault(); 

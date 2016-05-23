@@ -28,6 +28,33 @@
 	
 	<!-- funcoes geral vemev -->
 	<script src="/js/funcoes-vemev.js"></script>
+	
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 #myTable tr > *:nth-child(2), tr > *:nth-child(5), tr > *:nth-child(6) {
+		    display: none;
+		 }
+		 #tablelessThead tr > *:nth-child(2), tr > *:nth-child(5), tr > *:nth-child(6){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #myTable{
+		 	font-size: 11px;
+		 }
+		 #myTable thead tr th{
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -40,7 +67,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -54,12 +81,12 @@
 
 <div class="container-fluid">
 
-<a href="/Tela de cadastro dos Visitantes.html" style="text-decoration: underline;">Cadastrar novo visitante</a>
+<a href="/Tela de cadastro dos Visitantes.jsp" style="text-decoration: underline;">Cadastrar novo visitante</a>
     
     
 <!-- Start tableless -->
 <div style="text-align:center; float:center;">
-<p style="padding:12px;">
+<p>
         <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
         <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
 </p>
@@ -84,8 +111,15 @@
 	    			<a href="#" title="Exibir relatório" onclick="mostrarRelatorioVisitantePopup('${lista.id_visit}');">${lista.nome}</a>
 	    		</td>
 	    		<td width="120px">${lista.celular}</td>
-	    		<td width="120px">${lista.telefone}</td>
-	    		<td width="250px">${lista.endereco}</td>
+	    		<td width="120px">
+	    			${lista.telefone}<br>
+	    			<div id="divGridOcultar">${lista.celular}</div>	
+	    		</td>
+	    		<td width="250px">
+	    			${lista.endereco}<br>
+	    			<div id="divGridOcultar"><b>Bairro:</b> ${lista.bairro}</div>
+	    			<div id="divGridOcultar"><b>Cidade:</b> ${lista.cidade}</div>
+	    		</td>
 	    		<td width="150px">${lista.bairro}</td>	    		
 	    		<td width="150px">${lista.cidade}</td>
 	    		<td width="80px">

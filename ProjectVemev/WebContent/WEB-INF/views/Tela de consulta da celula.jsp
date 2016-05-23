@@ -85,6 +85,38 @@
 		width: 99%; color: white; font-size: 16px; padding: 4px; font-weight: 600;
 	}
 	</style>
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		 .white-popup {
+		 	  width: 85%;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 .white-popup {
+		 	  width: 95%;
+		 }
+		 #table-membros tr > *:nth-child(3){
+		    display: none;
+		 }
+		 #myTable tr > *:nth-child(3){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #table-membros, #myTable{
+		 	font-size: 11px;
+		 }
+		 #table-membros thead tr th, #myTable thead tr th{
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -97,7 +129,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vêê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -122,8 +154,7 @@
 					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
 				</c:forEach>
 			</select>
-			&nbsp;&nbsp;&nbsp;
-		    <button type="submit" class="btn btn-primary">Buscar</button>
+		    <button type="submit" class="btn btn-primary form-control" style="max-width: 100px;">Buscar</button>
 	    </div>
 </form>  
   <hr />
@@ -196,7 +227,7 @@
  		
 		<br>
 		<div class="membro-table">
-			<table>
+			<table id="table-membros">
 			<thead class="corTitulo-${setor.cor_rede}">
 		      	<tr>
 		      		<th width="5%"> </th>
@@ -215,17 +246,19 @@
 		    		<td width="5%" align="center">${contagem.count}</td>
 		    		<td width="25%">${lista.nome}</td>
 		    		<td width="15%">${lista.celular}</td>
-		    		<td width="15%">${lista.telefone}</td>
+		    		<td width="15%">
+		    			${lista.telefone}<br>
+		    			<div id="divGridOcultar">${lista.celular}</div>			    		
+		    		</td>
 		    		<td width="20%">${lista.endereco}</td>
 		    		<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
 						<td width="20%">
-			    			&nbsp;&nbsp;
 				    		<a class="popup-with-form" href="#desvincular-form" onclick="desvincularMembroDaCelula('${lista.id_membro}');">
-				    			- Desvincular membro
+				    			Desvincular membro
 				    		</a>
-				    		<br>&nbsp;&nbsp;
+				    		<br>
 				    		<a class="popup-with-form" href="#excluir-form" onclick="excluirMembroDaCelula('${lista.id_membro}');">
-				    			x Excluir participação
+				    			Excluir participação
 				    		</a>
 			    		</td>
 					<%} %>		    		
@@ -276,7 +309,10 @@
 		    		</td>
 		    		<td width="280px">${lista.get("membro").get("nome")}</td>
 		    		<td width="150px">${lista.get("membro").get("celular")}</td>
-		    		<td width="150px">${lista.get("membro").get("telefone")}</td>
+		    		<td width="150px">
+		    			${lista.get("membro").get("telefone")}<br>
+		    			<div id="divGridOcultar">${lista.get("membro").get("celular")}</div>
+		    		</td>
 		    		<td width="280px">${lista.get("membro").get("endereco")}</td>
 		    		<td width="140px">
 		    			<c:if test="${lista.get('participa_celula').get('frequenta') eq 'Sim'}">

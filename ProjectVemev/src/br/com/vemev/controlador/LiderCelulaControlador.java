@@ -59,13 +59,13 @@ public class LiderCelulaControlador {
 		int totalLiderAtivo = dao.getListaLideresAtivo(lider.getNome_celula()).size();		//retorna tamanho da lista
 		if(totalLiderAtivo == 1 && idsDosMembros.length > 1){
 			//ja possui 1 lider ativo, pode adicionar so mais 1
-			response.getWriter().write("Rede j· possui 1 lÌder ativo, sÛ È possÌvel adicionar mais 1");	//msg de resposta
+			response.getWriter().write("C√©lula j√° possui 1 l√≠der ativo, s√≥ √© poss√≠vel adicionar mais 1");	//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}
 		if(totalLiderAtivo == 2 && idsDosMembros.length >= 1){			
 			//ja possui 2 lideres ativos, nao pode adicionar mais nenhum
-			response.getWriter().write("Rede j· possui 2 lÌderes ativos!");		//msg de resposta
+			response.getWriter().write("C√©lula j√° possui 2 l√≠deres ativos!");		//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}
@@ -105,27 +105,27 @@ public class LiderCelulaControlador {
 		String tituloTipoLider = "";
 		String tipo = request.getParameter("tipoLider");
 		if(tipo != null && tipo.equalsIgnoreCase("Celula")){
-			tituloTipoLider = "Consulta LÌder de CÈlula";
+			tituloTipoLider = "Consulta L√≠der de C√©lula";
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresCel = daoLiderCel.getListaDadosLideresCelulas();
 			model.addAttribute("listaLideresCel", listaLideresCel);		//add lista na view jsp
 			
 		}else if(tipo != null && tipo.equalsIgnoreCase("Treinamento")){
-			tituloTipoLider = "Consulta LÌder em Treinamento";
+			tituloTipoLider = "Consulta L√≠der em Treinamento";
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresTrein = daoLiderTrein.getListaDadosLideresTreinamento();
 			model.addAttribute("listaLideresTrein", listaLideresTrein);		//add lista na view jsp
 			
 		}else if(tipo != null && tipo.equalsIgnoreCase("Setor")){
-			tituloTipoLider = "Consulta LÌder de Setor";
+			tituloTipoLider = "Consulta L√≠der de Setor";
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresSetor = daoLiderSetor.getListaDadosLideresSetores();
 			model.addAttribute("listaLideresSetor", listaLideresSetor);		//add lista na view jsp
 			
 		}else if(tipo != null && tipo.equalsIgnoreCase("Rede")){
-			tituloTipoLider = "Consulta LÌder de Rede";
+			tituloTipoLider = "Consulta L√≠der de Rede";
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresRede = daoLiderRede.getListaDadosLideresRedes();
 			model.addAttribute("listaLideresRede", listaLideresRede);		//add lista na view jsp
 			
 		}else{
-			tituloTipoLider = "Consulta de Todos os lÌderes";
+			tituloTipoLider = "Consulta de Todos os l√≠deres";
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresCel = daoLiderCel.getListaDadosLideresCelulas();
 			model.addAttribute("listaLideresCel", listaLideresCel);		//add lista na view jsp
 			ArrayList<HashMap<String,HashMap<String,String>>> listaLideresTrein = daoLiderTrein.getListaDadosLideresTreinamento();

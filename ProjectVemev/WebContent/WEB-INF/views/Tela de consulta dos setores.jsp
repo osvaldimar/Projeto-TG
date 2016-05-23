@@ -138,6 +138,29 @@
 		background-color: #ffcc00;
 	}
 	</style>
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 #table-lider-setor tr > *:nth-child(2){
+		    display: none;
+		 }
+		 #divGridOcultar {
+		    display: block;
+		 }
+		 #table-lider-setor, #table-celulas-setor{
+		 	font-size: 11px;
+		 }
+		 #table-lider-setor thead tr th, #table-celulas-setor thead tr th{	
+		 	font-size: 11px;
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -150,7 +173,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->
@@ -173,8 +196,7 @@
 					<option value="${lista.id_setor}">${lista.cor_rede} - ${lista.nome_setor}</option>
 				</c:forEach>
 			</select>
-			&nbsp;&nbsp;&nbsp;
-		    <button type="submit" class="btn btn-primary">Buscar</button>
+		    <button type="submit" class="btn btn-primary form-control" style="max-width: 100px;">Buscar</button>
 	    </div>
 	</form>  
   	<hr>
@@ -197,7 +219,7 @@
 				Lideres - Setor ${setor.nome_setor}
 			</div>
 			<br>
-			<table>
+			<table id="table-lider-setor">
 				<thead>
 	    			<tr>
 	        			<th width="30%">Nome Líder</th>
@@ -238,7 +260,7 @@
 				Células - Setor ${setor.nome_setor}
 			</div>
 			<br>
-			<table>
+			<table id="table-celulas-setor">
 				<thead>
 	    			<tr>
 	        			<th width="30%">Nome da Célula</th>
@@ -252,8 +274,8 @@
 		    			<tr>
 		        			<td>${lista.nome_celula}</td>
 		        			<td>${lista.total}</td>
-		        			<td>${lista.endereco}</td>
-		        			<td>${lista.cidade}</td>
+		        			<td>${lista.dia_reuniao}</td>
+		        			<td>${lista.horario}</td>
 		        		</tr>
 	        		</c:forEach>	
 	        	</tbody>

@@ -90,6 +90,31 @@
 	}
 		
 	</style>
+	<!-- configuracao do layout da grid -->
+	<style type="text/css">
+		@media screen and (min-width:861px) {
+		 #divGridOcultar {
+		    display: none;
+		 }
+		}
+		@media screen and (max-width:860px) {
+		 table tr > *:nth-child(2){
+		    display: none;
+		 }
+		 table{
+		 	font-size: 11px;
+		 }
+		 table thead tr th{	
+		 	font-size: 11px;
+		 }
+		 .rede div{	
+		 	font-size: 11px;
+		 	height: 40px;
+		 	font-size: 18px;"
+		 }
+		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
+		}
+	</style>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -102,7 +127,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vem e Vê</a>
+          <a class="navbar-brand" href="#">Vem vê</a>
         </div>
         <div class="navbar-collapse collapse">
         	<!-- cabecalho default -->

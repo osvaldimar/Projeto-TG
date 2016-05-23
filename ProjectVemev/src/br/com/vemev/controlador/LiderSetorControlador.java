@@ -37,13 +37,13 @@ public class LiderSetorControlador {
 		int totalLiderAtivo = dao.getListaLideresAtivo(lider.getId_setor()).size();		//retorna tamanho da lista
 		if(totalLiderAtivo == 1 && idsDosMembros.length > 1){
 			//ja possui 1 lider ativo, pode adicionar so mais 1
-			response.getWriter().write("Rede já possui 1 líder ativo, só é possível adicionar mais 1");	//msg de resposta
+			response.getWriter().write("Rede jÃ¡ possui 1 lÃ­der ativo, sÃ³ Ã© possÃ­vel adicionar mais 1");	//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}
 		if(totalLiderAtivo == 2 && idsDosMembros.length >= 1){			
 			//ja possui 2 lideres ativos, nao pode adicionar mais nenhum
-			response.getWriter().write("Rede já possui 2 líderes ativos!");		//msg de resposta
+			response.getWriter().write("Rede jÃ¡ possui 2 lÃ­deres ativos!");		//msg de resposta
 			response.setStatus(200);		//status resposta http 200 success
 			return;							//finaliza metodo
 		}
