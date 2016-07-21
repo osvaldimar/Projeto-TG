@@ -50,7 +50,11 @@ public class Membro {
 	
     @ColunaBD(nome = "RG")
 	@TipoDado(tipo = "String")
-    private String RG;	
+    private String RG;
+    
+    @ColunaBD(nome = "email")
+	@TipoDado(tipo = "String")
+    private String email;
     
 	public Membro(){
 		
@@ -142,6 +146,14 @@ public class Membro {
 
 	public void setRG(String RG) {
 		this.RG = RG;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

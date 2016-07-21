@@ -144,5 +144,6 @@
 				
 				<script src="/js/submenus-bootstrap.js"></script>
 			</h6>
+			<div class="loader" id="loader"></div>
 </body>
 </html>

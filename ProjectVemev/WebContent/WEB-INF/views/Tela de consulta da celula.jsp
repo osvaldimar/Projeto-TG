@@ -16,15 +16,15 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
-	
 	<!-- Magnific Popup core JS CSS file -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
-	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>	
+	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
+	
+	<!-- Tableless JS CSS file -->
+	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
  
 	<style type="text/css">
 	.membro-table table{
@@ -96,13 +96,22 @@
 		 }
 		}
 		@media screen and (max-width:860px) {
+		.divRede-Lider{
+			width: 95%; 
+		}
 		 .white-popup {
-		 	  width: 95%;
+		 	  width: 98%;
 		 }
 		 #table-membros tr > *:nth-child(3){
 		    display: none;
 		 }
+		 #table-membros tr > *:nth-child(5){
+		    display: none;
+		 }
 		 #myTable tr > *:nth-child(3){
+		    display: none;
+		 }
+		 #myTable tr > *:nth-child(5){
 		    display: none;
 		 }
 		 #divGridOcultar {
@@ -181,7 +190,7 @@
 			<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
 				<hr>
 				<a class="popup-with-form" href="#alterarDados-form">
-					Alterar dados
+					<span class="glyphicon glyphicon-edit"></span>  Alterar dados
 				</a>
 			<%} %>
 		
@@ -201,7 +210,7 @@
 			<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso%>
 				<hr>
 				<a href="/vemev/lider/consultaLideres?tipoLider=Celula">
-					Detalhes dos líderes
+					<span class="glyphicon glyphicon-user"></span> Detalhes dos líderes
 				</a>
 			<%} %>			
 			
@@ -219,7 +228,7 @@
 			<div id="actions" class="row">
 	    		<div class="col-md-12">
 					<a class="popup-with-form" href="#membro-form">
-				    	<button class="btn btn-primary">+ Incluir Membro</button>
+				    	<button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Incluir Membro</button>
 					</a>
 	    		</div>
 	 		</div>
@@ -254,11 +263,11 @@
 		    		<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
 						<td width="20%">
 				    		<a class="popup-with-form" href="#desvincular-form" onclick="desvincularMembroDaCelula('${lista.id_membro}');">
-				    			Desvincular membro
+				    			<span class="glyphicon glyphicon-minus"></span> Desvincular
 				    		</a>
 				    		<br>
 				    		<a class="popup-with-form" href="#excluir-form" onclick="excluirMembroDaCelula('${lista.id_membro}');">
-				    			Excluir participação
+				    			<span class="glyphicon glyphicon-trash"></span> Excluir
 				    		</a>
 			    		</td>
 					<%} %>		    		
@@ -287,7 +296,7 @@
 	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
 	
     <div id="divTableless">
-	<table id="myTable" cellspacing="0">
+	<table id="myTable" cellspacing="0" width="100%">
 		<thead>
 	      	<tr>
 	      		<th width="10px">&nbsp;&nbsp;&nbsp;</th>
@@ -398,7 +407,7 @@
 <!-- form para alterar os dados da celula -->
 <form id="alterarDados-form" class="mfp-hide white-popup" action="/vemev/celula/updateCelula" method="post" style="max-width: 1000px;">
 	<div class="incluirMembro corTitulo-${setor.cor_rede}">
-		Alterar dados - ${celula.nome_celula}
+		<span class="glyphicon glyphicon-edit"></span> Alterar dados - ${celula.nome_celula}
 	</div>
 	<br><br>
 	<div class="row">
@@ -620,5 +629,6 @@
     });
 
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

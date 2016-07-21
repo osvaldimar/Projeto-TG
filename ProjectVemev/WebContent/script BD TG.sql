@@ -6,28 +6,28 @@ CREATE TABLE visitante (
     id_visit INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     nome VARCHAR(40),
     apelido VARCHAR(15),
-    telefone VARCHAR(15),
+    telefone VARCHAR(16),
     celular VARCHAR(16),
     data_nascimento DATE,
-    RG Varchar(12),
+    RG Varchar(15),
     email VARCHAR(40),
     sexo CHAR,
     estado_civil VARCHAR(15),
-    endereco VARCHAR(40),
-    bairro VARCHAR(25),
+    endereco VARCHAR(100),
+    bairro VARCHAR(40),
     cep VARCHAR(9),
     estado VARCHAR(2),
     cidade VARCHAR(50),
-    complemento VARCHAR(30),
+    complemento VARCHAR(50),
     descricao_reuniao VARCHAR(100),
     pertence_igreja VARCHAR(3),
-    qual_igreja VARCHAR(30),
+    qual_igreja VARCHAR(100),
     pertence_celula VARCHAR(3),
     conhecer_celula VARCHAR(3),
     conhecer_jesus VARCHAR(3),
     deseja_oracao VARCHAR(3),
     motivo_oracao VARCHAR(100),
-    precisa_ajuda VARCHAR(3),
+    precisa_ajuda VARCHAR(100),
     data_reuniao DATE,
     celula_culto VARCHAR(6)
 );
@@ -35,15 +35,15 @@ CREATE TABLE visitante (
 CREATE TABLE membro (
     id_membro INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     nome VARCHAR(40),
-    telefone VARCHAR(15),
-    celular VARCHAR(15),
-    endereco VARCHAR(40),
-    bairro VARCHAR(25),
+    telefone VARCHAR(16),
+    celular VARCHAR(16),
+    endereco VARCHAR(100),
+    bairro VARCHAR(40),
     cep VARCHAR(9),
     estado VARCHAR(2),
     cidade VARCHAR(50),
-    complemento VARCHAR(12),
-	RG Varchar(12)
+    complemento VARCHAR(50),
+	RG Varchar(15)
 );
 
 
@@ -131,6 +131,7 @@ CREATE TABLE reuniao (
 	id_reuniao INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     horario TIME NOT NULL,
     dia_reuniao VARCHAR(10) NOT NULL,
+    data_reuniao DATE,
     num_visitantes INT NOT NULL,
     num_membros INT NOT NULL,
     nome_celula VARCHAR(20) NOT NULL,
@@ -172,32 +173,32 @@ describe membro;
 
 use db_vemev;
 
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('João da Silva','11-4677-6545','11-99677-6545','Rua Teixeira, 564','São Paulo','82728-098','SP','Carapicuíba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Maria Joaquina','11-3000-6545','11-99000-6545','Rua Nogueira, 564','São Paulo','82728-098','SP','Carapicuíba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('José Souza','11-4555-6545','11-98555-6545','Rua Jones, 564','São Paulo','82728-098','SP','Carapicuíba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-4222-6545','11-99222-6545','Rua Costa, 564','São Paulo','82728-098','SP','Carapicuíba','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Amanda Croce','11-4111-7777','11-91111-7777','Rua Arthur, 123','Pirituba','02898-339','SP','São Paulo','nada');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Arnaldo Armada','11-3888-3333','11-98888-3333','Travessa Carlos Sampaio, 676','Chácara Klabin','06765-998','SP','São Paulo','prd23,ap67D');	
-insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-3555-0000','11-95555-0000','Rua Ypsulon, 564','São Paulo','82728-098','SP','Carapicuíba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Joï¿½o da Silva','11-4677-6545','11-99677-6545','Rua Teixeira, 564','Sï¿½o Paulo','82728-098','SP','Carapicuï¿½ba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Maria Joaquina','11-3000-6545','11-99000-6545','Rua Nogueira, 564','Sï¿½o Paulo','82728-098','SP','Carapicuï¿½ba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Josï¿½ Souza','11-4555-6545','11-98555-6545','Rua Jones, 564','Sï¿½o Paulo','82728-098','SP','Carapicuï¿½ba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-4222-6545','11-99222-6545','Rua Costa, 564','Sï¿½o Paulo','82728-098','SP','Carapicuï¿½ba','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Amanda Croce','11-4111-7777','11-91111-7777','Rua Arthur, 123','Pirituba','02898-339','SP','Sï¿½o Paulo','nada');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Arnaldo Armada','11-3888-3333','11-98888-3333','Travessa Carlos Sampaio, 676','Chï¿½cara Klabin','06765-998','SP','Sï¿½o Paulo','prd23,ap67D');	
+insert into membro(nome,telefone,celular,endereco,bairro,cep,estado,cidade,complemento) values('Carla Marquezi','11-3555-0000','11-95555-0000','Rua Ypsulon, 564','Sï¿½o Paulo','82728-098','SP','Carapicuï¿½ba','nada');	
 
 insert into rede values('Verde');
 insert into rede values('Vermelho');
 insert into rede values('Azul');
 insert into rede values('Amarelo');
 
-insert into setor(nome_setor, cor_rede) values('Genérico', 'Verde');
-insert into setor(nome_setor, cor_rede) values('Genérico', 'Vermelho');
-insert into setor(nome_setor, cor_rede) values('Genérico', 'Azul');
-insert into setor(nome_setor, cor_rede) values('Genérico', 'Amarelo');
+insert into setor(nome_setor, cor_rede) values('GenÃ©rico', 'Verde');
+insert into setor(nome_setor, cor_rede) values('GenÃ©rico', 'Vermelho');
+insert into setor(nome_setor, cor_rede) values('GenÃ©rico', 'Azul');
+insert into setor(nome_setor, cor_rede) values('GenÃ©rico', 'Amarelo');
 
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
-	values('Célula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'São Paulo', 'casa 1', '09:00', 'Segunda');
+	values('CÃ©lula Omega', 0, 1, 'Rua da celula de Omega', 'Centro', '04462-111', 'SP', 'SÃ£o Paulo', 'casa 1', '09:00', 'Segunda');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
-	values('Célula Apolo', 0, 2, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'São Paulo', '', '18:00', 'Terça');
+	values('CÃ©lula Apolo', 0, 2, 'Rua da celula de Apolo', 'Centro', '04462-111', 'SP', 'SÃ£o Paulo', '', '18:00', 'TerÃ§a');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
-	values('Célula Bravo', 0, 3, 'Rua da celula de Bravo', 'Centro', '04462-111', 'SP', 'São Paulo', '', '18:30', 'Quarta');
+	values('CÃ©lula Bravo', 0, 3, 'Rua da celula de Bravo', 'Centro', '04462-111', 'SP', 'SÃ£o Paulo', '', '18:30', 'Quarta');
 insert into celula(nome_celula, total, id_setor, endereco, bairro, cep, estado, cidade, complemento, horario, dia_reuniao) 
-	values('Célula Pegasus', 0, 4, 'Rua da celula de Pegasus', 'Pegasinho', '09862-100', 'SP', 'São Paulo', '', '14:00', 'Sábado');   
+	values('CÃ©lula Pegasus', 0, 4, 'Rua da celula de Pegasus', 'Pegasinho', '09862-100', 'SP', 'SÃ£o Paulo', '', '14:00', 'SÃ¡bado');   
  
 select * from membro;
 

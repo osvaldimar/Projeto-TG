@@ -27,17 +27,6 @@ button {
   background-color: transparent;
 }
 
-/* Container para navegador web*/
-@media screen and (min-width: 1000px){
-	.container {
-	  position: absolute;
-	  width: 24em;
-	  left: 50%;
-	  top: 50%;
-	  transform: translate(-50%,-50%);
-	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-	}
-}
 
 /* Profile Card */
 .profile {
@@ -174,7 +163,19 @@ input:valid + .label {
     top: 50%;
   }
 }
-	
+
+/* Container para navegador web*/
+@media screen and (min-width: 1000px){
+	.container {
+	  position: absolute;
+	  width: 24em;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%,-50%);
+	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+	}
+}
+
 /* Container para dispositivos moveis */
 @media screen and (max-width: 1000px){
 	.container {
@@ -184,88 +185,35 @@ input:valid + .label {
 	  top: 50%;
 	  transform: translate(-50%,-50%);
 	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+	  margin-top: 10%;
 	}
-	
-	.profile__footer {
-	  padding-top: 2em;
+	.profile__form {
+	  height: 80%;
 	}
-	
-.profile--open .profile__form {
-  visibility: visible;
-  height: auto;
-  opacity: 1;
-  transform: translateY(-12em);
-  padding-top: 24em;
-}
-.profile--open .profile__fields {
-  opacity: 1;
-  visibility: visible;
-}
-.profile--open .profile__avatar {
-  transform: translate(-50%, -1.5em);
-  border-radius: 50%;
-}
-.profile__form {
-  position: relative;
-  background: white;
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
-  padding: 3em;
-  border-radius: .25em;
-}	
-	/* Form */
-	.field {
-	  position: relative;
-	  margin-bottom: 4em;
-	}
-.label {
-  position: absolute;
-  height: 4rem;
-  line-height: 4rem;
-  bottom: 0;
-  color: #999;
-  transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.input {
-  width: 100%;
-  font-size: 1.8em;
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  height: 4rem;
-  line-height: 4rem;
-  border-bottom: 1px solid #eee;
-  color: #777;
-  transition: all .2s ease-in;
-}
-
-/* Using required and a faux pattern to see if input has text from http://stackoverflow.com/questions/16952526/detect-if-an-input-has-text-in-it-using-css */
-.input:focus + .label,
-input:valid + .label {
-  transform: translateY(-100%);
-  font-size: 1.5rem;
-  color: #ccc;
-}
-
-/* Button */
-.btn {
-  border: 0;
-  font-size: 1.50rem;
-  height: 4.5rem;
-  line-height: 4.5rem;
-  border-radius: .50rem;
-  letter-spacing: .4em;
-  padding: 0 3.0rem;
-}
-
-	
-}
-
-@media screen and (max-width: 1000px){
 	.profile__avatar {
-	  width: 200px;
-	  height: 200px;
+	  top:-15%;
+	  position: absolute;
+	  z-index: 1;
+	  left: 50%;
+	  transform: translateX(-50%);
+	  border-radius: 1.25em;
+	  overflow: hidden;
+	  width: 150px;
+	  height: 150px;
+	  display: block;
+	  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	  will-change: transform;
+	}
+}
+
+@media screen and (max-width: 540px){
+	.container {
+	  position: absolute;
+	  width: 98%;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%,-50%);
+	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 	}
 }
 

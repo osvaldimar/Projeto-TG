@@ -71,7 +71,7 @@ public class MembroDAO extends GenericDAO {
 	 * @return
 	 */
 	public ArrayList<Membro> getListaMembrosDaCelula(String nomeCelula){
-		String clausulaSql = "select t1.id_membro, t1.nome, t1.telefone, t1.celular, t1.endereco, t1.bairro, t1.cep, t1.cidade, t1.estado, t1.complemento, t1.RG"
+		String clausulaSql = "select t1.id_membro, t1.nome, t1.telefone, t1.celular, t1.endereco, t1.bairro, t1.cep, t1.email, t1.cidade, t1.estado, t1.complemento, t1.RG"
 				+ " from membro as t1"
 				+ " join participa_celula as t2 on t1.id_membro = t2.id_membro"
 				+ " where t2.nome_celula = '" + nomeCelula + "' and t2.frequenta = 'Sim';";

@@ -37,7 +37,7 @@
 		 }
 		}
 		@media screen and (max-width:860px) {
-		 #myTable tr > *:nth-child(3){
+		 #myTable tr > *:nth-child(2), tr > *:nth-child(4){
 		    display: none;
 		 }
 		 #divGridOcultar {
@@ -89,7 +89,8 @@
 	      	<tr>
 	      		<th width="250px">Célula</th>
 	      		<th width="150px">Dia</th>
-		    	<th width="100px">Horário</th>  
+		    	<th width="100px">Data</th>  
+		    	<th width="100px">Horário</th>
 		    	<th width="100px">Membros</th>
 		    	<th width="100px">Visitantes</th>
 		    	<th width="100px">Ações</th>		    	
@@ -100,6 +101,11 @@
 	    	<tr>
 	    		<td width="250px">${lista.nome_celula}</td>
 	    		<td width="150px">${lista.dia_reuniao}<br><div id="divGridOcultar">${lista.horario}</div></td>
+	    		<td width="100px">
+	    			${lista.data_reuniao}
+	    			<div id="divGridOcultar">${lista.dia_reuniao}</div>
+	    			<div id="divGridOcultar">${lista.horario}</div>
+	    		</td>
 	    		<td width="100px">${lista.horario}</td>
 	    		<td width="100px">${lista.num_membros}</td>
 	    		<td width="100px">${lista.num_visitantes}</td>
@@ -292,5 +298,6 @@
       
     });
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

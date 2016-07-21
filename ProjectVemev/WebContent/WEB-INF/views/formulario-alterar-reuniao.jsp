@@ -38,6 +38,8 @@
      <div class="form-group col-md-4">
        <label for="horario">Horário</label>
        <input type="time" value="${reuniao.horario}" class="form-control" id="horario" name ="horario" required="true">
+       <label for="data_reuniao">Data</label>
+       <input type="date" value="${reuniao.data_reuniao}" class="form-control" id="data_reuniao" name ="data_reuniao" required="true">
        <label for="num_membros">Número de Membros</label>
        <input type="text" value="${reuniao.num_membros}" class="form-control" id="num_membros" name ="num_membros" required="true">
      </div>     

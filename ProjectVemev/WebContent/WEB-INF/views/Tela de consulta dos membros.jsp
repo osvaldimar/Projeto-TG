@@ -54,9 +54,11 @@
 		 }
 		 .container-fluid{margin-right:-1%;margin-left:-1%;padding-left:0%;padding-right:0%}
 		}
+
 	</style>
 </head>
 <body> 
+
  <!-- Fixed navbar -->
  <div class="navbar navbar-default" role="navigation">
       <div class="container">
@@ -287,5 +289,6 @@
       
     });
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

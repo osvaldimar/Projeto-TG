@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cadastro dos Visitantes</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <script src="/js/mascaras-validacoes.js"></script>
@@ -81,7 +82,7 @@
 									<option>RO</option>
 									<option>RR</option>
 									<option>SC</option>
-									<option>SP</option>
+									<option selected="selected">SP</option>
 									<option>SE</option>
 									<option>TO</option>
 								</select>
@@ -92,6 +93,7 @@
 									class="form-control" id="txt_apelido" name="apelido"> <label
 									for="slc_sexo">Sexo</label> <select class="form-control"
 									name="sexo" required="true">
+									<option value=""></option>
 									<option value = "F">F</option>
 									<option value = "M">M</option>
 								</select> <label for="txt_celular">Celular</label> <input type="text"
@@ -206,5 +208,6 @@
 			<script src="js/bootstrap.min.js"></script>
 			<script src="/js/submenus-bootstrap.js"></script>
 		</h6>
+		<div class="loader" id="loader"></div>
 </body>
 </html>

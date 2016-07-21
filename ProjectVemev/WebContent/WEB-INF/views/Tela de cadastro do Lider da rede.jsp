@@ -208,7 +208,8 @@
 			success: function(respostaServer){
 				if(respostaServer == "ok"){
 					alert("Cadastro de líderes da Rede Ok!");
-					window.location.reload();		//cadastro ok e reload na pagina de cadastro
+					//window.location.reload();		//cadastro ok e reload na pagina de cadastro
+					window.location.href = "/vemev/lider/consultaLideres?tipoLider=Rede";		//redirect para consulta lideres
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
 				}				
@@ -284,5 +285,6 @@
       
     });
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

@@ -13,7 +13,8 @@ public class SetorDAO extends GenericDAO {
 	 * @param setor
 	 */
 	public void create(Setor setor){
-		super.create(setor);
+		int id = super.create(setor);
+		setor.setId_setor(id);
 	}
 	
 	/**

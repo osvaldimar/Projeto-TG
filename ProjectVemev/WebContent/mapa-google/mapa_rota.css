@@ -8,12 +8,12 @@ h1 { text-align: center; font-size: 18px }
 input { width: 500px; padding: 5px }
 input[type=submit] { padding: 5px 10px; width: auto }
 form { margin-bottom: 20px }
-#mapa { width: 800px; height: 600px; }
+#mapa { width: 740px; height: 600px; }
 #trajeto-texto { width: 300px; height: 400px; float: right; overflow: scroll }
 /* Container para dispositivos moveis */
-@media screen and (max-width: 800px){
-	#mapa { width: 500px; height: 350px; }
+@media screen and (max-width: 740px){
+	#mapa { width: 100%; height: 400px; }
 }
 @media screen and (max-width: 400px){
-	#mapa { width: 280px; height: 230px; }
+	#mapa { height: 230px; }
 }

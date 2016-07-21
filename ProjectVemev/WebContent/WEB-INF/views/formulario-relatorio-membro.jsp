@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="br.com.vemev.dao.*, br.com.vemev.modelo.*" %>
 <style type="text/css">
 	hr {
     display: block;
@@ -51,6 +52,7 @@
 		<b>Nome:</b> ${membro.nome}<br>
 		<b>Celular:</b> ${membro.celular}<br>
 		<b>Telefone:</b> ${membro.telefone}<br>
+		<b>Email:</b> ${membro.email}<br>
 		<b>Endereço:</b> ${membro.endereco}<br>
 		<b>Complemento:</b> ${membro.complemento}<br>
 		<b>Cep:</b> ${membro.cep}<br>
@@ -85,7 +87,10 @@
 		</c:forEach>
 		<c:forEach var="lista" items="${listaLiderancaSetores}">
 			<c:if test="${lista.status_lider eq 'Ativo'}">
-				<b>É líder do Setor:</b> ${lista.id_setor}<br>
+				<jsp:useBean id="lider" class="br.com.vemev.modelo.LiderSetor" scope="page"></jsp:useBean>
+				<jsp:setProperty property="id_setor" name="lider" value="${lista.id_setor}"/>
+				<%	Setor setor = new SetorDAO().read( ((br.com.vemev.modelo.LiderSetor)pageContext.getAttribute("lider")).getId_setor() ); %>
+				<b>É líder do Setor:</b> <%=setor.getNome_setor()%> - <%=setor.getCor_rede()%><br>
 				<% temAtribuicao = true; %>
 			</c:if>
 		</c:forEach>
@@ -96,7 +101,7 @@
 			</c:if>
 		</c:forEach>	
 		<%if(temAtribuicao == false){ %>
-			Membro ainda não possui atribuições!
+			Sem atribuições no momento!
 		<%} %>
 	</div>
 	<br>
@@ -231,7 +236,12 @@
 		      	<c:forEach var="lista" items="${listaLiderancaSetores}">
 		      		<c:if test="${lista.status_lider eq 'Inativo'}">
 				    	<tr>
-				    		<td width="120px">${lista.id_setor}</td>
+				    		<td width="120px">
+				    			<jsp:useBean id="liderAnterior" class="br.com.vemev.modelo.LiderSetor" scope="page"></jsp:useBean>
+								<jsp:setProperty property="id_setor" name="liderAnterior" value="${lista.id_setor}"/>
+								<%	Setor setorAnt = new SetorDAO().read( ((br.com.vemev.modelo.LiderSetor)pageContext.getAttribute("liderAnterior")).getId_setor() ); %>
+								<%=setorAnt.getNome_setor()%> - <%=setorAnt.getCor_rede()%>
+				    		</td>
 				    		<td width="120px">${lista.data_ini}</td>
 				    		<td width="120px">${lista.data_fim}</td>
 				    	</tr>

@@ -9,6 +9,7 @@
          <meta name="viewport" content="width=device-width, initial-scale=1">
          <title>Cadastro dos Membros</title>
         
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
          <link href="css/bootstrap.min.css" rel="stylesheet">
          <link href="css/style.css" rel="stylesheet">
          
@@ -39,29 +40,25 @@
           <div class="row">
           <div class="col-md-12">
           
-          <div class="row">
-          <div class="col-md-12">
-          
-              </div>
-              </div>
-        
              <div class="form-group col-md-4">
                 <label for="nome">Nome</label>
                <input type="text" class="form-control" id="nome" name="nome" required="true">
                 <label for="telefone">Telefone</label>
                <input type="text" class="form-control" id="telefone" name="telefone" onkeypress="formataTelefone(this, event)">  
-                 <label for="endereco">Endereço</label>
+               <label for="celular">Celular</label>
+               <input type="text" class="form-control" id="celular" name="celular" onkeypress="formataCelular(this, event)" name="celular">
+                 <label for="nome">RG</label>
+               <input type="text" class="form-control" id="RG" name="RG" required="true">
+               <label for="email">Email</label>
+               <input type="text" class="form-control" id="email" name="email" required="true">
+               <label for="endereco">Endereço</label>
                <input type="text" class="form-control" id="endereco" name="endereco" required="true">
+             </div>
+              <div class="form-group col-md-4">
                <label for="cep">CEP</label>
                <input type="text" class="form-control" id="cep" name="cep" required="true" onkeypress="formataCEP(this, event)">
                <label for="cidade">Cidade</label>
                <input type="text" class="form-control" id="cidade" name="cidade" required="true">
-             </div>
-              <div class="form-group col-md-4">
-                 <label for="nome">RG</label>
-               <input type="text" class="form-control" id="RG" name="RG" required="true">
-               <label for="celular">Celular</label>
-               <input type="text" class="form-control" id="celular" name="celular" onkeypress="formataCelular(this, event)" name="celular">
                 <label for="complemento">Complemento</label>
                <input type="text" class="form-control" id="complemento" name="complemento">
                          <label for="bairro">Bairro</label>
@@ -93,7 +90,7 @@
       <option>RO</option>	 
       <option>RR</option>	 
       <option>SC</option>	 
-      <option>SP</option>	 
+      <option selected="selected">SP</option>	 
       <option>SE</option>	 
       <option>TO</option>
             </select>
@@ -122,5 +119,6 @@
               <script src="js/bootstrap.min.js"></script>
               <script src="/js/submenus-bootstrap.js"></script>
       </h6>
+      <div class="loader" id="loader"></div>
       </body>
       </html>

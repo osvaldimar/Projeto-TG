@@ -9,13 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Navbar tutorial from BootstrapBay.com">
 <meta name="author" content="BootstrapBay.com">
-<title>Home</title>
+<title>Exibir rotas</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/mapa-google/mapa_rota.css" rel="stylesheet">
 
 <style type="text/css">
 	.divRede-Lider{
-		width: 400px; 
+		width: 740px; 
 		height: auto; 
 		color: black; 
 		padding: 1%; 
@@ -29,10 +31,10 @@
 		-moz-border-radius:10px;
 		-webkit-border-radius:10px;
  		border-radius:10px;
- 		background-color: #fff;
+ 		background-color: #cccfff;
 	}
-	@media screen and (max-width: 500px){
-		.divRede-Lider { width: 300px;}
+	@media screen and (max-width: 740px){
+		.divRede-Lider { width: 100%;}
 	}
 </style>
 </head>
@@ -62,10 +64,11 @@
 		
 		<form method="post" action="index.html">
 		   <fieldset>
-		      <legend>Exibir rotas</legend> 		            
+		   		<span class="label label-default"></span>		   
+		      <legend style="color:blue;"><span class="glyphicon glyphicon-map-marker" style="font-size:1em;" aria-hidden="true"></span> Exibir rotas</legend> 		            
 		      <div class="divRede-Lider">
-				<b>Endereço do visitante (partida):</b> ${partida}<br>
-		      	<b>Endereço da célula (chegada):</b> ${chegada}<br>
+				<b>Endereço do visitante (partida):</b><br> ${param.partida}<br>
+		      	<b>Endereço da célula (chegada):</b><br> ${param.chegada}<br>
 				<b>Distância km:</b> ${km}
 				<hr>
 				<b>Nome célula:</b> ${celula.nome_celula}<br>
@@ -86,8 +89,11 @@
 		   </fieldset>
 		</form>				  
 		<div id="mapa"></div>
-        <br><br><br>
-        
+        <br>
+        <div style="float: left;">
+			<button type="button" onclick="window.history.go(-1);" class="btn btn-primary">Voltar</button>
+		</div>
+		<br><br><br>
 	</div>
 	
 	<!-- Bootstrap core JavaScript
@@ -123,5 +129,6 @@
 			});
 		};
 	</script>
+	<div class="loader1" id="loader"></div>
 </body>
 </html>

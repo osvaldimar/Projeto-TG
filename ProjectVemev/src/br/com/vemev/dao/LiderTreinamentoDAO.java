@@ -74,7 +74,8 @@ public class LiderTreinamentoDAO extends GenericDAO {
 	 * @return
 	 */
 	public ArrayList<HashMap<String,HashMap<String,String>>> getListaDadosLideresTreinamento(){
-		String sqlAvancado = "select * from lider_treinamento as t1 join membro as t2 on t1.id_membro = t2.id_membro order by t1.status_lider, t2.nome;";
+		String sqlAvancado = "select * from lider_treinamento as t1 join membro as t2 on t1.id_membro = t2.id_membro "
+				+ "join celula as t3 on t3.nome_celula = t1.nome_celula order by t1.status_lider, t2.nome;";
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;
 	}

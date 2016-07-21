@@ -19,6 +19,10 @@ public class Reuniao {
 	@TipoDado(tipo = "String")	
 	private String dia_reuniao;	
 	
+	@ColunaBD(nome = "data_reuniao")
+	@TipoDado(tipo = "String")	
+	private String data_reuniao;	
+	
 	@ColunaBD(nome = "num_visitantes")
 	@TipoDado(tipo = "Integer")	
 	private Integer num_visitantes;
@@ -79,5 +83,13 @@ public class Reuniao {
 		this.nome_celula = nome_celula;
 	}
 
+	public String getData_reuniao() {
+		return data_reuniao;
+	}
+
+	public void setData_reuniao(String data_reuniao) {
+		this.data_reuniao = data_reuniao;
+	}
+	
 }
 

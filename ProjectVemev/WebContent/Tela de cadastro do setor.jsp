@@ -9,6 +9,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <title>Cadastro dos Setores</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
  <link href="css/style.css" rel="stylesheet">
 </head>
@@ -77,5 +78,6 @@
       <script src="js/bootstrap.min.js"></script>
       <script src="/js/submenus-bootstrap.js"></script>
     </h6>
+    <div class="loader" id="loader"></div>
   </body>
 </html>

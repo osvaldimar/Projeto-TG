@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -73,6 +72,8 @@
      <div class="form-group col-md-4">
        <label for="horario">Horário</label>
        <input type="time" class="form-control" id="horario" name ="horario" required="true">
+       <label for="data_reuniao">Data</label>
+       <input type="date" class="form-control" id="data_reuniao" name ="data_reuniao" required="true">
        <label for="num_membros">Número de Membros</label>
        <input type="text" class="form-control" id="num_membros" name ="num_membros" required="true">
        
@@ -99,8 +100,7 @@
     ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-     
-      <script src="bootstrap.min.js"></script>
     </h6>
+    <div class="loader" id="loader"></div>
   </body>
 </html>

@@ -60,7 +60,7 @@ public class LiderCelulaDAO extends GenericDAO {
 	}
 	
 	/**
-	 * Retorna uma lista simples dos lideres ativo em uma rede especifica informada no parametro
+	 * Retorna uma lista simples dos lideres ativo em uma celula especifica informada no parametro
 	 * @return
 	 */
 	public ArrayList<LiderCelula> getListaLideresAtivo(String nome_celula){
@@ -75,7 +75,8 @@ public class LiderCelulaDAO extends GenericDAO {
 	 * @return
 	 */
 	public ArrayList<HashMap<String,HashMap<String,String>>> getListaDadosLideresCelulas(){
-		String sqlAvancado = "select * from lider_celula as t1 join membro as t2 on t1.id_membro = t2.id_membro order by t1.status_lider, t2.nome;";
+		String sqlAvancado = "select * from lider_celula as t1 join membro as t2 on t1.id_membro = t2.id_membro "
+				+ "join celula as t3 on t3.nome_celula = t1.nome_celula order by t1.status_lider, t2.nome;";
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;
 	}

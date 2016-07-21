@@ -30,10 +30,10 @@ public class SetorControlador {
 	@RequestMapping(value={"/setor/createSetor"}, method=RequestMethod.POST)
 	public String cadastrarMembro(Setor setor){
 				
-		//regras de negocio - salva membro no banco		
+		//regras de negocio - salva setor no banco		
 		dao.create(setor);
 		
-		return "redirect:/membro?id_membro=" + setor.getId_setor();	//redireciona pagina da membro cadastrada
+		return "redirect:/vemev/setor/consultaSetor?id_setor="+setor.getId_setor();	//redireciona pagina consulta setor
 	}
 	
 	@RequestMapping(value={"/setor/updateSetor"}, method=RequestMethod.GET)

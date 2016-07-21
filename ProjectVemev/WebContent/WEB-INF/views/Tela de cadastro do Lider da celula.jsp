@@ -85,7 +85,7 @@
 
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
+         <input type="text" class="form-control" id="pesquisar" value="" style ="width: 200px"><br>
 </div>
 
 <!-- Start tableless -->
@@ -209,7 +209,8 @@
 			success: function(respostaServer){
 				if(respostaServer == "ok"){
 					alert("Cadastro de líderes da Célula Ok!");
-					window.location.reload();		//cadastro ok e reload na pagina de cadastro
+					//window.location.reload();		//cadastro ok e reload na pagina de cadastro
+					window.location.href = "/vemev/lider/consultaLideres?tipoLider=Celula";		//redirect para consulta lideres
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
 				}				
@@ -244,8 +245,8 @@
           	return false; //ignorar enter da caixa pesquisar
         }
       });
-    
-      $('#pesquisar').keyup(function(e){
+
+      $('#pesquisar').keyup(function(e){          
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
         $('#divTableless table > tbody > tr').each(function(){
@@ -262,7 +263,7 @@
           }
           else $(this).closest('tr').show();
           encontrou = false;
-        });
+        });        
       });
       
       $("#divTableless table") 
@@ -285,5 +286,6 @@
       
     });
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

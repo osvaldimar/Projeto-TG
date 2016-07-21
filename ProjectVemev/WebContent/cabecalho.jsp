@@ -1,4 +1,15 @@
 <!-- cabecalho default para todas as paginas -->
+<style type="text/css">
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('/image/loading_ios.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+</style>
 
 <%@page import="br.com.vemev.modelo.MembroUserWeb"%>
 <% 	
@@ -8,12 +19,17 @@
 %>
 	<ul class="nav navbar-nav navbar-right">
 	<li class="active">
-		<a href="/home.jsp">Home 'Lider'</a>
+		<a href="/home.jsp"><span class="glyphicon glyphicon-home"></span> Visão Lider</a>
 	</li>
 	<li class="dropdown">
 		&nbsp;
 	</li>
-		
+	<li class="dropdown">
+		<a href="/vemev/agenda/visitantes?nomeCelula=Todas&status=Não contatado">
+			Agenda
+		</a>
+	</li>
+	
 	<li class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Membro<b class="caret"></b></a>
 		<ul class="dropdown-menu">
@@ -81,7 +97,7 @@
 			<li class="dropdown-submenu" id="btn-liderSetor">
 				<a tabindex="-1" href="#"> < Lider de Setor </a>
 				<ul class="dropdown-menu" id="menu-liderSetor"
-					style="right: 192px; top: 99px;">
+					style="right: 192px; top: 72px;">
 					<li><a tabindex="-1" href="/vemev/lider/CadastrarLiderSetor">Cadastrar</a></li>
 					<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Consultar</a></li>
 					<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Setor">Alterar</a></li>
@@ -90,7 +106,7 @@
 			<li class="dropdown-submenu" id="btn-liderRede">
 				<a tabindex="-1" href="#"> < Lider de Rede </a>
 				<ul class="dropdown-menu" id="menu-liderRede"
-					style="right: 192px; top: 72px;">
+					style="right: 192px; top: 99px;">
 						<li><a tabindex="-1" href="/vemev/cadastro/liderRede">Cadastrar</a></li>
 						<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Consultar</a></li>
 						<li><a tabindex="-1" href="/vemev/lider/consultaLideres?tipoLider=Rede">Alterar</a></li>
@@ -119,7 +135,7 @@
 		
 		<li class="dropdown">
 			<a style="text-decoration:underline;" href="/vemev/logout">
-				Sair
+				<span class="glyphicon glyphicon-log-out"></span> Sair
 			</a>
 		</li>
 	</ul>
@@ -131,10 +147,15 @@
 %>		
 	<ul class="nav navbar-nav navbar-right">
 		<li class="active">
-			<a href="/home.jsp">Home 'Membro'</a>
+			<a href="/home.jsp"><span class="glyphicon glyphicon-home"></span> Visão Membro</a>
 		</li>
 		<li class="dropdown">
 			&nbsp;
+		</li>
+		<li class="dropdown">
+			<a href="/vemev/agenda/visitantes?nomeCelula=Todas&status=Não contatado">
+				Agenda
+			</a>
 		</li>
 		
 		<li class="dropdown">
@@ -167,7 +188,7 @@
 		
 		<li class="dropdown">
 			<a style="text-decoration:underline;" href="/vemev/logout">
-				Sair
+				<span class="glyphicon glyphicon-log-out"></span> Sair
 			</a>
 		</li>
 	</ul>
@@ -175,3 +196,22 @@
 	}
 %>
 
+<script type="text/javascript">
+	window.onload = function(e){	
+		//oculta loading da pagina
+		$(".loader").fadeOut("slow");
+	}
+	var sub = false;
+	$(document).ready(function() {
+		$('form').submit(function(e) {
+			//alert("trying...");
+			if(sub == true){
+		   		alert("Por favor aguarde até o fim da solicitação!");
+				e.preventDefault();
+			}
+		   sub = true;
+		   $(".loader").show();
+		}); 
+	})
+	
+</script>

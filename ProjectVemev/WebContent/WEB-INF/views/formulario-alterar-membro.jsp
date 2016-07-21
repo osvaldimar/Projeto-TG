@@ -21,6 +21,8 @@
                <input type="text" value="${membro.nome}" class="form-control" id="nome" name="nome" required="true">
                 <label for="telefone">Telefone</label>
                <input type="text" value="${membro.telefone}" class="form-control" id="telefone" name="telefone" onkeypress="formataTelefone(this, event)">  
+               <label for="email">Email</label>
+               <input type="text" value="${membro.email}" class="form-control" id="email" name="email" required="true">  
                  <label for="endereco">Endereço</label>
                <input type="text" value="${membro.endereco}" class="form-control" id="endereco" name="endereco" required="true">
                <label for="cep">CEP</label>

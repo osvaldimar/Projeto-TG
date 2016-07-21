@@ -12,7 +12,8 @@ public class VisitanteDAO extends GenericDAO {
 	 * @param visitante
 	 */
 	public void create(Visitante visitante){
-		super.create(visitante);
+		int idGerado = super.create(visitante);
+		visitante.setId_visit(idGerado);
 	}
 	
 	/**

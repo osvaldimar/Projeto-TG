@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Rede</title>
+	<title>Gerenciar Líderes</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -16,15 +16,18 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
-	
 	<!-- Magnific Popup core JS CSS file -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
 	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>
+	
+	<!-- Tableless JS CSS file -->
+	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>	
+	
+	<!-- funcoes geral vemev -->
+	<script src="/js/funcoes-vemev.js"></script>
 	
 	<!-- configuracao do layout da grid -->
 	<style type="text/css">
@@ -85,9 +88,16 @@
 	<h4>${param.tituloTipoLider}</h4>
 	<br><br>
 	
+<% 
+	String pesquisaAuto = "";	//parametro url 'pesquisar' para fazer pesquisa automatica
+	if(request.getParameter("pesquisar") != null && !request.getParameter("pesquisar").isEmpty()){
+		pesquisaAuto = new String(request.getParameter("pesquisar").getBytes("iso-8859-1"),"utf-8");
+	}
+%>	
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
+         <input type="text" class="form-control" id="pesquisar" 
+         		value="" style ="width: 200px"><br>
 </div>
 
 <!-- Start tableless -->
@@ -96,10 +106,10 @@
 			<thead>
     			<tr>
         			<th width="300px">Nome Líder</th>
-        			<th width="200px">Celular</th>
+        			<th width="150px">Celular</th>
         			<th width="100px;">Data inicio</th>
         			<th width="100px">Data fim</th>
-        			<th width="100px">Tipo líder</th>
+        			<th width="200px">Líder</th>
         			<th width="100px">Status</th>
         			<th width="100px">Ação</th>
     			</tr>
@@ -107,11 +117,16 @@
 			<tbody>
 				<c:forEach items="${listaLideresCel}" var="lista">
 	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="300px">
+	        				<a href="#" title="Exibir relatório" onclick="mostrarRelatorioMembroPopup('${lista.membro.id_membro}');">${lista.membro.nome}</a>
+	        			</td>
+	        			<td width="150px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_celula").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_celula").get("data_fim")}</td>
-	        			<td width="100px">Célula<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_celula").get("status_lider")}</div></td>
+	        			<td width="200px">
+	        				<b>Tipo: </b>Líder de Célula<br>
+	        				<b>Nome: </b>${lista.celula.nome_celula}<br>
+	        				<div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_celula").get("status_lider")}</div></td>
 	        			<td width="100px">${lista.get("lider_celula").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_celula').get('status_lider') eq 'Ativo'}">
@@ -125,11 +140,17 @@
         		</c:forEach>
         		<c:forEach items="${listaLideresTrein}" var="lista">
 	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="300px">
+	        				<a href="#" title="Exibir relatório" onclick="mostrarRelatorioMembroPopup('${lista.membro.id_membro}');">${lista.membro.nome}</a>
+	        			</td>
+	        			<td width="150px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("data_fim")}</td>
-	        			<td width="100px">Treinamento<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_treinamento").get("status_lider")}</div></td>
+	        			<td width="200px">
+	        				<b>Tipo: </b>Líder em Treinamento<br>
+	        				<b>Nome: </b>${lista.celula.nome_celula}<br>
+	        				<div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_treinamento").get("status_lider")}</div>
+	        			</td>
 	        			<td width="100px">${lista.get("lider_treinamento").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_treinamento').get('status_lider') eq 'Ativo'}">
@@ -143,11 +164,17 @@
         		</c:forEach>
         		<c:forEach items="${listaLideresSetor}" var="lista">
 	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="300px">
+	        				<a href="#" title="Exibir relatório" onclick="mostrarRelatorioMembroPopup('${lista.membro.id_membro}');">${lista.membro.nome}</a>
+	        			</td>
+	        			<td width="150px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_setor").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_setor").get("data_fim")}</td>
-	        			<td width="100px">Setor<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_setor").get("status_lider")}</div></td>
+	        			<td width="200px">
+	        				<b>Tipo: </b>Líder de Setor<br>
+	        				<b>Setor: </b>${lista.setor.nome_setor}<br>
+	        				<div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_setor").get("status_lider")}</div>
+	        			</td>
 	        			<td width="100px">${lista.get("lider_setor").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_setor').get('status_lider') eq 'Ativo'}">
@@ -161,11 +188,17 @@
         		</c:forEach>
         		<c:forEach items="${listaLideresRede}" var="lista">
 	    			<tr>
-	        			<td width="300px">${lista.get("membro").get("nome")}</td>
-	        			<td width="200px">${lista.get("membro").get("celular")}</td>
+	        			<td width="300px">
+	        				<a href="#" title="Exibir relatório" onclick="mostrarRelatorioMembroPopup('${lista.membro.id_membro}');">${lista.membro.nome}</a>
+	        			</td>
+	        			<td width="150px">${lista.get("membro").get("celular")}</td>
 	        			<td width="100px">${lista.get("lider_rede").get("data_ini")}</td>
 	        			<td width="100px">${lista.get("lider_rede").get("data_fim")}</td>
-	        			<td width="100px">Rede<br><div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_rede").get("status_lider")}</div></td>
+	        			<td width="200px">
+	        				<b>Tipo: </b>Líder de Rede<br>
+	        				<b>Rede: </b>${lista.lider_rede.cor_rede}<br>
+	        				<div id="divGridOcultar"><b>Status:</b> ${lista.get("lider_rede").get("status_lider")}</div>
+	        			</td>
 	        			<td width="100px">${lista.get("lider_rede").get("status_lider")}</td>
 	        			<td width="100px">
 			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
@@ -242,7 +275,7 @@
       <!-- Bootstrap core JavaScript
     ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
-     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+     
       <script src="/js/submenus-bootstrap.js"></script>
     </h6>
     
@@ -304,7 +337,32 @@
           	return false; //ignorar enter da caixa pesquisar
         }
       });
-    
+
+      //momento que a tela carrega verifica pesquisa na url e faz a busca automatico
+      window.onload = function() {
+    	var elemento = $('#pesquisar');    
+      	var encontrou = false;
+        var termo = elemento.val().toLowerCase();
+        $('#divTableless table > tbody > tr').each(function(){
+            $(this).find('td').each(function(){
+              if($(this).text().toLowerCase().indexOf(termo) > -1) encontrou = true;
+            });
+            if(!encontrou){
+                //antes de ocultar, verificar se checkbox is checked para continuar visualizacao dos selecionados
+          	  if($(this).find('td > :checkbox').is(':checked')){ 
+              	  //ignore - nao oculta selecionados
+          	  }else{ 
+              	  $(this).closest('tr').hide();
+          	  }              
+            }else{ 
+                $(this).closest('tr').show();
+        	}
+            encontrou = false;
+        });
+        //hide loading
+        $(".loader").fadeOut("slow");
+      }
+      
       $('#pesquisar').keyup(function(e){
         var encontrou = false;
         var termo = $(this).val().toLowerCase();
@@ -325,8 +383,7 @@
         });
       });
       
-      $("#divTableless table") 
-        .tablesorter({
+      $("#divTableless table").tablesorter({
           dateFormat: 'uk',
           headers: {
             0: {
@@ -345,5 +402,6 @@
       
     });
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>

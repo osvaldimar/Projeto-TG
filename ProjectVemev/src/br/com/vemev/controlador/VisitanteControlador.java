@@ -1,22 +1,33 @@
 package br.com.vemev.controlador;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.vemev.dao.ContataVisitanteDAO;
+import br.com.vemev.dao.GenericDAO;
 import br.com.vemev.dao.VisitanteDAO;
-import br.com.vemev.modelo.Membro;
+import br.com.vemev.modelo.ContataVisitante;
 import br.com.vemev.modelo.Visitante;
 
 @Controller
 public class VisitanteControlador {
-
-	private VisitanteDAO dao = new VisitanteDAO();	//data access object - classe de acesso ao banco de dados
 	
+	static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(VisitanteControlador.class);
+	
+	@Autowired
+	HttpServletRequest request;
+	
+	private VisitanteDAO dao = new VisitanteDAO();	//data access object - classe de acesso ao banco de dados
 	
 	@RequestMapping(value={"/visitante/ajaxRelatorioDadosVisitante"}, method = RequestMethod.GET)
 	public String ajaxRelatorioDadosVisitante(@RequestParam(required=true, value="id_visit") int id, Model model){
@@ -31,8 +42,17 @@ public class VisitanteControlador {
 	@RequestMapping(value={"/visitante/createVisitante"}, method=RequestMethod.POST)
 	public String cadastrarVisitante(Visitante visitante){
 				
-		//regras de negocio - salva visitante no banco		
+		//regras de negocio - salva visitante no banco	
+		log.info("PROCESSO SALVA NOVO VISITANTE NO BD!");
 		dao.create(visitante);
+		
+		try{
+			//inicia processo de geocalizacao e envio de email em uma thread background
+			GoogleMapsControlador.iniciarProcessoDeGeocalizacaoEEmail(visitante);
+		}catch(Exception e){
+			log.error("\n***WARNINGS OR ERROR - metodo geocalizacao ou envio de emails***\n"+e.getMessage()+"\n");
+			e.printStackTrace();
+		}
 		
 		return "redirect:/vemev/visitante/consultaVisitantes";			//redireciona pagina mostrar consulta dos visitantes
 	}
@@ -42,7 +62,7 @@ public class VisitanteControlador {
 				
 		//regras de negocio
 		ArrayList<Visitante> listaVisitantes = dao.getLista();			//recupera todas as visitantes no banco		
-		model.addAttribute("listaVisitantes", listaVisitantes);			//seta lista na view para jsp			
+		model.addAttribute("listaVisitantes", listaVisitantes);			//seta lista na view para jsp		
 		
 		return "Tela de consulta dos visitantes.jsp"; 					//retorna pagina listar todas as visitantes
 	}

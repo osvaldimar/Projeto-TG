@@ -361,5 +361,6 @@
 	  magnificPopup.close(); 
 	}
 </script>
+<div class="loader" id="loader"></div>
   </body>
 </html>
