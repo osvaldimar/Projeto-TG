@@ -5,13 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData; 
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-import org.springframework.aop.ThrowsAdvice;
 
 import br.com.vemev.dao.annotation.ColunaBD;
 import br.com.vemev.dao.annotation.TabelaBD;
@@ -19,34 +17,44 @@ import br.com.vemev.dao.annotation.TipoDado;
 
 public abstract class GenericDAO {
 	
+	static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(GenericDAO.class);
+	
 	public GenericDAO(){
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 		}catch (ClassNotFoundException e){
-			e.printStackTrace();
+			log.error(e);
+			//e.printStackTrace();
 		}
 	}
 	
 	protected Connection getConnection() throws SQLException{
 		
 		//usuario, senha, url bd
+		//*
 		String usuario = "root";
-		String senha = "admin";
+		String senha = "root";
 		String url = "jdbc:mysql://localhost/db_vemev";
+		//*
+		/*
+		String usuario = "adminFkDd3PE";
+		String senha = "iDjUJYMN_91k";
+		String url = "jdbc:mysql://127.3.164.130:3306/fatecvemevapp";
+		//*/
 		
-		Connection conexao = DriverManager.getConnection(url, usuario, senha);
-		
+		Connection conexao = DriverManager.getConnection(url, usuario, senha);		
 		return conexao;		//retorna conexao do banco de dados
 	}
 	
 	/**
 	 * Metodo salva o objeto no banco de dados, os atributos com valores sao convertidos para as colunas da tabela
 	 * @param object - Objeto deve conter as anotocoes na classe: TabelaBD, ColunaBD e TipoDado
-	 * @return
+	 * @return int - valor do id gerado no banco de dados se a tabela possuir coluna auto increment
 	 */
-	protected void create(Object object){
+	protected int create(Object object){
 		
+		int generatedIdKey = 0;	//id gerado pelo banco de dados pela operacao insert realizada.
 		String tabela = "";
 		TabelaBD tabelaBD = object.getClass().getAnnotation(TabelaBD.class);
 		if(tabelaBD != null && !tabelaBD.nome().equals("")){
@@ -55,7 +63,8 @@ public abstract class GenericDAO {
 			try {
 				throw new Exception();
 			} catch (Exception e) {
-				System.out.println("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -83,8 +92,10 @@ public abstract class GenericDAO {
 				}
 				
 			} catch (IllegalArgumentException e) {
+				log.error(e);
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
+				log.error(e);
 				e.printStackTrace();
 			}				
 		}
@@ -106,16 +117,16 @@ public abstract class GenericDAO {
 				}
 			}
 			sql += colunasInsert + ") values" + valuesInsert + ")";
-			System.out.println("PRINT SQL INSERT: " + sql);
+			log.info("PRINT SQL INSERT: " + sql);
 			
 			Connection conexao = null;
 			PreparedStatement stmt = null;
 			try {
 				conexao = this.getConnection();
-				stmt = conexao.prepareStatement(sql);
+				stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				
 				//valores
-				System.out.println("Dados insert: ");
+				log.info("Dados insert: ");
 				int cont = 1;
 				for(String coluna : mapStmtValores.keySet()){					
 					String tipoDado = (String) mapStmtValores.get(coluna).get("tipo");	
@@ -124,22 +135,23 @@ public abstract class GenericDAO {
 						String valor = (String) mapStmtValores.get(coluna).get("valor");
 						stmt.setString(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else if(tipoDado.equals("Integer")){
 						Integer valor = (Integer) mapStmtValores.get(coluna).get("valor");
 						stmt.setInt(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else if(tipoDado.equals("Long")){
 						Long valor = (Long) mapStmtValores.get(coluna).get("valor");
 						stmt.setLong(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else{
 						try {
 							throw new Exception();
 						} catch (Exception e) {
-							System.out.println("ERRO TIPO DE DADOS NAO DECLARADOS!!!");
+							log.error("ERRO TIPO DE DADOS NAO DECLARADOS!!!");
+							log.error(e);
 							e.printStackTrace();
 						}
 					}
@@ -147,13 +159,19 @@ public abstract class GenericDAO {
 				
 				//executa no banco de dados
 				stmt.execute();
-				System.out.println("O REGISTRO FOI CRIADO COM SUCESSO NO BANCO DE DADOS!!\n");
+				ResultSet resultSet = stmt.getGeneratedKeys();
+				if(resultSet != null && resultSet.next()){
+					generatedIdKey = resultSet.getInt(1);
+				}
+				
+				log.info("O REGISTRO FOI CRIADO COM SUCESSO NO BANCO DE DADOS, ID = " +generatedIdKey+ "!!\n");
 				
 				//finaliza conexao
 				stmt.close();
 				conexao.close();
 			} catch (SQLException e) {
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			} finally {
 				try{
@@ -164,13 +182,16 @@ public abstract class GenericDAO {
 						conexao.close();
 					}
 				}catch (Exception e){
-					System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+					log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+					log.error(e);
 					e.printStackTrace();
 				}
 			}
 		}else{
-			System.out.println("NENHUM REGISTRO FOI CRIADO NO BANCO DE DADOS, OBJETO NULL!!!");
+			log.warn("NENHUM REGISTRO FOI CRIADO NO BANCO DE DADOS, OBJETO NULL!!!");
 		}
+		
+		return generatedIdKey;
 	}
 
 	/**
@@ -187,6 +208,7 @@ public abstract class GenericDAO {
 		try {
 			obj = clazz.newInstance();
 		} catch (Exception e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 		TabelaBD tabelaBD = obj.getClass().getAnnotation(TabelaBD.class);
@@ -196,14 +218,15 @@ public abstract class GenericDAO {
 			try {
 				throw new Exception();
 			} catch (Exception e) {
-				System.out.println("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
 		
 		//SQL
 		String sql = "select * from " + tabela + " where " + clausulaWhere;
-		System.out.println("PRINT SQL SELECT: " + sql);
+		log.info("PRINT SQL SELECT: " + sql);
 		
 		Connection conexao = null;
 		PreparedStatement stmt = null;
@@ -213,7 +236,7 @@ public abstract class GenericDAO {
 			stmt = conexao.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			
-			System.out.println("Dados select "+tabela+": ");
+			log.info("Dados select "+tabela+": ");
 			if(rs.next()){
 				Object object = clazz.newInstance();	
 				for(Field atributo : object.getClass().getDeclaredFields()) {						
@@ -227,33 +250,38 @@ public abstract class GenericDAO {
 							if(tipoDado.tipo().equals("String")){
 								String valor = rs.getString(coluna.nome());
 								atributo.set(object, valor);	
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							
 							}else if(tipoDado.tipo().equals("Integer")){
 								Integer valor = rs.getInt(coluna.nome());
 								atributo.set(object, valor);	
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							
 							}else if(tipoDado.tipo().equals("Long")){
 								Long valor = rs.getLong(coluna.nome());
 								atributo.set(object, valor);
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							}
 						}
 					}
 				}
-				System.out.println("\n");
+				log.info("\n");
 				return object;
 			}
 		} catch (IllegalArgumentException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (InstantiationException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SQLException e) {
+			log.error(e);
 			e.printStackTrace();
 		} finally {
 			try{
@@ -264,7 +292,8 @@ public abstract class GenericDAO {
 					conexao.close();
 				}
 			}catch (Exception e){
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -289,7 +318,8 @@ public abstract class GenericDAO {
 			try {
 				throw new Exception();
 			} catch (Exception e) {
-				System.out.println("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}		
@@ -317,8 +347,10 @@ public abstract class GenericDAO {
 				}
 				
 			} catch (IllegalArgumentException e) {
+				log.error(e);
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
+				log.error(e);
 				e.printStackTrace();
 			}				
 		}
@@ -338,7 +370,7 @@ public abstract class GenericDAO {
 			}
 			//clausula Where
 			sql += colunasUpdate + " where " + clausulaWhere;
-			System.out.println("PRINT SQL UPDATE: " + sql);
+			log.info("PRINT SQL UPDATE: " + sql);
 			
 			Connection conexao = null;
 			PreparedStatement stmt = null;
@@ -347,7 +379,7 @@ public abstract class GenericDAO {
 				stmt = conexao.prepareStatement(sql);
 				
 				//valores
-				System.out.println("Dados update "+tabela+": ");
+				log.info("Dados update "+tabela+": ");
 				int cont = 1;
 				for(String coluna : mapStmtValores.keySet()){					
 					String tipoDado = (String) mapStmtValores.get(coluna).get("tipo");	
@@ -356,22 +388,23 @@ public abstract class GenericDAO {
 						String valor = (String) mapStmtValores.get(coluna).get("valor");
 						stmt.setString(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else if(tipoDado.equals("Integer")){
 						Integer valor = (Integer) mapStmtValores.get(coluna).get("valor");
 						stmt.setInt(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else if(tipoDado.equals("Long")){
 						Long valor = (Long) mapStmtValores.get(coluna).get("valor");
 						stmt.setLong(cont, valor);
 						cont++;
-						System.out.println("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
+						log.info("Coluna: " +coluna+ " - tipo: " +tipoDado+ " - valor: " +valor);
 					}else{
 						try {
 							throw new Exception();
 						} catch (Exception e) {
-							System.out.println("ERRO TIPO DE DADOS NAO DECLARADOS!!!");
+							log.error("ERRO TIPO DE DADOS NAO DECLARADOS!!!");
+							log.error(e);
 							e.printStackTrace();
 						}
 					}
@@ -379,13 +412,14 @@ public abstract class GenericDAO {
 				
 				//executa no banco de dados
 				stmt.executeUpdate();
-				System.out.println("O REGISTRO FOI ATUALIZADO COM SUCESSO NO BANCO DE DADOS!!\n");
+				log.info("O REGISTRO FOI ATUALIZADO COM SUCESSO NO BANCO DE DADOS!!\n");
 				
 				//finaliza conexao
 				stmt.close();
 				conexao.close();
 			} catch (SQLException e) {
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			} finally {
 				try{
@@ -396,12 +430,13 @@ public abstract class GenericDAO {
 						conexao.close();
 					}
 				}catch (Exception e){
-					System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+					log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+					log.error(e);
 					e.printStackTrace();
 				}
 			}
 		}else{
-			System.out.println("NENHUM REGISTRO FOI ATUALIZADO NO BANCO DE DADOS, OBJETO NULL!!!");
+			log.warn("NENHUM REGISTRO FOI ATUALIZADO NO BANCO DE DADOS, OBJETO NULL!!!");
 		}
 	}
 
@@ -420,6 +455,7 @@ public abstract class GenericDAO {
 		try {
 			obj = clazz.newInstance();
 		} catch (Exception e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 		TabelaBD tabelaBD = obj.getClass().getAnnotation(TabelaBD.class);
@@ -429,14 +465,15 @@ public abstract class GenericDAO {
 			try {
 				throw new Exception();
 			} catch (Exception e) {
-				System.out.println("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
 		
 		//SQL
 		String sql = "delete from " + tabela + " where " + clausulaWhere;
-		System.out.println("PRINT SQL DELETE: " + sql);
+		log.info("PRINT SQL DELETE: " + sql);
 		
 		Connection conexao = null;
 		PreparedStatement stmt = null;
@@ -446,12 +483,13 @@ public abstract class GenericDAO {
 			int count = stmt.executeUpdate();
 			boolean ok = count > 0;
 			if(ok){
-				System.out.println("DADOS DELETADO COM SUCESSO!!!\n");
+				log.info("DADOS DELETADO COM SUCESSO!!!\n");
 			}else{
-				System.out.println("NAO ACHOU REGISTRO NO BD PARA DELETAR!!!\n");
+				log.warn("NAO ACHOU REGISTRO NO BD PARA DELETAR!!!\n");
 			}
 			return ok;
 		} catch (SQLException e){
+			log.error(e);
 			e.printStackTrace();
 		} finally {
 			try{
@@ -462,7 +500,8 @@ public abstract class GenericDAO {
 					conexao.close();
 				}
 			}catch (Exception e){
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -502,6 +541,7 @@ public abstract class GenericDAO {
 		try {
 			obj = clazz.newInstance();
 		} catch (Exception e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 		TabelaBD tabelaBD = obj.getClass().getAnnotation(TabelaBD.class);
@@ -511,7 +551,8 @@ public abstract class GenericDAO {
 			try {
 				throw new Exception();
 			} catch (Exception e) {
-				System.out.println("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error("ERRO NOME DA TABELA NAO DECLARADO!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -528,7 +569,7 @@ public abstract class GenericDAO {
 				sql = "select * from " + tabela + " where " + clausulaWhere;
 			}
 		}
-		System.out.println("PRINT SQL LIST SELECT: " + sql);
+		log.info("PRINT SQL LIST SELECT: " + sql);
 		ArrayList lista = new ArrayList<>();
 		
 		Connection conexao = null;
@@ -540,7 +581,7 @@ public abstract class GenericDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
-				System.out.println("Dados list select "+tabela+": ");
+				log.info("Dados list select "+tabela+": ");
 				Object object = clazz.newInstance();	
 				for(Field atributo : object.getClass().getDeclaredFields()) {						
 					atributo.setAccessible(true);
@@ -553,34 +594,39 @@ public abstract class GenericDAO {
 							if(tipoDado.tipo().equals("String")){
 								String valor = rs.getString(coluna.nome());
 								atributo.set(object, valor);	
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							
 							}else if(tipoDado.tipo().equals("Integer")){
 								Integer valor = rs.getInt(coluna.nome());
 								atributo.set(object, valor);	
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							
 							}else if(tipoDado.tipo().equals("Long")){
 								Long valor = rs.getLong(coluna.nome());
 								atributo.set(object, valor);
-								System.out.println("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
+								log.info("Coluna: " +coluna.nome()+ " - tipo: " +tipoDado.tipo()+ " - valor: " +valor);
 							}
 						}
 					}
 				}
-				System.out.println();
+				log.info("\n");
 				//add objeto na lista
 				lista.add(object);
 			}
 		} catch (IllegalArgumentException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (InstantiationException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SQLException e) {
+			log.error(e);
 			e.printStackTrace();
 		} finally {
 			try{
@@ -591,7 +637,8 @@ public abstract class GenericDAO {
 					conexao.close();
 				}
 			}catch (Exception e){
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -610,7 +657,7 @@ public abstract class GenericDAO {
 	protected ArrayList<HashMap<String, HashMap<String, String>>> getListSqlAvancado(String sql){
 		
 		//SQL
-		System.out.println("PRINT SQL SELECT AVANCADO: " + sql);
+		log.info("PRINT SQL SELECT AVANCADO: " + sql);
 		ArrayList<HashMap<String, HashMap<String, String>>> lista = new ArrayList<HashMap<String, HashMap<String, String>>>();
 		
 		Connection conexao = null;
@@ -621,7 +668,7 @@ public abstract class GenericDAO {
 			stmt = conexao.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			
-			System.out.println("Dados list select:");
+			log.info("Dados list select:");
 			while(rs.next()){
 				HashMap<String, HashMap<String, String>> linhaRegistro = new HashMap<String, HashMap<String, String>>();				
 				ResultSetMetaData rsmd = rs.getMetaData();  	//MetaDados das tabelas e colunas
@@ -635,8 +682,7 @@ public abstract class GenericDAO {
 			    	if(objeto != null){
 			    		valor = objeto.toString();				//Qualquer tipo sera transformado em String
 			    	}
-			    	System.out.printf("Tabela: %s - coluna: %s - valor: %s", tableName, columnName, valor);
-			    	System.out.println();
+			    	log.info("Tabela: "+tableName+" - coluna: "+columnName+" - valor: " + valor);
 			    	
 			    	//Exemplo recuperar dados: lista(posicaoRegistro)<"nomeTabela", <"nomeColuna", valorColuna>>
 			    	//lista.get(1).get("membro").get("nome");           traz o valor do nome do membro
@@ -652,15 +698,18 @@ public abstract class GenericDAO {
 			    		linhaRegistro.put(tableName, mapColumnAndValue);		//add na linha de registro a 'tabela=hashmap'
 			    	}
 			    }					
-				System.out.println();
+				log.info("\n");
 				
 				lista.add(linhaRegistro);	//add cada linha de registro na lista
 			}
 		} catch (IllegalArgumentException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (SQLException e) {
+			log.error(e);
 			e.printStackTrace();
 		} finally {
 			try{
@@ -671,7 +720,8 @@ public abstract class GenericDAO {
 					conexao.close();
 				}
 			}catch (Exception e){
-				System.out.println("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error("ERRO DE CONEXAO COM BANCO DE DADOS!!!");
+				log.error(e);
 				e.printStackTrace();
 			}
 		}
