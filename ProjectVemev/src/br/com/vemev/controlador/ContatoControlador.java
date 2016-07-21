@@ -81,32 +81,38 @@ public class ContatoControlador {
 	
 	@RequestMapping(value={"/agenda/updateContatoOutraCelula"}, method=RequestMethod.POST)
 	public String updateDelegaCelula(ContataVisitante contato, 
-									@RequestParam(required=true, value="nome_celula") String nomeCelula,
 									@RequestParam(required=true, value="nome_celula_ant") String nomeCelAnterior) throws UnsupportedEncodingException{
 				
 		//regras de negocio - atualiza contato
 		
 		new ContataVisitanteDAO().update(contato);		//salva contato
-		Visitante v = new VisitanteDAO().read(contato.getId_visit());	//ler visitante
-		
+		final Visitante v = new VisitanteDAO().read(contato.getId_visit());	//ler visitante
+		final String nomeCelula = contato.getNome_celula();
+				
 		CelulaDAO dao = new CelulaDAO();
-		Celula celAnt = dao.read(nomeCelAnterior);	//celula anterior
-		Celula c = dao.read(nomeCelula);			//celula atual
-		String destinos = (c.getEndereco() +" "+ c.getCidade() +" "+ c.getCep() +" "+ c.getEstado());
-		String origem = v.getEndereco() +" "+ v.getCidade() +" "+ v.getCep() +" "+ v.getEstado();
-			
-		log.info("Geocalizacao: id_visit = "+v.getId_visit() + "origem: " + origem + "\ndestinos: " + destinos);
-		GoogleMapsControlador maps = new GoogleMapsControlador();
-		HashMap<String, String> valores = maps.calcularDistanciaKm(origem, destinos);
-		String km = valores.get("text");
+		final Celula celAnt = dao.read(nomeCelAnterior);	//celula anterior
+		final Celula c = dao.read(nomeCelula);			//celula atual
+		final String destinos = (c.getEndereco() +" "+ c.getCidade() +" "+ c.getCep() +" "+ c.getEstado());
+		final String origem = v.getEndereco() +" "+ v.getCidade() +" "+ v.getCep() +" "+ v.getEstado();
 		
-		//ENVIA EMAIL PARA LIDERES DA CELULA
-		log.info("PROCESSO ENVIA EMAIL PARA LIDERES DA CELULA - DIRECIONAMENTO!\n"
-					+ "*DE PARA* - DE '" +(celAnt != null ? celAnt.getNome_celula() : "N/A") + "' PARA '" +c.getNome_celula()+ "'");
-		EmailControlador email = new EmailControlador();
-		email.enviaEmailsParaLideresDelegarOutraCelula(c, v, km, celAnt);
+		Thread run = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				log.info("Geocalizacao: id_visit = "+v.getId_visit() + "origem: " + origem + "\ndestinos: " + destinos);
+				GoogleMapsControlador maps = new GoogleMapsControlador();
+				HashMap<String, String> valores = maps.calcularDistanciaKm(origem, destinos);
+				String km = valores.get("text");
+				
+				//ENVIA EMAIL PARA LIDERES DA CELULA
+				log.info("PROCESSO ENVIA EMAIL PARA LIDERES DA CELULA - DIRECIONAMENTO!\n"
+							+ "*DE PARA* - DE '" +(celAnt != null ? celAnt.getNome_celula() : "N/A") + "' PARA '" +c.getNome_celula()+ "'");
+				EmailControlador email = new EmailControlador();
+				email.enviaEmailsParaLideresDelegarOutraCelula(c, v, km, celAnt);
+			}
+		});
+		run.start();
 		
-		return "redirect:/vemev/agenda/visitantes?nomeCelula=Todas&status="+URLEncoder.encode("Agendado", "utf-8");	//redireciona pagina agenda
+		return "redirect:/vemev/agenda/visitantes?nomeCelula=Todas&status="+URLEncoder.encode("Não contatado", "utf-8");	//redireciona pagina agenda
 	}
 	
 }

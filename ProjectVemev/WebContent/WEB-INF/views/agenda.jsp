@@ -168,8 +168,9 @@
 	    </div>
 </form>  
   <hr>	
-		<div id="divTableless1" class="table-responsive" style="overflow-y: scroll; height:250px; border:1px;">
-		<table id="myTable1" class="table small table-bordered table-striped table-hover" cellspacing="0"> 
+ 		<b>Total de membros: ${listaContatosVisitantes.size()}</b><br><br>
+		<div id="divTableless1" class="table-responsive" style="overflow-y: scroll; height:250px; border:2px solid;">
+		<table id="myTable1" class="table small table-bordered table-striped table-hover" border="1px" cellspacing="0"> 
 		<thead>
 			<tr class="info">
 			<th>Dados do Visitante</th>
@@ -210,19 +211,28 @@
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Detalhes da visita
 					</a>
 					<br>
-					<a class="popup-with-form" href="#direcionar-form" 
-							onclick="direcionarContatoOutraCelula('${lista.get('contata_visitante').get('id_contato')}', '${lista.get('contata_visitante').get('nome_celula')}');">
-		    			<span class="glyphicon glyphicon-minus"></span> Direcionar contato
-		    		</a>
+					<%if(membroSession != null && membroSession.getAcesso().equals(MembroUserWeb.TipoAcessoLogin.LIDER_ACESSO)){ //lider acesso alterar%>
+						<a class="popup-with-form" href="#direcionar-form" 
+								onclick="direcionarContatoOutraCelula('${lista.get('contata_visitante').get('id_contato')}', 
+								'${lista.get('contata_visitante').get('id_visit')}',
+								'${lista.get('visitante').get('nome')}',
+								'${lista.get('contata_visitante').get('nome_celula')}');">
+			    			<span class="glyphicon glyphicon-share-alt"></span> Direcionar contato
+			    		</a>
+		    		<%} %>
 	    		</td>
 	    	</tr>
 	    </c:forEach>
       </tbody>
     </table>    
-    </div><br>
-	<b>Total de membros: ${listaContatosVisitantes.size()}</b>
+    </div>	
     <!-- End tableless -->
-
+	 <br>
+     <div style="float: left;">
+		<button type="button" onclick="window.history.go(-1);" class="btn btn-primary">Voltar</button>
+	</div>
+	<br><br><br>
+		
  </div>
  
 </div>
@@ -240,7 +250,11 @@
     
   <!-- form para direcionar contato para outra celula -->
 <form id="direcionar-form" class="mfp-hide white-popup" action="/vemev/agenda/updateContatoOutraCelula" method="post" style="width: 400px;">
-	Derecionar contato para outra célula
+	<h3>Derecionar contato para outra célula</h3>
+	<br>
+	<div class="well">
+	  		<b>Nome do visitante:</b> <span id="nome_visit-dir"></span>
+	</div>
 	<br>
 	<label for="comboCelula">Escolha a Célula</label>
 	<select class="form-control" required="true" name="nome_celula" style="width: 250px;">
@@ -249,6 +263,11 @@
 			<option value="${lista.nome_celula}">${lista.nome_celula}</option>
 		</c:forEach>
 	</select>
+	<br>
+	<div class="form-group">
+	 	<label for="observacao">Observação</label> 
+	 	<textarea class="form-control" rows="4" id="observacao" name="observacao" style="width: 300px;">${contato.observacao}</textarea>
+	</div>
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">
@@ -257,6 +276,7 @@
 	    </div>
   	</div>
 	<input type="hidden" id="id_contato-dir" name="id_contato" value="">
+	<input type="hidden" id="id_visit-dir" name="id_visit" value="">
 	<input type="hidden" id="nome_celula_ant-dir" name="nome_celula_ant" value="">
 </form>
 
@@ -267,9 +287,11 @@
 <script>
 
 	//funcao para desvincular membro da celula
-	function direcionarContatoOutraCelula(id, celAnt){
+	function direcionarContatoOutraCelula(id, idVisit, nome, celAnt){
 		$('#id_contato-dir').val(id);		//passa o id contato para o campo hidden do form direcionar
+		$('#id_visit-dir').val(idVisit);
 		$('#nome_celula_ant-dir').val(celAnt);
+		$('#nome_visit-dir').html(nome);
 	}
 	
 	//funcao javascript recupera formulario em ajax no server
