@@ -27,6 +27,20 @@ public class ContatoControlador {
 
 	static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(EmailControlador.class);	
 	
+	@RequestMapping(value={"/agenda/ajaxRelatorioDetalhesVisita"}, method = RequestMethod.GET)
+	public String ajaxRelatorioDadosVisitante(@RequestParam(required=true, value="id_contato") int id, Model model){
+				
+		//regras de negocio	- recupera dados do contato do visitante
+		ContataVisitante contato = new ContataVisitanteDAO().read(id);
+		Visitante visitante = new VisitanteDAO().read(contato.getId_visit());
+		Membro membro = new MembroDAO().read(contato.getId_membro());
+		model.addAttribute("visitante", visitante);
+		model.addAttribute("membro", membro);		
+		model.addAttribute("contato", contato);		
+		
+		return "formulario-relatorio-visita.jsp";		//retorna um formulario via ajax
+	}
+	
 	@RequestMapping(value={"/agenda/ajaxAgendamentoDeVisita"}, method = RequestMethod.GET)
 	public String consultarAgenda(@RequestParam(required=true, value="id_contato") int idContato, Model model){
 				

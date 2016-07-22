@@ -207,7 +207,7 @@
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Agendar/Concluir
 					</a>
 					<br>
-					<a href="#" onclick="agendamentoDeVisita('${lista.get('contata_visitante').get('id_contato')}');">
+					<a href="#" onclick="detalhesDeVisita('${lista.get('contata_visitante').get('id_contato')}');">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Detalhes da visita
 					</a>
 					<br>
@@ -292,6 +292,26 @@
 		$('#id_visit-dir').val(idVisit);
 		$('#nome_celula_ant-dir').val(celAnt);
 		$('#nome_visit-dir').html(nome);
+	}
+	
+	//funcao javascript recupera formulario em ajax no server detalhes da visita
+	function detalhesDeVisita(id){
+		$.get("/vemev/agenda/ajaxRelatorioDadosVisitante",
+		    {
+				id_contato: id		//parametro
+		    },
+		    function(data, status){
+		        //$('#divFormAlterarMembro').html(data);
+		        //tenta forcar o pop up
+		        $.magnificPopup.open({
+		            items: {
+		                src: data,
+		                type:'inline'
+		            },
+		            modal: true
+		        });
+		    }
+		);
 	}
 	
 	//funcao javascript recupera formulario em ajax no server

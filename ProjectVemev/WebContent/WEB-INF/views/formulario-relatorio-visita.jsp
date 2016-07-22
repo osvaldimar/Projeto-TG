@@ -33,7 +33,7 @@
 		
 </style>
 	
-<!-- form relatorido  dos dados do visitante -->
+<!-- form relatorido  dos dados da visita -->
 <form id="alterarDados-form" class="white-popup" method="post" style="max-width: 1000px; background-color: #fff;">
 	<div style="float: right;">
 		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
@@ -41,11 +41,9 @@
 	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
-		<h3>Visão geral do visitante</h3>
+		<h3>Detalhes da visita</h3>
 	</div>	
 	<br>
-	
-	
 	<h4>Dados pessoais</h4>
 	<div class="divRelatorio">
 		<table width="100%">
@@ -55,21 +53,10 @@
 			<div style="width:50%; float:left;">
 				<b>Nome:</b> ${visitante.nome}<br>
 				<b>Apelido:</b> ${visitante.apelido}<br>
-				<b>Data de nascimento:</b> ${visitante.data_nascimento}<br>
-				<b>Sexo:</b> ${visitante.sexo}<br>
 				<b>Celular:</b> ${visitante.celular}<br>
 				<b>Telefone:</b> ${visitante.telefone}<br>
-				<b>Estado Civil:</b> ${visitante.estado_civil}<br>
-				<b>Email:</b> ${visitante.email}<br><br>
-			</div>
-			<div style="width:50%; float:left;">
 				<b>Endereço:</b> ${visitante.endereco}<br>
-				<b>Complemento:</b> ${visitante.complemento}<br>
-				<b>Cep:</b> ${visitante.cep}<br>
-				<b>Bairro:</b> ${visitante.bairro}<br>
-				<b>Cidade:</b> ${visitante.cidade}<br>
-				<b>Estado:</b> ${visitante.estado}<br>
-				<b>RG:</b> ${visitante.RG}<br><br>
+				<b>Data da Visita:</b> <br>${visitante.data_reuniao}<br>
 			</div>
 		</td>
 		</tr>
@@ -77,23 +64,15 @@
 		</table>
 	</div>
 	<br>
-	<hr>
-	
-	<h4>Detalhes</h4>
+	<hr>	
+	<h4>Agendamento</h4>
 	<div class="divRelatorio">
-		<b>Data da Visita:</b> <br>${visitante.data_reuniao}<br>
-		<b>Pertence a alguma igreja?</b> <br>${visitante.pertence_igreja}<br>
-		<b>Pertence a qual igreja?</b> <br>${visitante.qual_igreja}<br>
-		<b>Pertence a alguma célula?</b> <br>${visitante.pertence_celula}<br>
-		<b>Quer conhecer alguma célula?</b> <br>${visitante.conhecer_celula}<br>
-		<b>Visitou célula ou reunião?</b> <br>${visitante.celula_culto}<br>
-		<b>Quer conhecer Jesus?</b> <br>${visitante.conhecer_jesus}<br>
-		<b>Deseja oração?</b> ${visitante.deseja_oracao}<br>
-		<b>Qual o motivo da oração?</b> <br>${visitante.motivo_oracao}<br>
-		<b>Precisa de alguma ajuda específica?</b> <br>${visitante.precisa_ajuda}<br>
-		<b>O que chamou a atenção na reunião de celebração ou na célula?</b>  <br>${visitante.descricao_reuniao}<br><br>		
-	</div>
-		
+		<b>Célula responsável pela visita:</b> <br>${contato.nome_celula}<br>
+		<b>Agendado pelo membro:</b> <br>${membro.nome}<br>
+		<b>Status:</b> <br>${contato.status_contato}<br>
+		<b>Data de agendamento:</b> <br>${contato.data_agendado}<br>
+		<b>Observação:</b> <br>${contato.observacao}<br>	
+	</div>		
 	<br>
 	<div style="float: right;">
 		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
