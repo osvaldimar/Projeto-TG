@@ -1,11 +1,16 @@
 package br.com.vemev.controlador;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.spi.LoggingEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.vemev.dao.LoginDAO;
+import br.com.vemev.modelo.Login;
 import br.com.vemev.modelo.MembroUserWeb;
 import br.com.vemev.modelo.MembroUserWeb.TipoAcessoLogin;
 
@@ -14,11 +19,12 @@ public class LoginControlador {
 	
 	static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(LoginControlador.class);
 	
-	private String userDefaultAdmin = "admin";
-	private String passwordDefaultAdmin = "admin";
+	private LoginDAO dao = new LoginDAO();
+	private String userDefaultAdmin = "lider";
+	private String passwordDefaultAdmin = dao.read("lider").getPassword();		//"admin";
 	
 	private String userDefaultMembro = "membro";
-	private String passwordDefaultMembro = "membro";
+	private String passwordDefaultMembro = dao.read("membro").getPassword();	//"membro";
 	
 	@RequestMapping(value={"/login"})
 	public String login(HttpServletRequest request, HttpServletResponse response){
@@ -62,6 +68,25 @@ public class LoginControlador {
 		
 		//redireciona para pagina login
 		return "redirect:/index.html";
+	}
+	
+	@RequestMapping(value={"/alterarSenha"})
+	public void alterarSenhas(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String tipo = request.getParameter("tipo");
+		String senhaAtual = request.getParameter("senhaAtual");
+		String novaSenha = request.getParameter("novaSenha");
+		Login login = dao.read(tipo);
+		
+		//valida senha atual e atualiza a nova senha
+		if(login.getPassword().equals(senhaAtual)){
+			login.setPassword(novaSenha);
+			dao.update(login);
+			response.getWriter().write("ok");
+			response.setStatus(200);
+		}else{
+			response.getWriter().write("Senha atual inválida!");
+			response.setStatus(200);
+		}
 	}
 
 }

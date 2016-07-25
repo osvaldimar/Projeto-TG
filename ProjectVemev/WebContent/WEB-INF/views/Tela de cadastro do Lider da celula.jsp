@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Célula</title>
+	<title>Cadastro dos Líderes de Célula</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -66,12 +66,12 @@
         </div><!--/.nav-collapse -->
         
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres de Celula</h3>
+ <h3 class="page-header">Cadastro dos Líderes de Célula</h3>
  <form action="/vemev/lider/createLiderCelula" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
-
+	<span id="errorLider" style="color:red; display:none;"></span>
      <label for="nome_celula">Célula</label>
 			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="max-width: 250px;">
 				<option value=""></option>
@@ -211,6 +211,10 @@
 					window.location.href = "/vemev/lider/consultaLideres?tipoLider=Celula";		//redirect para consulta lideres
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
+					//oculta loading
+					$(".loader").hide();
+					$("#errorLider").html(respostaServer);
+					$("#errorLider").show();
 				}				
 			}
 		});

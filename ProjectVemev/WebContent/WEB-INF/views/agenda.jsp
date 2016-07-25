@@ -141,7 +141,7 @@
 <form action="/vemev/agenda/visitantes" method="get" role="form" class="well">
 		<div class="form-group">
 			<label for="comboCelula">Escolha a Célula</label>
-			<select class="form-control" required="true" id="comboCelula" name="nomeCelula" style="width: 250px;">
+			<select class="form-control" required="true" id="comboCelula" name="nomeCelula" style="max-width: 250px;">
 				<option value="${celulaSelecionada}">${celulaSelecionada}</option>
 				<option value="Todas">Todas</option>
 				<c:forEach var="lista" items="${listaTodasCelulas}">
@@ -151,7 +151,7 @@
 		</div>
 		<div class="form-group">
 			<label for="status-contato">Status</label>
-			<select class="form-control" required="true" id="status-contato" name="status" style="width: 200px;">
+			<select class="form-control" required="true" id="status-contato" name="status" style="max-width: 250px;">
 				<option value="${statusSelecionado}">${statusSelecionado}</option>
 				<option value="Não contatado">Não contatado</option>
 				<option value="Agendado">Agendado</option>
@@ -279,7 +279,7 @@
       </tbody>
     </table>    
     </div>	
-    <br><b>Total de membros: ${listaContatosVisitantes.size()}</b><br>
+    <br><b>Total de contatos: ${listaContatosVisitantes.size()}</b><br>
     <div id="pager-tableless" class="pager-tableless">
 			<br>&nbsp;&nbsp;&nbsp;		
 			<img src="/jquery-tableless/first.png" class="first">

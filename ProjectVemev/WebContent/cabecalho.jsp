@@ -137,8 +137,7 @@
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></b></a>
 			<ul class="dropdown-menu">
 				<li class="dropdown-header"></li>
-				<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Alterar senha de lider</a></li>
-				<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Alterar senha de membro</a></li>
+				<li><a tabindex="-1" href="/Tela alterar senhas.jsp">Alterar senha</a></li>
 			</ul>
 		</li>
 		

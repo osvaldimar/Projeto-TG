@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Cadastro dos Lideres de Rede</title>
+	<title>Cadastro dos Líderes de Rede</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -67,12 +67,12 @@
         <!--/.nav-collapse -->
         
         <div id="main" class="container-fluid">
- <h3 class="page-header">Cadastro dos Lideres de Setor</h3>
+ <h3 class="page-header">Cadastro dos Líderes de Setor</h3>
  <form action="/vemev/lider/createLiderSetor" method="post" id="form-lider">
   <!-- area de campos do form -->
 
 <div class="container-fluid">
-
+	<span id="errorLider" style="color:red; display:none;"></span>
    <label for="setor_celula">Rede / Setor</label>
         <select class="form-control" required="true" name="id_setor" style="max-width: 250px;">
         	<option value=""></option>
@@ -212,6 +212,10 @@
 					window.location.href = "/vemev/lider/consultaLideres?tipoLider=Setor";		//redirect para consulta lideres
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
+					//oculta loading
+					$(".loader").hide();
+					$("#errorLider").html(respostaServer);
+					$("#errorLider").show();
 				}				
 			}
 		});
