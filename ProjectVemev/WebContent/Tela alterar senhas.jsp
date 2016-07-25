@@ -12,6 +12,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
  <link href="css/style.css" rel="stylesheet">
+ 
+ <!-- Ajax formulario --> 
+ <script src="http://malsup.github.com/jquery.form.js"></script>
 </head>
 <body> 
  <!-- Fixed navbar -->
@@ -37,23 +40,23 @@
   <!-- area de campos do form -->
   <div class="row">
   <div class="col-md-12">
-  <div class="well">
-  	 <span id="errorSenha" style="color:red; display:none;"></span><br>
      <div class="form-group col-md-4">
-      	<label for="cor_rede">Tipo de acesso</label>
-        <select class="form-control" name="tipo" required="true">
-        	<option></option>
-        	<option value="lider">Líder</option>
-            <option value="membro">Membro</option>
-        </select>
-    	<label for="nome_setor">Senha atual</label>
-    	<input type="text" class="form-control" id="senhaAtual" name="senhaAtual" required="true">
-    	<label for="nome_setor">Nova senha</label>
-    	<input type="text" class="form-control" id="novaSenha" name="novaSenha" required="true">
-    	<label for="nome_setor">Confirmar senha</label>
-    	<input type="text" class="form-control" id="confirmarSenha" required="true">
+  	 <span id="errorSenha" style="color:red; display:none;"></span><br>
+  		<div class="info">
+	      	<label for="cor_rede">Tipo de acesso</label>
+	        <select class="form-control" name="tipo" required="true">
+	        	<option></option>
+	        	<option value="lider">Líder</option>
+	            <option value="membro">Membro</option>
+	        </select>
+	    	<label for="nome_setor">Senha atual</label>
+	    	<input type="password" class="form-control" id="senhaAtual" name="senhaAtual" required="true">
+	    	<label for="nome_setor">Nova senha</label>
+	    	<input type="password" class="form-control" id="novaSenha" name="novaSenha" required="true">
+	    	<label for="nome_setor">Confirmar senha</label>
+	    	<input type="password" class="form-control" id="confirmarSenha" required="true">
+		</div>
      </div>
- </div>
  </div>
 </div>
   <hr />
@@ -75,11 +78,12 @@
       <script src="js/bootstrap.min.js"></script>
       <script src="/js/submenus-bootstrap.js"></script>
     </h6>
-    <div class="loader" id="loader"></div>
+    <div class="loader_ajax" id="loader_ajax"></div> 
     
     <script type="text/javascript">
   //valida antes de enviar formulario
 	$('#form-senha').submit(function(e){ 
+		$(".loader_ajax").show();
 		var nova = $('#novaSenha').val();
 		var conf = $('#confirmarSenha').val();
 		if(nova != conf){
@@ -87,6 +91,7 @@
 			//alert("A confirmação de senha não confere!");
 			$("#errorSenha").html("A confirmação de senha não confere!");
 			$("#errorSenha").show();
+			$(".loader_ajax").hide();
 		}
 	});
 	//valida alteracao de senha
@@ -100,7 +105,7 @@
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
 					//oculta loading
-					$(".loader").hide();
+					$(".loader_ajax").hide();
 					$("#errorSenha").html(respostaServer);
 					$("#errorSenha").show();
 				}				

@@ -9,6 +9,15 @@
 	z-index: 9999;
 	background: url('/image/loading_ios.gif') 50% 50% no-repeat rgb(249,249,249);
 }
+.loader_ajax {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('/image/loading_ios.gif') 50% 50% no-repeat rgb(249,249,249);
+}
 </style>
 
 <%@page import="br.com.vemev.modelo.MembroUserWeb"%>
@@ -208,14 +217,15 @@
 	window.onload = function(e){	
 		//oculta loading da pagina
 		$(".loader").fadeOut("slow");
+		$(".loader_ajax").hide();
 	}
 	var sub = false;
 	$(document).ready(function() {
 		$('form').submit(function(e) {
 			//alert("trying...");
 			if(sub == true){
-		   		alert("Por favor aguarde até o fim da solicitação!");
-				e.preventDefault();
+		   		//alert("Por favor aguarde até o fim da solicitação!");
+				//e.preventDefault();
 			}
 		   sub = true;
 		   $(".loader").show();
