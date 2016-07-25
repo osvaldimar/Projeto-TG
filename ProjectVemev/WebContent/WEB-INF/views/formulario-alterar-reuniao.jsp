@@ -5,15 +5,15 @@
 		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
 	</div>
 	<br>
-	<h3>
-		Alterar dados da reunião
-	</h3>
+	<div style="text-align: center; width:100%; color: blue;">
+		<h3><span class="glyphicon glyphicon-edit"></span> Alterar dados da reunião</h3>
+	</div>
 	<br><br>
 	<div class="row">
   <div class="col-md-12">
      <div class="form-group col-md-4">
      <label for="nome_celula">Célula</label>
-			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
+			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="max-width: 250px;">
 				<option value="${reuniao.nome_celula}">${reuniao.nome_celula}</option>
 				<c:forEach var="lista" items="${listaTodasCelulas}">
 					<option value="${lista.nome_celula}">${lista.nome_celula}</option>

@@ -19,7 +19,7 @@
 	.divRede-Lider{
 		width: 740px; 
 		height: auto; 
-		color: black; 
+		color: white; 
 		padding: 1%; 
 		font-size: 14px;
 		border: 1px solid lightgrey;
@@ -31,7 +31,7 @@
 		-moz-border-radius:10px;
 		-webkit-border-radius:10px;
  		border-radius:10px;
- 		background-color: #cccfff;
+ 		background-color: #6699cc;
 	}
 	@media screen and (max-width: 740px){
 		.divRede-Lider { width: 100%;}

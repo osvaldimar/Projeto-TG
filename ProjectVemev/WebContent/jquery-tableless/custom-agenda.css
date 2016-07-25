@@ -17,7 +17,7 @@
 	display: block;
 	width: 100%;
 	min-width: 250px;
-	background-color: #ad2525;
+	
 }
 
 #divTableless table {
@@ -26,9 +26,9 @@
 }
 
 #divTableless table thead th, #divTableless table thead td {
-	background-color: #ad2525;
+	
 	padding: 6px;
-	color: #fff;
+	
 	text-align: left;
 	font-size: 14px;
 }

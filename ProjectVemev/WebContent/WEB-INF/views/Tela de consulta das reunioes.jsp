@@ -81,10 +81,10 @@
 <!-- Start tableless -->
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" value="${param.pesquisa}" name="pesquisar" style ="width: 200px"><br>
+         <input type="text" class="form-control" id="pesquisar" value="${param.pesquisa}" name="pesquisar" style ="max-width: 250px"><br>
 </div>
      <div id="divTableless">
-		<table id="myTable" cellspacing="0"> 
+		<table id="myTable" cellspacing="0" width="100%"> 
 		<thead>
 	      	<tr>
 	      		<th width="250px">Célula</th>
@@ -111,10 +111,12 @@
 	    		<td width="100px">${lista.num_visitantes}</td>
 	    		<td width="100px">
 	    			&nbsp;&nbsp;
-		    		<a href="#" onclick="alterarDadosReuniao('${lista.id_reuniao}');">Alterar</a>
+		    		<a href="#" onclick="alterarDadosReuniao('${lista.id_reuniao}');">
+		    			<span class="glyphicon glyphicon-edit"></span> Alterar
+		    		</a>
 		    		<br>&nbsp;&nbsp;
 		    		<a class="popup-with-form" href="#excluir-form" onclick="excluirReuniao('${lista.id_reuniao}');">
-		    			Excluir
+		    			<span class="glyphicon glyphicon-trash"></span> Excluir
 		    		</a>
 	    		</td>   		
 	    	</tr>
@@ -133,9 +135,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
@@ -165,16 +165,16 @@
 </div>
 
 <!-- form para excluir reuniao -->
-<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/reuniao/excluirReuniao" method="get" style="width: 400px;">
-	<div class="">
-		Excluir reunião
+<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/reuniao/excluirReuniao" method="get" style="max-width: 400px;">
+	<div style="text-align: center; width:100%; color: blue;">
+		<h4><span class="glyphicon glyphicon-trash"></span> Excluir reunião</h4>
 	</div>
 	<br>
 	Você tem certeza que deseja excluir o histórico dessa reunião da célula?
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">
-	      <button type="submit" class="btn btn-primary">- Excluir</button>
+	      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Excluir</button>
 	      <a onclick="closePopup()" class="btn btn-default">Cancelar</a>
 	    </div>
   	</div>

@@ -80,11 +80,11 @@
            <input type ="radio" value = "Vermelho" name = "cor_rede" required="true"> Vermelho <br><br>
 		
        <label for="data">Data</label>
-       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
+       <input type="date" class="form-control" id="date" name="data_ini" style ="max-width: 250px" required="true"> <br>
 
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" style ="width: 200px"><br>
+         <input type="text" class="form-control" id="pesquisar" style ="max-width: 250px"><br>
 </div>
 
 <!-- Start tableless -->
@@ -128,9 +128,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>

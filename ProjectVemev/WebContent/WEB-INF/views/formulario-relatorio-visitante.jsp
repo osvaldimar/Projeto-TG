@@ -41,7 +41,7 @@
 	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
-		<h3>Visão geral do visitante</h3>
+		<h3><span class="glyphicon glyphicon-user"></span> Visão geral do visitante</h3>
 	</div>	
 	<br>
 	
@@ -52,7 +52,7 @@
 		<tbody>
 		<tr>
 		<td width="100%">
-			<div style="width:50%; float:left;">
+			<div style="width:50%; float:left; min-width:200px;">
 				<b>Nome:</b> ${visitante.nome}<br>
 				<b>Apelido:</b> ${visitante.apelido}<br>
 				<b>Data de nascimento:</b> ${visitante.data_nascimento}<br>
@@ -62,7 +62,7 @@
 				<b>Estado Civil:</b> ${visitante.estado_civil}<br>
 				<b>Email:</b> ${visitante.email}<br><br>
 			</div>
-			<div style="width:50%; float:left;">
+			<div style="width:50%; float:left; min-width:200px;">
 				<b>Endereço:</b> ${visitante.endereco}<br>
 				<b>Complemento:</b> ${visitante.complemento}<br>
 				<b>Cep:</b> ${visitante.cep}<br>

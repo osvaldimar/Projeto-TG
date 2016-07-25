@@ -296,7 +296,7 @@
 	<input type="hidden" name="nome_celula" value="${celula.nome_celula}">
 	
     <div id="divTableless">
-	<table id="myTable" cellspacing="0" width="100%">
+	<table id="myTable" cellspacing="0" width="auto">
 		<thead>
 	      	<tr>
 	      		<th width="10px">&nbsp;&nbsp;&nbsp;</th>
@@ -344,9 +344,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
@@ -365,7 +363,7 @@
     <!-- End tableless -->    
 
 <!-- form para excluir um membro -->
-<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/participaCelula/excluirMembro" method="post" style="width: 400px;">
+<form id="excluir-form" class="mfp-hide white-popup" action="/vemev/participaCelula/excluirMembro" method="post" style="max-width: 500px;">
 	<div class="incluirMembro corTitulo-${setor.cor_rede}">
 		Excluir membro - ${celula.nome_celula}
 	</div>
@@ -383,15 +381,17 @@
 </form>
 
 <!-- form para desvincular um membro -->
-<form id="desvincular-form" class="mfp-hide white-popup" action="/vemev/participaCelula/desvincularMembro" method="post" style="width: 400px;">
+<form id="desvincular-form" class="mfp-hide white-popup" action="/vemev/participaCelula/desvincularMembro" method="post" style="max-width: 500px;">
 	<div class="incluirMembro corTitulo-${setor.cor_rede}">
 		Desvincular membro - ${celula.nome_celula}
 	</div>
 	<br>
+	<div class="well">
 	Escolha a data final do membro na Célula.
-	<br><br>
-	<label for="data">Data final</label>
-    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+		<br><br>
+		<label for="data">Data final</label>
+ 	   <input type="date" class="form-control" id="date" name="data_fim" style ="max-width: 200px" required="true">
+	</div>
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">
@@ -495,6 +495,7 @@
 	    </div>
   	</div>
 	<input type="hidden" name="nomeAtual" value="${celula.nome_celula}">
+	<br>
 </form>
 
  </div>

@@ -134,6 +134,15 @@
 		</li>
 		
 		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></b></a>
+			<ul class="dropdown-menu">
+				<li class="dropdown-header"></li>
+				<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Alterar senha de lider</a></li>
+				<li><a tabindex="-1" href="/vemev/lider/consultaLiderRede">Alterar senha de membro</a></li>
+			</ul>
+		</li>
+		
+		<li class="dropdown">
 			<a style="text-decoration:underline;" href="/vemev/logout">
 				<span class="glyphicon glyphicon-log-out"></span> Sair
 			</a>

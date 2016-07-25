@@ -41,7 +41,7 @@
 	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
-		<h3>Detalhes da visita</h3>
+		<h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Detalhes da visita</h3>
 	</div>	
 	<br>
 	<h4>Dados pessoais</h4>
@@ -50,13 +50,13 @@
 		<tbody>
 		<tr>
 		<td width="100%">
-			<div style="width:50%; float:left;">
+			<div>
 				<b>Nome:</b> ${visitante.nome}<br>
 				<b>Apelido:</b> ${visitante.apelido}<br>
 				<b>Celular:</b> ${visitante.celular}<br>
 				<b>Telefone:</b> ${visitante.telefone}<br>
 				<b>Endereço:</b> ${visitante.endereco}<br>
-				<b>Data da Visita:</b> <br>${visitante.data_reuniao}<br>
+				<b>Data da Visita:</b> ${visitante.data_reuniao}<br>
 			</div>
 		</td>
 		</tr>

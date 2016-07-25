@@ -29,14 +29,20 @@
 	<!-- funcoes geral vemev -->
 	<script src="/js/funcoes-vemev.js"></script>
 	
-	<!-- configuracao do layout da grid -->
+	<!-- configuracao do layout da grid -->		
 	<style type="text/css">
 		@media screen and (min-width:861px) {
+		.white-popup {
+		 	  width: 85%;
+		 }
 		 #divGridOcultar {
 		    display: none;
 		 }
 		}
 		@media screen and (max-width:860px) {
+		.white-popup {
+		 	  width: 95%;
+		 }
 		 #myTable tr > *:nth-child(2), tr > *:nth-child(6){
 		    display: none;
 		 }
@@ -97,12 +103,12 @@
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
          <input type="text" class="form-control" id="pesquisar" 
-         		value="" style ="width: 200px"><br>
+         		value="" style ="max-width: 250px"><br>
 </div>
 
 <!-- Start tableless -->
      <div id="divTableless">
-		<table id="myTable" cellspacing="0">
+		<table id="myTable" cellspacing="0" style="min-width: 450px;">
 			<thead>
     			<tr>
         			<th width="300px">Nome Líder</th>
@@ -223,9 +229,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>
@@ -244,17 +248,19 @@
 
 
 <!-- form para alterar um lider -->
-<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusQualquerLider" method="post" style="width: 600px;">
-	<div style="font-weight: 600; font-size: 16px;">
-		<h4>Alterar Status do Lider para 'Inativo'</h4>
-	</div>
+<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusQualquerLider" method="post" style="max-width: 600px;">
+	<div style="text-align: center; width:100%; color: blue;">
+		<h3><span class="glyphicon glyphicon-edit"></span> Alterar Status do Lider para 'Inativo'</h3>
+	</div>	
 	<br>
-	<b>Escolha a data final do Lider</b><br><br>
-	<b>Nome: </b><span id="spanNomeLider"> </span><br>
-	<b>Tipo Líder: </b><span id="spanTipoLider"> </span>
-	<br><br>
-	<label for="data">Data final</label>
-    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<div class="well">
+		<b>Escolha a data final do Lider</b><br><br>
+		<b>Nome: </b><span id="spanNomeLider"> </span><br>
+		<b>Tipo Líder: </b><span id="spanTipoLider"> </span>
+		<br><br>
+		<label for="data">Data final</label>
+	    <input type="date" class="form-control" id="date" name="data_fim" style ="max-width: 250px" required="true">
+    </div>
 	<br>
 	<hr>
 	<br>

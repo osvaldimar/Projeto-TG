@@ -73,7 +73,7 @@
 <div class="container-fluid">
 
      <label for="nome_celula">Célula</label>
-			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="width: 250px;">
+			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="max-width: 250px;">
 				<option value=""></option>
 				<c:forEach var="lista" items="${listaTodasCelulas}">
 					<option value="${lista.nome_celula}">${lista.nome_celula}</option>
@@ -81,11 +81,11 @@
 			</select>
            
        <label for="data"><br>Data</label>
-       <input type="date" class="form-control" id="date" name="data_ini" style ="width: 200px" required="true"> <br>
+       <input type="date" class="form-control" id="date" name="data_ini" style ="max-width: 250px" required="true"> <br>
 
 <div style="text-align:left; float:center;">
       <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
-         <input type="text" class="form-control" id="pesquisar" value="" style ="width: 200px"><br>
+         <input type="text" class="form-control" id="pesquisar" value="" style ="max-width: 250px"><br>
 </div>
 
 <!-- Start tableless -->
@@ -129,9 +129,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>

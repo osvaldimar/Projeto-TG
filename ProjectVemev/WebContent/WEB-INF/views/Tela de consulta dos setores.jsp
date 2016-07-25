@@ -97,7 +97,6 @@
  		border-radius:5px;
 	}
 	.divSetor{
-		width: 300px; 
 		height: auto; 
 		color: black; 
 		padding: 1%; 
@@ -190,7 +189,7 @@
 		<br>		
 		<label for="comboCelula">Escolha o Setor:</label><br>
 		<div class="form-inline">
-			<select class="form-control" required="true" id="comboCelula" name="id_setor" style="width: 250px;">
+			<select class="form-control" required="true" id="comboCelula" name="id_setor" style="max-width: 250px;">
 				<option value=""></option>
 				<c:forEach var="lista" items="${listaSetores}">
 					<option value="${lista.id_setor}">${lista.cor_rede} - ${lista.nome_setor}</option>
@@ -203,12 +202,12 @@
 	<br>
 	
 	<c:if test="${setor != null}">
-		<div class="divSetor">
+		<div class="divSetor" style="max-width:350px; width:100%;">
 			<div class="divTitulo corTitulo-${setor.cor_rede}">Detalhes do Setor</div><br>
 			<b>Nome:</b> ${setor.nome_setor}<br>
 			<b>Rede:</b> ${setor.cor_rede}<br><br>
 			<a class="popup-with-form" href="#alterarSetor-form" onclick="alterarSetor('${setor.id_setor}');">
-				Alterar dados
+				<span class="glyphicon glyphicon-edit"></span> Alterar dados
 			</a>
 		</div>
 		<div style="clear: both; width: 100%;"> </div>
@@ -243,7 +242,7 @@
 				    			<c:if test="${lista.get('lider_setor').get('status_lider') eq 'Ativo'}">
 			        				<a class="popup-with-form" href="#alterar-form" 
 			        					onclick="alterarLider('${lista.get('lider_setor').get('id_lider')}');">
-					    				Alterar
+					    				<span class="glyphicon glyphicon-edit"></span>
 					    			</a>
 				    			</c:if>
 		        			</td>
@@ -288,15 +287,17 @@
 </div>
 
 <!-- form para alterar status do lider de Setor -->
-<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/setor/alterarStatusLider" method="get" style="width: 400px;">
+<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/setor/alterarStatusLider" method="get" style="max-width: 400px;">
 	<div style="font-weight: 600; font-size: 16px;">
-		Alterar Status do Lider para 'Inativo'
+		<div class="rede-${setor.cor_rede}"><span class="glyphicon glyphicon-edit"></span> Alterar Status do Lider para 'Inativo'</div>
 	</div>
 	<br>
-	Escolha a data final do Lider no Setor.
-	<br><br>
-	<label for="data">Data final</label>
-    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<div class="well">
+		Escolha a data final do Lider no Setor.
+		<br><br>
+		<label for="data">Data final</label>
+	    <input type="date" class="form-control" id="date" name="data_fim" style ="max-width: 200px" required="true">
+	</div>
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">
@@ -309,13 +310,15 @@
 </form>
 
 <!-- form para alterar o nome do Setor -->
-<form id="alterarSetor-form" class="mfp-hide white-popup" action="/vemev/setor/updateSetor" method="get" style="width: 400px;">
+<form id="alterarSetor-form" class="mfp-hide white-popup" action="/vemev/setor/updateSetor" method="get" style="max-width: 400px;">
 	<div style="font-weight: 600; font-size: 16px;">
-		Alterar o nome do Setor
+		<div class="rede-${setor.cor_rede}"><span class="glyphicon glyphicon-edit"></span> Alterar o nome do Setor</div>
 	</div>
 	<br><br>
-	<label for="data">Nome do Setor</label>
-    <input type="text" class="form-control" name="nome_setor" style ="width: 200px" required="true">
+	<div class="well">
+		<label for="data">Nome do Setor</label>
+	    <input type="text" class="form-control" name="nome_setor" value="${setor.nome_setor}" style ="max-width: 200px" required="true">
+	</div>
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">

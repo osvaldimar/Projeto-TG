@@ -1,13 +1,13 @@
 <!-- form para alterar os dados do membro -->
-<form id="alterarDados-form" class="white-popup" action="/vemev/membro/updateMembro" method="post" style="max-width: 1000px;">
+<form id="alterarDados-form" class="white-popup" action="/vemev/membro/updateMembro" method="post" style="max-width: 800px;" role="form">
 	
 	<div style="float: right;">
 		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
 	</div>
 	<br>
-	<h3>
-		Alterar dados do membro
-	</h3>
+	<div style="text-align: center; width:100%; color: blue;">
+		<h3><span class="glyphicon glyphicon-edit"></span> Alterar dados do membro</h3>
+	</div>
 	<br><br>
 	<div class="row">
           <div class="col-md-12">          

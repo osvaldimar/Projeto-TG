@@ -1,13 +1,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- form para alterar os dados da reuniao -->
-<form id="alterarDados-form" class="white-popup" action="/vemev/agenda/updateContataVisitante" method="post" style="max-width: 1000px;" role="form">	
+<form id="alterarDados-form" class="white-popup" action="/vemev/agenda/updateContataVisitante" method="post" style="max-width: 600px;" role="form">	
 	<div style="float: right;">
 		<button type="button" onclick="closePopup()" class="btn btn-primary">Fechar</button>
 	</div>
 	<br>
-	<h3>
-		Agendamento de visita
-	</h3>
+	<div style="text-align: center; width:100%; color: blue;">
+		<h3><span class="glyphicon glyphicon-calendar"></span> Agendamento de visita</h3>
+	</div>	
 	<br>
   		<div class="well">
 	  		<b>Nome do visitante:</b> ${visitante.nome}<br>
@@ -29,7 +29,7 @@
 	     </div> 
      	<div class="form-group">
 			<label for="status_contato">Status</label>
-			<select class="form-control" required="true" id="status_contato" name="status_contato" style="width: 300px;">
+			<select class="form-control" required="true" id="status_contato" name="status_contato" style="max-width: 300px;">
 				<option value=""></option>
 				<option value="Não contatado">Não contatado</option>
 				<option value="Agendado">Agendado</option>
@@ -38,7 +38,7 @@
 		</div> 
 		<div class="form-group">
 	 	<label for="observacao">Observação</label> 
-	 	<textarea class="form-control" rows="4" id="observacao" name="observacao" style="width: 300px;">${contato.observacao}</textarea>
+	 	<textarea class="form-control" rows="4" id="observacao" name="observacao" style="max-width: 300px;">${contato.observacao}</textarea>
 	</div>   
     <hr>
 	<div id="actions" class="row">

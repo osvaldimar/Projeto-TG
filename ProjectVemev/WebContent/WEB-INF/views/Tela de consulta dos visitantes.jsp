@@ -32,11 +32,17 @@
 	<!-- configuracao do layout da grid -->
 	<style type="text/css">
 		@media screen and (min-width:861px) {
+		.white-popup {
+		 	  width: 85%;
+		 }
 		 #divGridOcultar {
 		    display: none;
 		 }
 		}
 		@media screen and (max-width:860px) {
+		.white-popup {
+		 	  width: 95%;
+		 }
 		 #myTable tr > *:nth-child(2), tr > *:nth-child(5), tr > *:nth-child(6) {
 		    display: none;
 		 }
@@ -80,16 +86,13 @@
   <!-- area de campos do form -->
 
 <div class="container-fluid">
+<a href="/Tela de cadastro dos Visitantes.jsp" style="text-decoration: underline;"><span class="glyphicon glyphicon-plus"></span> Cadastrar novo visitante</a>
 
-<a href="/Tela de cadastro dos Visitantes.jsp" style="text-decoration: underline;">Cadastrar novo visitante</a>
-    
-    
 <!-- Start tableless -->
-<div style="text-align:center; float:center;">
-<p>
-        <label style="color:#333; font-weight:900;" id="for=&quot;pesquisar&quot;">Pesquisar</label>
-        <input style="padding:6px; border:1px solid #ccc; width:300px;" id="pesquisar" value="${param.pesquisa}" name="pesquisar" size="30" type="text">
-</p>
+<div style="text-align:left; float:center;">
+<br>
+      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
+         <input type="text" class="form-control" id="pesquisar" name="pesquisar" style="max-width: 300px" value="${param.pesquisa}"><br>
 </div>
      <div id="divTableless">
 		<table id="myTable" cellspacing="0"> 
@@ -141,9 +144,7 @@
     		<img src="/jquery-tableless/last.png" class="last">
             <span>
 			<select class="pagesize">
-					<option value="5">5</option>
-					<option selected="selected" value="10">10</option>
-					<option value="20">20</option>
+					<option selected="selected" value="20">20</option>
 					<option value="30">30</option>
 					<option value="50">50</option>
 					<option value="100">100</option>

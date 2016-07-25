@@ -65,7 +65,8 @@ public class ContataVisitanteDAO extends GenericDAO {
 	 */
 	public ArrayList<HashMap<String,HashMap<String,String>>> getListaContataVisitantesTodasCelulaPorStatus(String status) {
 		String sqlAvancado = "select * from contata_visitante as t1 join visitante as t2 on t1.id_visit = t2.id_visit "
-				+ "join celula as t3 on t3.nome_celula = t1.nome_celula where t1.status_contato = '" +status+ "' order by t1.data_criado desc;";
+				+ "join celula as t3 on t3.nome_celula = t1.nome_celula "
+				+ "left join membro as t4 on t4.id_membro = t1.id_membro where t1.status_contato = '" +status+ "' order by t1.data_criado desc;";
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;		
 	}
@@ -78,7 +79,8 @@ public class ContataVisitanteDAO extends GenericDAO {
 	 */
 	public ArrayList<HashMap<String,HashMap<String,String>>> getListaContataVisitantesDaCelulaPorStatus(String nomeCelula, String status) {
 		String sqlAvancado = "select * from contata_visitante as t1 join visitante as t2 on t1.id_visit = t2.id_visit "
-				+ "join celula as t3 on t3.nome_celula = t1.nome_celula where t1.status_contato = '" +status+ "' and t1.nome_celula = '" +nomeCelula+ "' order by t1.data_criado desc;";
+				+ "join celula as t3 on t3.nome_celula = t1.nome_celula "
+				+ "left join membro as t4 on t4.id_membro = t1.id_membro where t1.status_contato = '" +status+ "' and t1.nome_celula = '" +nomeCelula+ "' order by t1.data_criado desc;";
 		ArrayList<HashMap<String,HashMap<String,String>>> lista = super.getListSqlAvancado(sqlAvancado);
 		return lista;	
 	}

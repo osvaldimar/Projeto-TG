@@ -43,7 +43,7 @@
 	<br>
 	
 	<div style="text-align: center; width:100%; color: blue;">
-		<h3>Visão geral do membro</h3>
+		<h3><span class="glyphicon glyphicon-user"></span> Visão geral do membro</h3>
 	</div>	
 	<br>
 	

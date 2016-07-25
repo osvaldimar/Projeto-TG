@@ -15,16 +15,17 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
-	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
-	<link rel="stylesheet" href="/jquery-tableless/custom.css" media="screen"/>
-	
+
 	<!-- Magnific Popup core JS CSS file -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="/jquery-magnific-popup/magnific-popup.css"> 
 	<script src="/jquery-magnific-popup/jquery.magnific-popup.js"></script>	
+	
+	<!-- Tableless JS CSS file -->
+	<script src="/jquery-tableless/jquery.tablesorter.min.js"></script>
+	<script src="/jquery-tableless/jquery.tablesorter.pager.js"></script>
+	<link rel="stylesheet" href="/jquery-tableless/custom-agenda.css" media="screen"/>
+	
  
 	<style type="text/css">
 	.membro-table table{
@@ -99,12 +100,6 @@
 		 .white-popup {
 		 	  width: 95%;
 		 }
-		 #table-membros tr > *:nth-child(3){
-		    display: none;
-		 }
-		 #myTable tr > *:nth-child(3){
-		    display: none;
-		 }
 		 #divGridOcultar {
 		    display: block;
 		 }
@@ -168,21 +163,25 @@
 	    </div>
 </form>  
   <hr>	
- 		<b>Total de membros: ${listaContatosVisitantes.size()}</b><br><br>
-		<div id="divTableless1" class="table-responsive" style="overflow-y: scroll; height:250px; border:2px solid;">
-		<table id="myTable1" class="table small table-bordered table-striped table-hover" border="1px" cellspacing="0"> 
+ 		<!-- Start tableless -->
+		<div style="text-align:left; float:center;">
+		      <label  id="for=&quot;pesquisar&quot;">Pesquisar</label>
+		         <input type="text" class="form-control" id="pesquisar" name="pesquisar" style="max-width: 300px" value="${param.pesquisa}"><br>
+		</div>
+		<div id="divTableless" style="max-width:820px;">
+		<table id="myTable" style="min-width: 450px; max-width:820px;" class="table small table-striped table-hover"  cellspacing="0"> 
 		<thead>
 			<tr class="info">
-			<th>Dados do Visitante</th>
-			<th>Célula<br>responsável</th>
-			<th>Status<br>Agendamento</th>
-			<th>Ação</th>
+				<th width="220px">Dados do Visitante</th>
+				<th width="200px">Célula<br>responsável</th>
+				<th width="200px">Status<br>Agendamento</th>
+				<th width="200px">Ação</th>
 			</tr>
 		</thead>
       	<tbody>
       	<c:forEach var="lista" items="${listaContatosVisitantes}">
 	    	<tr>
-	    		<td class="filterable-cell">
+	    		<td width="220px">
 	    			<a href="#" title="Exibir relatório" onclick="mostrarRelatorioVisitantePopup('${lista.get('visitante').get('id_visit')}');">
 	    				${lista.get('visitante').get('nome')}
 	    			</a>
@@ -190,15 +189,69 @@
 	    			Endereço: ${lista.get('visitante').get('endereco')}<br>
 	    			Telefone: ${lista.get('visitante').get('telefone')}
 	    		</td>
-	    		<td class="filterable-cell">
+	    		<td width="200px">
 	    		  	${lista.get('celula').get('nome_celula')}
 	    		</td>
-	    		<td class="filterable-cell">
+	    		<td width="200px">
 	    		  	${lista.get('contata_visitante').get('status_contato')}
 	    		  	<br>
+	    		  	<span id="spanRelogioIdContato_${lista.get('contata_visitante').get('id_contato')}" style="color:red;"></span>
+	    		  	<!-- Start Relogio -->
+	    		  	<input type="hidden" id="dataContato_${lista.get('contata_visitante').get('id_contato')}" 
+	    		  		value="${lista.get('contata_visitante').get('data_criado')}">
+	    		  	<script type="text/javascript">
+	    		  		if("${lista.get('contata_visitante').get('status_contato')}" != "Não contatado"){
+		    		  		$("#spanRelogioIdContato_${lista.get('contata_visitante').get('id_contato')}").hide();
+		    		  	}
+	    		  		relogioIdContato_${lista.get('contata_visitante').get('id_contato')}();	//inicia contador
+						function relogioIdContato_${lista.get('contata_visitante').get('id_contato')}(){
+							var data_visitante = document.getElementById("dataContato_${lista.get('contata_visitante').get('id_contato')}").value;//data criacao leilao  2015-04-19 23:14:25
+							var dataInicio = new Date(data_visitante);
+							var dataAgora = new Date();  
+						  
+							var diferenca = dataAgora.getTime() - dataInicio.getTime(); 	//diferença em milliseconds
+								var tempoRestante = "";
+				
+								//calcula dias restantes, horas, minutos e segundos
+								var milliDia = 1000*60*60*24;	        //total millisendos em um dia
+								var milliHora = 1000*60*60;		//total milliseconds em uma hora
+								var milliMin = 1000*60;			//total milliseconds em um minuto
+								var milliseconds = 1000;
+								
+								if(diferenca >= milliDia){
+									var d = parseInt(diferenca / milliDia);
+									tempoRestante += d+" dias ";
+								}		
+								var h = parseInt((diferenca % milliDia) / milliHora);
+								if(h <= 9){
+									tempoRestante += "0"+h+":";
+								}else{
+									tempoRestante += h+":";
+								}
+								var m = parseInt(((diferenca % milliDia) % milliHora) / milliMin);
+								if(m <= 9){
+									tempoRestante += "0"+m+":";
+								}else{
+									tempoRestante += m+":";
+								}
+								var s = parseInt((((diferenca % milliDia) % milliHora) % milliMin) / milliseconds);
+								if(s <= 9){
+									tempoRestante += "0"+s;
+								}else{
+									tempoRestante += s;
+								}
+								$("#spanRelogioIdContato_${lista.get('contata_visitante').get('id_contato')}").html(tempoRestante);	//exemplo: 2 days 10:23:09      
+							
+							setTimeout("relogioIdContato_${lista.get('contata_visitante').get('id_contato')}()", 1000); 
+						} 
+					</script>
+	    		  	<!-- End Relogio -->
+	    		  	<br>
 	    		  	${lista.get('contata_visitante').get('data_agendado')}
+	    		  	<br>
+	    		  	${lista.get('membro').get('nome')}
 	    		</td>
-	    		<td class="filterable-cell">
+	    		<td width="200px">
 					<a href="/maps/gerarRotasMapa?idVisit=${lista.get('visitante').get('id_visit')}&nomeCelula=${lista.get('celula').get('nome_celula')}">
 						<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Rota
 					</a>
@@ -226,6 +279,24 @@
       </tbody>
     </table>    
     </div>	
+    <br><b>Total de membros: ${listaContatosVisitantes.size()}</b><br>
+    <div id="pager-tableless" class="pager-tableless">
+			<br>&nbsp;&nbsp;&nbsp;		
+			<img src="/jquery-tableless/first.png" class="first">
+    		<img src="/jquery-tableless/prev.png" class="prev">
+    		<input class="pagedisplay" type="text">
+    		<img src="/jquery-tableless/next.png" class="next">
+    		<img src="/jquery-tableless/last.png" class="last">
+            <span>
+			<select class="pagesize">
+					<option selected="selected" value="20">20</option>
+					<option value="30">30</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+			</select> Registros&nbsp;&nbsp;&nbsp;
+			</span>
+			<br>
+    </div>
     <!-- End tableless -->
 	 <br>
      <div style="float: left;">
@@ -246,18 +317,19 @@
       <script src="/js/submenus-bootstrap.js"></script>
     </h6>
     
-    <br><br>
     
   <!-- form para direcionar contato para outra celula -->
-<form id="direcionar-form" class="mfp-hide white-popup" action="/vemev/agenda/updateContatoOutraCelula" method="post" style="width: 400px;">
-	<h3>Derecionar contato para outra célula</h3>
+<form id="direcionar-form" class="mfp-hide white-popup" action="/vemev/agenda/updateContatoOutraCelula" method="post" style="max-width: 600px;">
+	<div style="text-align: center; width:100%; color: blue;">
+		<h3><span class="glyphicon glyphicon-share-alt"></span> Derecionar contato para outra célula</h3>
+	</div>
 	<br>
 	<div class="well">
 	  		<b>Nome do visitante:</b> <span id="nome_visit-dir"></span>
 	</div>
 	<br>
 	<label for="comboCelula">Escolha a Célula</label>
-	<select class="form-control" required="true" name="nome_celula" style="width: 250px;">
+	<select class="form-control" required="true" name="nome_celula" style="max-width: 250px;">
 		<option value=""></option>
 		<c:forEach var="lista" items="${listaTodasCelulas}">
 			<option value="${lista.nome_celula}">${lista.nome_celula}</option>
@@ -266,7 +338,7 @@
 	<br>
 	<div class="form-group">
 	 	<label for="observacao">Observação</label> 
-	 	<textarea class="form-control" rows="4" id="observacao" name="observacao" style="width: 300px;">${contato.observacao}</textarea>
+	 	<textarea class="form-control" rows="4" id="observacao" name="observacao" style="max-width: 300px;">${contato.observacao}</textarea>
 	</div>
 	<br><br><br>
 	<div id="actions" class="row">
@@ -280,7 +352,7 @@
 	<input type="hidden" id="nome_celula_ant-dir" name="nome_celula_ant" value="">
 </form>
 
-<br><br>
+
 </div>
 </div>
 
@@ -296,7 +368,7 @@
 	
 	//funcao javascript recupera formulario em ajax no server detalhes da visita
 	function detalhesDeVisita(id){
-		$.get("/vemev/agenda/ajaxRelatorioDadosVisitante",
+		$.get("/vemev/agenda/ajaxRelatorioDetalhesVisita",
 		    {
 				id_contato: id		//parametro
 		    },

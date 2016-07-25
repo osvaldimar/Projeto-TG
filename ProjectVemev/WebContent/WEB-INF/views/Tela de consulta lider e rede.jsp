@@ -172,7 +172,7 @@
 			    			<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
 		        				<a class="popup-with-form" href="#alterar-form" 
 		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
-				    				Alterar
+				    				<span class="glyphicon glyphicon-edit"></span>
 				    			</a>
 			    			</c:if>
 	        			</td>
@@ -214,7 +214,7 @@
 	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
 		        				<a class="popup-with-form" href="#alterar-form" 
 		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
-				    				Alterar
+				    				<span class="glyphicon glyphicon-edit"></span>
 				    			</a>
 			    			</c:if>
 	        			</td>
@@ -256,7 +256,7 @@
 	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
 		        				<a class="popup-with-form" href="#alterar-form" 
 		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
-				    				Alterar
+				    				<span class="glyphicon glyphicon-edit"></span>
 				    			</a>
 			    			</c:if>
 	        			</td>
@@ -298,7 +298,7 @@
 	        				<c:if test="${lista.get('lider_rede').get('status_lider') eq 'Ativo'}">
 		        				<a class="popup-with-form" href="#alterar-form" 
 		        					onclick="alterarLider('${lista.get('lider_rede').get('id_lider')}');">
-				    				Alterar
+				    				<span class="glyphicon glyphicon-edit"></span>
 				    			</a>
 			    			</c:if>
 	        			</td>
@@ -318,15 +318,17 @@
 </div>
 
 <!-- form para alterar um lider -->
-<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusLider" method="get" style="width: 400px;">
-	<div style="font-weight: 600; font-size: 16px;">
-		Alterar Status do Lider para 'Inativo'
+<form id="alterar-form" class="mfp-hide white-popup" action="/vemev/lider/alterarStatusLider" method="get" style="max-width: 400px;">
+	<div style="text-align: center; width:100%; color: blue;">
+		<h4><span class="glyphicon glyphicon-edit"></span> Alterar Status do Lider para 'Inativo'</h4>
 	</div>
 	<br>
-	Escolha a data final do Lider na Rede.
-	<br><br>
-	<label for="data">Data final</label>
-    <input type="date" class="form-control" id="date" name="data_fim" style ="width: 200px" required="true">
+	<div class="well">
+		Escolha a data final do Lider na Rede.
+		<br><br>
+		<label for="data">Data final</label>
+	    <input type="date" class="form-control" id="date" name="data_fim" style ="max-width: 200px" required="true">
+    </div>
 	<br><br><br>
 	<div id="actions" class="row">
 	    <div class="col-md-12">
