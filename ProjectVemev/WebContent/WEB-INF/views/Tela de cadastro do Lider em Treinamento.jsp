@@ -71,7 +71,7 @@
   <!-- area de campos do form -->
 
 <div class="container-fluid">
-	<span id="errorLider" style="color:red; display:none;"></span>
+	<span id="errorLider" style="color:red; display:none;"></span><br><br>
      <label for="nome_celula">Célula</label>
 			<select class="form-control" required="true" id="comboCelula" name="nome_celula" style="max-width: 250px;">
 				<option value=""></option>
@@ -185,6 +185,7 @@
 	}
 	//valida antes de enviar formulario
 	$('#form-lider').submit(function(e){ 
+		$(".loader_ajax").show();
 		var checks = document.getElementsByName("id_membro");
 		var cont = 0;
 		for(var i = 0; i < checks.length; i++){
@@ -195,10 +196,12 @@
 		if(cont < 1){
 			e.preventDefault(); 
 			alert("Por favor selecione 1 ou 2 líderes em Treinamento!");
+			$(".loader_ajax").hide();
 		}
 		if(cont > 2){
 			e.preventDefault(); 
 			alert("Só pode selecionar até 2 líderes!");
+			$(".loader_ajax").hide();
 		}
 	});
 	//valida o cadastro ok dos lideres da Rede
@@ -212,7 +215,7 @@
 				}else{
 					alert(respostaServer);			//mostra no alert a resposta de erro do servidor
 					//oculta loading
-					$(".loader").hide();
+					$(".loader_ajax").hide();
 					$("#errorLider").html(respostaServer);
 					$("#errorLider").show();
 				}				
@@ -288,6 +291,6 @@
       
     });
 </script>
-<div class="loader" id="loader"></div>
+<div class="loader_ajax" id="loader_ajax"></div>
   </body>
 </html>

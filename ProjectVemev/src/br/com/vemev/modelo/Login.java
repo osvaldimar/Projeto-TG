@@ -16,9 +16,9 @@ public class Login {
 	@TipoDado(tipo = "String")
 	private String username;
 	
-	@ColunaBD(nome = "password")
+	@ColunaBD(nome = "senha")
 	@TipoDado(tipo = "String")
-	private String password;
+	private String senha;
 	
 	public Login(){
 		
@@ -40,12 +40,12 @@ public class Login {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 }
