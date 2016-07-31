@@ -233,17 +233,18 @@ public class GoogleMapsControlador {
 	 */
 	public String calcularDistanciaGoogleApis(String enderecoOrigem, String enderecoDestinos) {
 				
-		//exemplo: https://maps.googleapis.com/maps/api/distancematrix/json?origins=Seattle&destinations=San+Francisco|New+York&key=AIzaSyCXhk3-X2KZVP5GjpUqdzns4TcDUiKFtbo
+		//exemplo: https://maps.googleapis.com/maps/api/distancematrix/json?
+		//origins=Seattle&destinations=San+Francisco|New+York&key=AIzaSyCXhk3-X2KZVP5GjpUqdzns4TcDUiKFtbo
 		
-		StringBuffer bufferJson = new StringBuffer();	//buffer para resposta
+		StringBuilder builderJson = new StringBuilder();
 		try {
-			String key = "key=AIzaSyCXhk3-X2KZVP5GjpUqdzns4TcDUiKFtbo";						//chave de acesso gerada no Google Developers Console
-			String urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?"	//url api google + enderecos origem e destinos 
+			String key = "key=AIzaSyCXhk3-X2KZVP5GjpUqdzns4TcDUiKFtbo";					  //chave de acesso gerada no Google Developers Console
+			String urlMaps = "https://maps.googleapis.com/maps/api/distancematrix/json?"  //url api google + enderecos origem e destinos 
 					+ "origins="+URLEncoder.encode(enderecoOrigem, "utf-8")
 					+"&destinations="+URLEncoder.encode(enderecoDestinos, "utf-8")+ "&" +key;
 			
 			URL url = new URL(urlMaps);
-			HttpURLConnection conexao = (HttpURLConnection) url.openConnection();	//abre conexao com web services google
+			HttpURLConnection conexao = (HttpURLConnection) url.openConnection();		  //abre conexao com web services google
 			conexao.setRequestProperty("Content-Type", "application/json");
 			conexao.setRequestMethod("GET");
 			conexao.setDoInput( true );
@@ -252,13 +253,13 @@ public class GoogleMapsControlador {
             BufferedReader in = new BufferedReader(new InputStreamReader(conexao.getInputStream())); //ler dados de entrada
 			String inputLine;
             while ((inputLine = in.readLine()) != null) {
-            	bufferJson.append(inputLine);
+            	builderJson.append(inputLine);
             }
 			in.close();            
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		return bufferJson.toString();	//retorna String com dados em json
+		return builderJson.toString();	//retorna String com dados em json
 	}
 	
 	

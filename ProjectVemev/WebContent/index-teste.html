@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Tela login</title>
+    <link rel="stylesheet" href="css/style-login.css">
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <!--Google Font - Work Sans-->
+
+	<div style="width: 100%;">		
+		<div id="div-vemeve" style="max-width: 700px;  margin: 0 auto;  text-align: center;">
+			<p style="padding-top: 5px; color: white; font-size: 18px;">
+				“Encontramos aquele de quem escreveram Moisés, na lei, e os profetas: Jesus, filho de José, de Nazaré”.
+				Perguntou-lhe Natanael: “De Nazaré pode sair algo de bom?” Filipe lhe disse: “Vem e vê”.(Jo 1:45-46)
+			</p>
+		</div>
+	</div>
+	
+<div class="container">
+
+	
+	
+  <div class="profile">
+  	
+    <button class="profile__avatar" id="toggleProfile">    
+     <img src="/logo_quadrangular.jpeg" alt="Avatar" /> 
+    </button>
+    <form method="post" action="/vemev/login">    	
+	    <div class="profile__form">	    	
+	      <div class="profile__fields">
+	        <div class="field">
+	          <input type="text" name="usuario" id="fieldUser" class="input" required pattern=.*\S.* />
+	          <label for="fieldUser" class="label">Usuario</label>
+	        </div>
+	        <div class="field">
+	          <input type="password" name="senha" id="fieldPassword" class="input" required pattern=.*\S.* />
+	          <label for="fieldPassword" class="label">Senha</label>
+	        </div>
+	        <span id="erroLogin" style="color:red;"> </span>
+	        <div class="profile__footer">
+	          <button class="btn" type="submit">Entrar</button>
+	        </div>
+	      </div>
+	     </div>
+     </form>
+  </div>
+</div>
+    
+<script src="js/index.js"></script>
+<script type="text/javascript">
+	try{
+		var query = window.location.search.substring(1);
+		var array = query.split("=");
+		if(array[0] == "error"){
+			document.getElementById("erroLogin").innerHTML = "Usuario ou senha inválidos!";
+		}
+	}catch(err){
+		//alert("nada");
+	}
+</script>
+    
+  </body>
+</html>

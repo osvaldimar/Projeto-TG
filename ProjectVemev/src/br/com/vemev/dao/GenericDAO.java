@@ -37,7 +37,7 @@ public abstract class GenericDAO {
 		String senha = "root";
 		String url = "jdbc:mysql://localhost/db_vemev";
 		//*
-		/*
+		/*/
 		String usuario = "adminFkDd3PE";
 		String senha = "iDjUJYMN_91k";
 		String url = "jdbc:mysql://127.3.164.130:3306/fatecvemevapp";

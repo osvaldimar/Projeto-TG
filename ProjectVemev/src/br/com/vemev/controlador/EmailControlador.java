@@ -38,7 +38,13 @@ public class EmailControlador {
 				e.printStackTrace();
 			}
 			htmlConteudo = 
-					  "<html><h2>Notificação de visitante próximo da célula - '" +celula.getNome_celula()+ "'</h2>"
+					"<html><head>"
+					+ "<style type=\"text/css\">"
+					+ ".divCel{max-width: 600px;height: auto;color: black;padding: 1%;font-size: 14px;border: 1px solid lightgrey;"
+					+ "vertical-align: text-top;padding: 6px;margin-right: 10px;margin-top: 10px;float: left;-moz-border-radius:10px;"
+					+ "-webkit-border-radius:10px;border-radius:10px;background-color: #fff;}</style></head>"
+					+ "<div class=\"divCel\">"
+					+ "<h4><span style=\"color:#0066CC;\">Notificação de visitante próximo da célula - '" +celula.getNome_celula()+ "'</span></h4><hr>"
 					+ "<br><br>Olá Querido Líder<br>"
 					+ "<br>Essa semana recebemos alguns visitantes e identificamos que um deles mora perto da célula '"
 					+ celula.getNome_celula()+"', por favor, entre em contato com o visitante abaixo:"					
@@ -50,7 +56,7 @@ public class EmailControlador {
 					+ "<br>Telefone: "+visitante.getTelefone()
 					+ "<br>Celular: "+visitante.getCelular()
 					+ "<br>Distância entre a célula e o visitante: "+km
-					+ "<br><br>Deus Abençoe."
+					+ "<br><br>Deus Abençoe.</div>"
 					+ "</html>";
 			
 			msgTexto = "mensagem...";
@@ -74,7 +80,13 @@ public class EmailControlador {
 				e.printStackTrace();
 			}
 			htmlConteudo = 
-					"<html><h2>Notificação de visitante direcionado para célula - '" +celula.getNome_celula()+ "'</h2>"
+					"<html><head>"
+					+ "<style type=\"text/css\">"
+					+ ".divCel{max-width: 600px;height: auto;color: black;padding: 1%;font-size: 14px;border: 1px solid lightgrey;"
+					+ "vertical-align: text-top;padding: 6px;margin-right: 10px;margin-top: 10px;float: left;-moz-border-radius:10px;"
+					+ "-webkit-border-radius:10px;border-radius:10px;background-color: #fff;}</style></head>"
+					+ "<div class=\"divCel\">"
+					+ "<h4><span style=\"color:#0066CC;\">Notificação de visitante direcionado para célula - '" +celula.getNome_celula()+ "'</span></h4><hr>"
 					+ "<br><br>Olá Querido Líder<br>"
 					+ "<br>A célula '"+(celulaEncaminhou != null ? celulaEncaminhou.getNome_celula() : "N/A")+"' direcionou este visitante para sua célula "
 					+ "por algum motivo especial, por favor, entre em contato com o visitante abaixo:"					
@@ -86,7 +98,7 @@ public class EmailControlador {
 					+ "<br>Telefone: "+visitante.getTelefone()
 					+ "<br>Celular: "+visitante.getCelular()
 					+ "<br>Distância entre a célula e o visitante: "+km
-					+ "<br><br>Deus Abençoe."
+					+ "<br><br>Deus Abençoe.</div>"
 					+ "</html>";
 			
 			msgTexto = "mensagem...";

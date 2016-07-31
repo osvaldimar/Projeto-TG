@@ -34,6 +34,14 @@ public class LoginControlador {
 		String usuario = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
 		
+		String usuario2 = request.getParameter("usuario2");
+		String senha2 = request.getParameter("senha2");
+		
+		//verifica mobile
+		if(usuario2 != null && !usuario2.isEmpty() && senha2 != null && !senha2.isEmpty()){
+			usuario = usuario2;
+			senha = senha2;
+		}
 		//valida usuario e senha padrao do sistema
 		if(usuario != null && senha != null){
 			if(usuario.equalsIgnoreCase(userDefaultAdmin) && senha.equals(passwordDefaultAdmin)){

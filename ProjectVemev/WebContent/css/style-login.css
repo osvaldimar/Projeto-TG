@@ -16,6 +16,104 @@ body {
   background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
   color: #777;
 }
+@media screen and (max-width: 999px){
+#erroLogin2{
+	display:block;
+}
+#erroLogin{
+	display:none;
+}
+#botao-login{
+	display:block;
+}
+#label1, #label2{
+	display:none;
+}
+#div-vemeve2{
+	display: block;
+}
+#div-vemeve{
+	display: none;
+}
+.btn-login {
+  color: white;
+  background-color: #8E49E8;
+}
+	.label {
+  bottom: 0;
+  color: black;
+  display:none;
+}
+#div_profile_av{
+	display:none;
+}
+#div-avatar{
+	width:100%; text-align: center;
+	display:block;
+}
+#div-avatar img{
+	max-width: 100px; max-height: 100px;
+}
+   #fieldUser{
+		display:none;
+   }
+   #fieldPassword{
+		display:none;
+   }
+   #btn-entrar{
+   		display:none;
+   }#fieldUser2{
+		display:block;
+   }
+   #fieldPassword2{
+		display:block;
+   }
+   #btn-entrar2{
+   		display:block;
+   }
+   .well{
+	 display:block;
+   }
+}
+@media screen and (min-width: 1000px){
+	#erroLogin{
+		display:block;
+	}
+	#erroLogin2{
+		display:none;
+	}
+	#label3, #label4{
+		display:none;
+	}
+	#botao-login{
+		display:none;
+	}
+	#div-vemeve2{
+		display: none;
+	}
+	#div-avatar{
+		display:none;
+	}
+   .well{
+	 display:none;
+   }
+	#fieldUser2{
+		display:none;
+   }
+   #fieldPassword2{
+		display:none;
+   }
+   #btn-entrar2{
+   		display:none;
+   }#fieldUser{
+		display:block;
+   }
+   #fieldPassword{
+		display:block;
+   }
+   #btn-entrar{
+   		display:block;
+   }
 img {
   vertical-align: middle;
   max-width: 100%;
@@ -164,60 +262,14 @@ input:valid + .label {
   }
 }
 
-/* Container para navegador web*/
-@media screen and (min-width: 1000px){
-	.container {
-	  position: absolute;
-	  width: 24em;
-	  left: 50%;
-	  top: 50%;
-	  transform: translate(-50%,-50%);
-	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-	}
+.container {
+  position: absolute;
+  width: 24em;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
 }
 
-/* Container para dispositivos moveis */
-@media screen and (max-width: 1000px){
-	.container {
-	  position: absolute;
-	  width: 80%;
-	  left: 50%;
-	  top: 50%;
-	  transform: translate(-50%,-50%);
-	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-	  margin-top: 10%;
-	}
-	.profile__form {
-	  height: 80%;
-	}
-	.profile__avatar {
-	  top:-15%;
-	  position: absolute;
-	  z-index: 1;
-	  left: 50%;
-	  transform: translateX(-50%);
-	  border-radius: 1.25em;
-	  overflow: hidden;
-	  width: 150px;
-	  height: 150px;
-	  display: block;
-	  transition: transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	  will-change: transform;
-	}
-}
-
-@media screen and (max-width: 540px){
-	.container {
-	  position: absolute;
-	  width: 98%;
-	  left: 50%;
-	  top: 50%;
-	  transform: translate(-50%,-50%);
-	  animation: intro .7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-	}
-}
-
-	
-	
-	
 	
